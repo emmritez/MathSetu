@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MathSetu — Complete School Mathematics Studio (Class 1–8)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbars and subtle transitions */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .fade-in {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-800">
+
+  <!-- Toast Notification Banner -->
+  <div id="toast-container" class="fixed bottom-20 md:bottom-6 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Top App Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchMainTab('chapters'); closeChapterDetail();">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-600 text-white flex items-center justify-center shadow-md shadow-indigo-200 font-extrabold text-xl">
+          ∑
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">MathSetu</h1>
+            <span class="hidden sm:inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">Class 1–8</span>
+          </div>
+          <p class="text-xs text-slate-500 hidden sm:block">Concepts • Formulas • Practice • Smart Vault</p>
+        </div>
+      </div>
+
+      <!-- Desktop Primary Navigation -->
+      <nav class="hidden md:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+        <button onclick="switchMainTab('chapters')" id="nav-desk-chapters" class="nav-desk-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-white text-indigo-700 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Chapters
+        </button>
+        <button onclick="switchMainTab('generators')" id="nav-desk-generators" class="nav-desk-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          Smart Generators
+        </button>
+        <button onclick="switchMainTab('vault')" id="nav-desk-vault" class="nav-desk-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          Reference Vault
+        </button>
+      </nav>
+
+      <!-- Progress Badge -->
+      <div class="flex items-center gap-2">
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5" title="Completed Chapters">
+          <span>🏆</span>
+          <span id="header-progress-text">0/10 Done</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-10">
+
+    <!-- ========================================================= -->
+    <!-- TAB 1: STRUCTURED CHAPTERS (THEORY -> FORMULAS -> EX -> PRAC) -->
+    <!-- ========================================================= -->
+    <section id="tab-chapters" class="fade-in">
+      <!-- Chapter List View -->
+      <div id="chapter-list-view">
+        <!-- Hero / Filter Banner -->
+        <div class="bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 rounded-2xl p-5 sm:p-7 text-white shadow-lg shadow-indigo-200/60 mb-6">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <span class="inline-block bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                NCERT / CBSE Aligned • Step-by-Step Mastery
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Class 1st to 8th Math Curriculum</h2>
+              <p class="text-indigo-100 text-sm sm:text-base mt-1 max-w-2xl">
+                Every chapter follows a structured 4-step path: <strong class="text-white">1. Theory</strong> → <strong class="text-white">2. Formulas</strong> → <strong class="text-white">3. Solved Examples</strong> → <strong class="text-white">4. Practice Quiz</strong>.
+              </p>
+            </div>
+            <!-- Search Input -->
+            <div class="w-full lg:w-80">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="chapter-search"
+                  oninput="renderChapterCards()"
+                  placeholder="Search chapter or topic..."
+                  class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white text-slate-900 placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-sm"
+                />
+                <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-5 mt-5 border-t border-white/15">
+            <button onclick="filterChaptersByClass('all')" data-class="all" class="class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-indigo-700 shadow-sm whitespace-nowrap transition">
+              All Chapters (10)
+            </button>
+            <button onclick="filterChaptersByClass('Foundation')" data-class="Foundation" class="class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/15 text-white hover:bg-white/25 whitespace-nowrap transition">
+              Class 1–5 Foundation
+            </button>
+            <button onclick="filterChaptersByClass('Class 6')" data-class="Class 6" class="class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/15 text-white hover:bg-white/25 whitespace-nowrap transition">
+              Class 6
+            </button>
+            <button onclick="filterChaptersByClass('Class 7')" data-class="Class 7" class="class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/15 text-white hover:bg-white/25 whitespace-nowrap transition">
+              Class 7
+            </button>
+            <button onclick="filterChaptersByClass('Class 8')" data-class="Class 8" class="class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/15 text-white hover:bg-white/25 whitespace-nowrap transition">
+              Class 8
+            </button>
+          </div>
+        </div>
+
+        <!-- Chapters Grid -->
+        <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+
+      <!-- Chapter Detail 4-Step Learning View (Hidden initially) -->
+      <div id="chapter-detail-view" class="hidden fade-in">
+        <!-- Back & Title Header -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm mb-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <button onclick="closeChapterDetail()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+              Back to Chapters
+            </button>
+            <div class="flex items-center gap-2">
+              <span id="detail-class-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">Class 8</span>
+              <button id="mark-complete-btn" onclick="toggleChapterComplete()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5">
+                Mark Completed
+              </button>
+            </div>
+          </div>
+
+          <h2 id="detail-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Chapter Title</h2>
+          <p id="detail-subtitle" class="text-slate-600 text-sm sm:text-base mt-1">Chapter overview description.</p>
+
+          <!-- 4-Step Learning Flow Stepper -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-6 pt-5 border-t border-slate-100">
+            <button onclick="switchChapterStep(1)" id="step-btn-1" class="step-tab-btn p-3 rounded-xl border-2 text-left transition flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0">1</span>
+              <div>
+                <div class="text-xs font-bold uppercase tracking-wider opacity-75">Step 1</div>
+                <div class="text-sm font-bold">Theory</div>
+              </div>
+            </button>
+            <button onclick="switchChapterStep(2)" id="step-btn-2" class="step-tab-btn p-3 rounded-xl border-2 text-left transition flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0">2</span>
+              <div>
+                <div class="text-xs font-bold uppercase tracking-wider opacity-75">Step 2</div>
+                <div class="text-sm font-bold">Formulas</div>
+              </div>
+            </button>
+            <button onclick="switchChapterStep(3)" id="step-btn-3" class="step-tab-btn p-3 rounded-xl border-2 text-left transition flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0">3</span>
+              <div>
+                <div class="text-xs font-bold uppercase tracking-wider opacity-75">Step 3</div>
+                <div class="text-sm font-bold">Examples</div>
+              </div>
+            </button>
+            <button onclick="switchChapterStep(4)" id="step-btn-4" class="step-tab-btn p-3 rounded-xl border-2 text-left transition flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0">4</span>
+              <div>
+                <div class="text-xs font-bold uppercase tracking-wider opacity-75">Step 4</div>
+                <div class="text-sm font-bold">Practice</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step Content Panels -->
+        <div id="chapter-step-content" class="space-y-5"></div>
+
+        <!-- Bottom Sequential Next/Prev Bar -->
+        <div class="flex items-center justify-between mt-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <button id="prev-step-btn" onclick="changeStepBy(-1)" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition disabled:opacity-40 disabled:pointer-events-none">
+            ← Previous Step
+          </button>
+          <span id="step-indicator-label" class="text-xs sm:text-sm font-bold text-slate-500">Step 1 of 4</span>
+          <button id="next-step-btn" onclick="changeStepBy(1)" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-sm transition">
+            Next: Formulas →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: SMART GENERATORS (TABLES, SQUARES & CUBES)         -->
+    <!-- ========================================================= -->
+    <section id="tab-generators" class="hidden fade-in">
+      <div class="mb-6">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Smart Math Generators</h2>
+        <p class="text-slate-600 text-sm sm:text-base mt-1">Enter any number to instantly generate multiplication tables (with audio read-aloud), squares, and cubes with step-by-step breakdowns.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- 1. Multiplication Table Generator (6 cols) -->
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+          <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-1 rounded-lg">Generator 1</span>
+              <span class="text-xl">✖️</span>
+            </div>
+            <h3 class="text-xl font-extrabold mt-2">Multiplication Table Generator</h3>
+            <p class="text-blue-100 text-xs sm:text-sm mt-0.5">Type any integer or decimal number to build its complete table.</p>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Enter Number</label>
+                <input
+                  type="number"
+                  id="gen-table-num"
+                  value="17"
+                  step="any"
+                  oninput="generateCustomTable()"
+                  placeholder="e.g., 17, 29, 125"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-mono font-bold text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Rows Up To</label>
+                <select id="gen-table-limit" onchange="generateCustomTable()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 font-bold text-base text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                  <option value="10" selected>10</option>
+                  <option value="12">12</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <button onclick="speakCurrentTable()" id="speak-table-btn" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-sm transition">
+                <span>🔊</span> Listen (Read Aloud)
+              </button>
+              <button onclick="stopSpeech()" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition">
+                ⏹ Stop
+              </button>
+              <button onclick="copyGeneratedTable()" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs sm:text-sm font-bold transition ml-auto">
+                📋 Copy
+              </button>
+            </div>
+
+            <!-- Generated Table Output -->
+            <div id="gen-table-output" class="bg-slate-50 rounded-xl border border-slate-200 p-3 max-h-96 overflow-y-auto divide-y divide-slate-200/70 font-mono text-sm sm:text-base"></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Square & Cube Generators (6 cols) -->
+        <div class="lg:col-span-6 flex flex-col gap-6">
+          <!-- 2. Square Generator -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-gradient-to-r from-amber-500 to-orange-500 p-5 text-white">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-1 rounded-lg">Generator 2</span>
+                <span class="font-mono font-extrabold text-lg">n²</span>
+              </div>
+              <h3 class="text-xl font-extrabold mt-2">Square Calculator (n²)</h3>
+              <p class="text-amber-50 text-xs sm:text-sm mt-0.5">Find the square of any number with multiplication breakdown.</p>
+            </div>
+
+            <div class="p-5">
+              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Enter Number (n)</label>
+              <div class="flex gap-2">
+                <input
+                  type="number"
+                  id="gen-square-num"
+                  value="24"
+                  step="any"
+                  oninput="generateCustomSquare()"
+                  placeholder="Enter any number..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 font-mono font-bold text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+                <button onclick="generateCustomSquare()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-sm transition shrink-0">
+                  Calculate
+                </button>
+              </div>
+
+              <div id="gen-square-output" class="mt-4 bg-amber-50/70 border border-amber-200 rounded-xl p-4"></div>
+            </div>
+          </div>
+
+          <!-- 3. Cube Generator -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-600 to-fuchsia-600 p-5 text-white">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-1 rounded-lg">Generator 3</span>
+                <span class="font-mono font-extrabold text-lg">n³</span>
+              </div>
+              <h3 class="text-xl font-extrabold mt-2">Cube Calculator (n³)</h3>
+              <p class="text-purple-100 text-xs sm:text-sm mt-0.5">Find the cube of any number with 3-step multiplication breakdown.</p>
+            </div>
+
+            <div class="p-5">
+              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Enter Number (n)</label>
+              <div class="flex gap-2">
+                <input
+                  type="number"
+                  id="gen-cube-num"
+                  value="12"
+                  step="any"
+                  oninput="generateCustomCube()"
+                  placeholder="Enter any number..."
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 font-mono font-bold text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <button onclick="generateCustomCube()" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm shadow-sm transition shrink-0">
+                  Calculate
+                </button>
+              </div>
+
+              <div id="gen-cube-output" class="mt-4 bg-purple-50/70 border border-purple-200 rounded-xl p-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: PRELOADED REFERENCE VAULT                          -->
+    <!-- ========================================================= -->
+    <section id="tab-vault" class="hidden fade-in">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm mb-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Quick Reference Vault</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">Preloaded tables (0–20), squares (1–30), cubes (1–30), and master formula sheet for instant revision.</p>
+          </div>
+        </div>
+
+        <!-- Vault Sub-Tabs -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-5 pt-5 border-t border-slate-100">
+          <button onclick="switchVaultSubTab('tables')" id="vault-btn-tables" class="vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-indigo-600 text-white shadow-sm">
+            ✖️ Tables (0 to 20)
+          </button>
+          <button onclick="switchVaultSubTab('squares')" id="vault-btn-squares" class="vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🟧 Squares (1 to 30)
+          </button>
+          <button onclick="switchVaultSubTab('cubes')" id="vault-btn-cubes" class="vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🟪 Cubes (1 to 30)
+          </button>
+          <button onclick="switchVaultSubTab('formulas')" id="vault-btn-formulas" class="vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-slate-100 text-slate-700 hover:bg-slate-200">
+            📐 Master Formulas
+          </button>
+        </div>
+      </div>
+
+      <!-- Vault Content Container -->
+      <div id="vault-content-area"></div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-200 shadow-lg grid grid-cols-3 h-16">
+    <button onclick="switchMainTab('chapters')" id="nav-mob-chapters" class="nav-mob-btn flex flex-col items-center justify-center gap-1 text-indigo-600 font-bold text-xs">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      <span>Chapters</span>
+    </button>
+    <button onclick="switchMainTab('generators')" id="nav-mob-generators" class="nav-mob-btn flex flex-col items-center justify-center gap-1 text-slate-500 font-semibold text-xs">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      <span>Generators</span>
+    </button>
+    <button onclick="switchMainTab('vault')" id="nav-mob-vault" class="nav-mob-btn flex flex-col items-center justify-center gap-1 text-slate-500 font-semibold text-xs">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      <span>Ref Vault</span>
+    </button>
+  </nav>
+
+  <!-- App Footer -->
+  <footer class="bg-white border-t border-slate-200 py-5 mb-16 md:mb-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-500">
+      <div>MathSetu — Complete Interactive School Mathematics (Class 1st to 8th)</div>
+      <div class="font-semibold text-slate-700">Created with ❤️ by Ritesh Srivastava</div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT APPLICATION DATA & LOGIC                       -->
+  <!-- ========================================================= -->
+  <script>
+    /**
+     * COMPLETE STRUCTURED CURRICULUM DATA (10 COMPREHENSIVE CHAPTERS)
+     * Every chapter strictly follows:
+     * 1. Theory & Definitions
+     * 2. Formulas
+     * 3. Step-by-Step Solved Examples
+     * 4. Interactive Practice Exercises with Hints & Explanations
+     */
+    const CHAPTERS_DATA = [
+      {
+        id: 'number-system-basics',
+        classLevel: 'Foundation',
+        badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
+        icon: '🔢',
+        title: 'Number System, Factors & BODMAS',
+        subtitle: 'Natural numbers, whole numbers, prime numbers, HCF, LCM, and order of operations.',
+        theory: [
+          {
+            heading: 'Types of Numbers',
+            points: [
+              '<strong>Natural Numbers (N):</strong> Counting numbers starting from 1: {1, 2, 3, 4, ...}.',
+              '<strong>Whole Numbers (W):</strong> Natural numbers including zero: {0, 1, 2, 3, 4, ...}.',
+              '<strong>Integers (Z):</strong> All positive numbers, negative numbers, and zero: {..., -3, -2, -1, 0, 1, 2, 3, ...}.',
+              '<strong>Prime Numbers:</strong> Numbers greater than 1 having exactly two factors (1 and itself), e.g., 2, 3, 5, 7, 11, 13. Note: 2 is the only even prime number.',
+              '<strong>Composite Numbers:</strong> Numbers having more than two factors, e.g., 4, 6, 8, 9, 10. Note: 1 is neither prime nor composite.'
+            ]
+          },
+          {
+            heading: 'The BODMAS Rule',
+            points: [
+              'When simplifying mathematical expressions with multiple operations, solve in the exact order: <strong>B</strong>rackets → <strong>O</strong>rders (powers/roots) → <strong>D</strong>ivision → <strong>M</strong>ultiplication → <strong>A</strong>ddition → <strong>S</strong>ubtraction.',
+              'Bracket priority order: Vinculum (bar) → Round brackets ( ) → Curly brackets { } → Square brackets [ ].'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'HCF & LCM Product Rule', expr: 'HCF(a, b) × LCM(a, b) = a × b', note: 'Valid for any two positive integers a and b.' },
+          { name: 'Division Algorithm', expr: 'Dividend = (Divisor × Quotient) + Remainder', note: 'Remainder is always smaller than Divisor (0 ≤ r < d).' },
+          { name: 'Even & Odd Parity Rules', expr: 'Even ± Even = Even | Odd ± Odd = Even | Even ± Odd = Odd', note: 'Product of any integer with an Even number is always Even.' },
+          { name: 'Divisibility by 3 & 9', expr: 'Sum of digits divisible by 3 (or 9)', note: 'Example: 729 → 7+2+9 = 18 (divisible by both 3 and 9).' }
+        ],
+        examples: [
+          {
+            q: 'Simplify using BODMAS: 24 + [16 - {12 ÷ (6 - 2)}]',
+            steps: [
+              'Solve innermost round bracket first: (6 - 2) = 4.',
+              'Expression becomes: 24 + [16 - {12 ÷ 4}].',
+              'Solve curly bracket: {12 ÷ 4} = 3.',
+              'Solve square bracket: [16 - 3] = 13.',
+              'Final Addition: 24 + 13 = 37.'
+            ],
+            ans: '37'
+          },
+          {
+            q: 'The HCF of two numbers is 12 and their LCM is 180. If one number is 36, find the other number.',
+            steps: [
+              'Use the formula: First Number × Second Number = HCF × LCM.',
+              '36 × Second Number = 12 × 180.',
+              'Second Number = (12 × 180) ÷ 36.',
+              'Divide 180 by 36 to get 5. Multiply 12 × 5 = 60.'
+            ],
+            ans: '60'
+          },
+          {
+            q: 'Find the smallest 4-digit number divisible by 15, 20, and 25.',
+            steps: [
+              'First find LCM(15, 20, 25): 15 = 3×5, 20 = 2²×5, 25 = 5².',
+              'LCM = 2² × 3 × 5² = 4 × 3 × 25 = 300.',
+              'Smallest 4-digit number is 1000. Divide 1000 by 300 → Quotient = 3, Remainder = 100.',
+              'Required number = 1000 + (300 - 100) = 1200.'
+            ],
+            ans: '1200'
+          }
+        ],
+        practice: [
+          {
+            q: 'Which is the smallest prime number?',
+            options: ['0', '1', '2', '3'],
+            correct: 2,
+            hint: 'A prime number must have exactly two distinct factors: 1 and itself.',
+            explanation: '2 has factors 1 and 2, making it the smallest (and only even) prime number.'
+          },
+          {
+            q: 'Evaluate: 40 - 12 ÷ 3 × 2 + 5',
+            options: ['37', '43', '23', '19'],
+            correct: 0,
+            hint: 'Perform Division (12 ÷ 3) first, then Multiplication, then Addition/Subtraction from left to right.',
+            explanation: '40 - (4 × 2) + 5 = 40 - 8 + 5 = 32 + 5 = 37.'
+          },
+          {
+            q: 'If HCF(24, 36) = 12, what is LCM(24, 36)?',
+            options: ['48', '72', '96', '144'],
+            correct: 1,
+            hint: 'Use LCM = (a × b) ÷ HCF.',
+            explanation: 'LCM = (24 × 36) ÷ 12 = 2 × 36 = 72.'
+          },
+          {
+            q: 'Which of the following numbers is divisible by 9?',
+            options: ['4521', '6381', '7123', '5042'],
+            correct: 1,
+            hint: 'Add all digits of each number; the sum must be a multiple of 9.',
+            explanation: 'In 6381, 6 + 3 + 8 + 1 = 18, which is divisible by 9.'
+          },
+          {
+            q: 'How many prime numbers exist between 1 and 20?',
+            options: ['6', '7', '8', '9'],
+            correct: 2,
+            hint: 'List them carefully: 2, 3, 5, 7, 11, 13, 17, 19.',
+            explanation: 'There are 8 prime numbers between 1 and 20: 2, 3, 5, 7, 11, 13, 17, and 19.'
+          }
+        ]
+      },
+      {
+        id: 'fractions-decimals',
+        classLevel: 'Class 6',
+        badgeColor: 'bg-teal-50 text-teal-700 border-teal-200',
+        icon: '🍕',
+        title: 'Fractions & Decimals',
+        subtitle: 'Proper, improper, mixed fractions, addition/subtraction of unlike fractions, and decimal operations.',
+        theory: [
+          {
+            heading: 'Understanding Fractions',
+            points: [
+              '<strong>Fraction:</strong> Represents a part of a whole, written as <code>Numerator / Denominator</code> where Denominator ≠ 0.',
+              '<strong>Proper Fraction:</strong> Numerator < Denominator (value is always less than 1), e.g., 3/5, 7/11.',
+              '<strong>Improper Fraction:</strong> Numerator ≥ Denominator (value is ≥ 1), e.g., 9/4, 7/7.',
+              '<strong>Mixed Fraction:</strong> Combination of a whole number and a proper fraction, e.g., 2 ¼ = 9/4.',
+              '<strong>Reciprocal (Multiplicative Inverse):</strong> Swapping numerator and denominator. Reciprocal of a/b is b/a.'
+            ]
+          },
+          {
+            heading: 'Decimals & Place Value',
+            points: [
+              'Moving right after the decimal point gives Tenths (1/10), Hundredths (1/100), and Thousandths (1/1000).',
+              'Multiplying a decimal by 10, 100, or 1000 shifts the decimal point 1, 2, or 3 places to the <strong>right</strong>.',
+              'Dividing a decimal by 10, 100, or 1000 shifts the decimal point 1, 2, or 3 places to the <strong>left</strong>.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Mixed to Improper Conversion', expr: 'Whole (Num/Den) = [(Whole × Den) + Num] / Den', note: 'Example: 3 (2/5) = (3×5 + 2)/5 = 17/5.' },
+          { name: 'Fraction Multiplication', expr: '(a / b) × (c / d) = (a × c) / (b × d)', note: 'Multiply numerators together and denominators together.' },
+          { name: 'Fraction Division', expr: '(a / b) ÷ (c / d) = (a / b) × (d / c)', note: 'Keep first fraction, change ÷ to ×, flip second fraction.' },
+          { name: 'Adding Unlike Fractions', expr: '(a / b) + (c / d) = (ad + bc) / bd', note: 'Or take LCM of denominators b and d first.' }
+        ],
+        examples: [
+          {
+            q: 'Solve: 2/3 + 3/4 - 1/6',
+            steps: [
+              'Find LCM of denominators 3, 4, and 6 → LCM = 12.',
+              'Convert each fraction to denominator 12: 2/3 = 8/12, 3/4 = 9/12, 1/6 = 2/12.',
+              'Combine numerators: (8 + 9 - 2) / 12 = 15/12.',
+              'Simplify by dividing numerator and denominator by 3: 5/4 = 1 ¼.'
+            ],
+            ans: '5/4 or 1 ¼'
+          },
+          {
+            q: 'Divide 4 ¾ by 1 ½.',
+            steps: [
+              'Convert both mixed fractions into improper fractions: 4 ¾ = 19/4 and 1 ½ = 3/2.',
+              'Rewrite division as multiplication by reciprocal: (19/4) × (2/3).',
+              'Cancel common factor 2 from numerator 2 and denominator 4 → (19/2) × (1/3).',
+              'Multiply: 19/6 = 3 ⅙.'
+            ],
+            ans: '19/6 or 3 ⅙'
+          },
+          {
+            q: 'Multiply: 2.35 × 1.4',
+            steps: [
+              'Ignore decimal points and multiply 235 × 14 = 3290.',
+              'Count total decimal places: 2.35 has 2 places, 1.4 has 1 place → Total = 3 places.',
+              'Place decimal point 3 digits from the right in 3290 → 3.290 = 3.29.'
+            ],
+            ans: '3.29'
+          }
+        ],
+        practice: [
+          {
+            q: 'What is the reciprocal of 3 ⅖?',
+            options: ['17/5', '5/17', '3/5', '15/2'],
+            correct: 1,
+            hint: 'First convert 3 ⅖ into an improper fraction, then flip it.',
+            explanation: '3 ⅖ = (3×5 + 2)/5 = 17/5. Its reciprocal is 5/17.'
+          },
+          {
+            q: 'Find the value of 0.045 × 100.',
+            options: ['0.45', '4.5', '45', '0.0045'],
+            correct: 1,
+            hint: 'Multiplying by 100 shifts the decimal point 2 places to the right.',
+            explanation: '0.045 × 100 = 4.5.'
+          },
+          {
+            q: 'Solve: (3/5) ÷ (9/10)',
+            options: ['27/50', '2/3', '3/2', '1/3'],
+            correct: 1,
+            hint: 'Multiply 3/5 by the reciprocal of 9/10 (which is 10/9).',
+            explanation: '(3/5) × (10/9) = 30/45 = 2/3.'
+          },
+          {
+            q: 'Which fraction is the largest among 1/2, 2/3, 3/4, 5/6?',
+            options: ['1/2', '2/3', '3/4', '5/6'],
+            correct: 3,
+            hint: 'Convert all to denominator 12: 6/12, 8/12, 9/12, 10/12.',
+            explanation: '5/6 = 10/12, which is greater than 9/12 (3/4), 8/12 (2/3), and 6/12 (1/2).'
+          },
+          {
+            q: 'Evaluate: 4.8 ÷ 0.06',
+            options: ['0.8', '8', '80', '800'],
+            correct: 2,
+            hint: 'Multiply both numerator and denominator by 100 to make divisor a whole number: 480 ÷ 6.',
+            explanation: '4.8 / 0.06 = 480 / 6 = 80.'
+          }
+        ]
+      },
+      {
+        id: 'lines-angles-triangles',
+        classLevel: 'Class 7',
+        badgeColor: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+        icon: '📐',
+        title: 'Lines, Angles & Triangles',
+        subtitle: 'Complementary/supplementary angles, parallel lines with transversal, angle sum & Pythagoras theorem.',
+        theory: [
+          {
+            heading: 'Pairs of Angles',
+            points: [
+              '<strong>Complementary Angles:</strong> Two angles whose sum is <strong>90°</strong> (e.g., 35° and 55°).',
+              '<strong>Supplementary Angles:</strong> Two angles whose sum is <strong>180°</strong> (e.g., 110° and 70°).',
+              '<strong>Linear Pair:</strong> Two adjacent angles on a straight line whose sum is always 180°.',
+              '<strong>Vertically Opposite Angles:</strong> When two lines intersect, opposite angles are always equal.'
+            ]
+          },
+          {
+            heading: 'Parallel Lines & Triangle Properties',
+            points: [
+              'When a transversal cuts two parallel lines: <strong>Corresponding angles</strong> are equal, <strong>Alternate interior angles</strong> are equal, and <strong>Co-interior angles</strong> add up to 180°.',
+              '<strong>Angle Sum Property:</strong> Sum of all three interior angles of any triangle is 180°.',
+              '<strong>Exterior Angle Property:</strong> An exterior angle of a triangle equals the sum of its two interior opposite angles.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Complementary & Supplementary', expr: 'Complement of x = 90° - x | Supplement of x = 180° - x', note: 'Used to find missing angle pairs.' },
+          { name: 'Triangle Angle Sum', expr: '∠A + ∠B + ∠C = 180°', note: 'True for every triangle on a flat plane.' },
+          { name: 'Exterior Angle Theorem', expr: 'Exterior ∠ACD = ∠A + ∠B', note: 'Sum of two opposite interior angles.' },
+          { name: 'Pythagoras Theorem (Right Triangle)', expr: 'Hypotenuse² = Base² + Perpendicular²  (c² = a² + b²)', note: 'Applies only to right-angled triangles (90°).' }
+        ],
+        examples: [
+          {
+            q: 'Find the angle which is equal to its own complement.',
+            steps: [
+              'Let the required angle be x.',
+              'Since the angle equals its complement, x + x = 90°.',
+              '2x = 90° → x = 90° ÷ 2 = 45°.'
+            ],
+            ans: '45°'
+          },
+          {
+            q: 'The angles of a triangle are in the ratio 2 : 3 : 4. Find all three angles.',
+            steps: [
+              'Let the angles be 2x, 3x, and 4x.',
+              'By Angle Sum Property: 2x + 3x + 4x = 180°.',
+              '9x = 180° → x = 20°.',
+              'Angles are: 2(20°) = 40°, 3(20°) = 60°, and 4(20°) = 80°.'
+            ],
+            ans: '40°, 60°, 80°'
+          },
+          {
+            q: 'A ladder 13 m long reaches a window 12 m high from the ground. Find the distance of the foot of the ladder from the wall.',
+            steps: [
+              'Wall and ground form a 90° angle, so ladder is the Hypotenuse (c = 13 m) and height is Perpendicular (b = 12 m).',
+              'By Pythagoras Theorem: Base² + 12² = 13².',
+              'Base² + 144 = 169 → Base² = 169 - 144 = 25.',
+              'Base = √25 = 5 m.'
+            ],
+            ans: '5 m'
+          }
+        ],
+        practice: [
+          {
+            q: 'What is the supplement of 105°?',
+            options: ['15°', '75°', '85°', '255°'],
+            correct: 1,
+            hint: 'Supplementary angles add up to 180°.',
+            explanation: 'Supplement = 180° - 105° = 75°.'
+          },
+          {
+            q: 'In a right-angled triangle, the two legs are 6 cm and 8 cm. What is the length of the hypotenuse?',
+            options: ['10 cm', '12 cm', '14 cm', '100 cm'],
+            correct: 0,
+            hint: 'Use c² = 6² + 8².',
+            explanation: 'c² = 36 + 64 = 100 → c = √100 = 10 cm.'
+          },
+          {
+            q: 'An exterior angle of a triangle is 115° and one interior opposite angle is 45°. Find the other interior opposite angle.',
+            options: ['65°', '70°', '75°', '160°'],
+            correct: 1,
+            hint: 'Exterior angle = Sum of two opposite interior angles.',
+            explanation: '115° = 45° + x → x = 115° - 45° = 70°.'
+          },
+          {
+            q: 'If two parallel lines are intersected by a transversal, what is the sum of interior angles on the same side of the transversal?',
+            options: ['90°', '180°', '270°', '360°'],
+            correct: 1,
+            hint: 'Co-interior angles are supplementary.',
+            explanation: 'Co-interior angles on the same side of a transversal always sum to 180°.'
+          },
+          {
+            q: 'Can a triangle have sides of lengths 3 cm, 4 cm, and 8 cm?',
+            options: ['Yes, always', 'No, because 3 + 4 < 8', 'Yes, it is right-angled', 'Only if acute'],
+            correct: 1,
+            hint: 'Triangle Inequality: Sum of any two sides must be strictly greater than the third side.',
+            explanation: '3 + 4 = 7, which is less than 8. Hence, no triangle can be formed.'
+          }
+        ]
+      },
+      {
+        id: 'rational-numbers',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        icon: '➗',
+        title: 'Rational Numbers',
+        subtitle: 'Properties of rational numbers (closure, commutativity, associativity), additive/multiplicative identity & inverse.',
+        theory: [
+          {
+            heading: 'What is a Rational Number?',
+            points: [
+              'Any number that can be expressed in the form <strong>p / q</strong>, where <code>p</code> and <code>q</code> are integers and <code>q ≠ 0</code>.',
+              'All natural numbers, whole numbers, integers, and fractions are rational numbers (e.g., -5 = -5/1, 0 = 0/1, 0.75 = 3/4).',
+              '<strong>Standard Form:</strong> A rational number p/q is in standard form if q > 0 and HCF(|p|, q) = 1.'
+            ]
+          },
+          {
+            heading: 'Key Algebraic Properties',
+            points: [
+              '<strong>Closure Property:</strong> Rational numbers are closed under addition, subtraction, and multiplication (not division, since division by 0 is undefined).',
+              '<strong>Commutative Property:</strong> a + b = b + a and a × b = b × a (Subtraction and division are NOT commutative).',
+              '<strong>Associative Property:</strong> (a + b) + c = a + (b + c) and (a × b) × c = a × (b × c).',
+              '<strong>Density Property:</strong> Between any two distinct rational numbers, there exist <strong>infinitely many</strong> rational numbers.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Additive Identity', expr: 'a + 0 = 0 + a = a', note: '0 is the additive identity for rational numbers.' },
+          { name: 'Multiplicative Identity', expr: 'a × 1 = 1 × a = a', note: '1 is the multiplicative identity for rational numbers.' },
+          { name: 'Additive Inverse (Negative)', expr: 'Additive inverse of (p / q) is (-p / q)', note: 'Because (p/q) + (-p/q) = 0.' },
+          { name: 'Multiplicative Inverse (Reciprocal)', expr: 'Multiplicative inverse of (p / q) is (q / p)', note: 'Valid for p ≠ 0. Note: 0 has no reciprocal.' },
+          { name: 'Distributive Property', expr: 'a × (b + c) = (a × b) + (a × c)', note: 'Multiplication distributes over addition and subtraction.' }
+        ],
+        examples: [
+          {
+            q: 'Find using distributive property: (7/5 × -3/12) + (7/5 × 5/12)',
+            steps: [
+              'Notice 7/5 is common in both terms.',
+              'Apply distributive property: a×b + a×c = a × (b + c).',
+              '= 7/5 × (-3/12 + 5/12).',
+              '= 7/5 × (2/12) = 7/5 × 1/6 = 7/30.'
+            ],
+            ans: '7/30'
+          },
+          {
+            q: 'Find 3 rational numbers between 1/4 and 1/2.',
+            steps: [
+              'Make denominators equal with a large enough gap. Multiply 1/4 by 4/4 → 4/16, and 1/2 by 8/8 → 8/16.',
+              'Now pick any three fractions between 4/16 and 8/16.',
+              'Three rational numbers are: 5/16, 6/16 (or 3/8), and 7/16.'
+            ],
+            ans: '5/16, 6/16, 7/16'
+          },
+          {
+            q: 'What should be added to -5/8 to get 3/4?',
+            steps: [
+              'Let the required number be x. Then: -5/8 + x = 3/4.',
+              'Transpose -5/8 to the right side: x = 3/4 + 5/8.',
+              'Take LCM of 4 and 8 (which is 8): x = 6/8 + 5/8 = 11/8.'
+            ],
+            ans: '11/8'
+          }
+        ],
+        practice: [
+          {
+            q: 'Which rational number does NOT have a reciprocal?',
+            options: ['1', '-1', '0', '1/2'],
+            correct: 2,
+            hint: 'Reciprocal of 0 would be 1/0, which is undefined.',
+            explanation: 'Division by zero is undefined, so 0 has no multiplicative inverse (reciprocal).'
+          },
+          {
+            q: 'What is the additive inverse of -7/19?',
+            options: ['-19/7', '19/7', '7/19', '0'],
+            correct: 2,
+            hint: 'Additive inverse changes the sign so that their sum equals 0.',
+            explanation: '(-7/19) + (7/19) = 0, so the additive inverse is 7/19.'
+          },
+          {
+            q: 'Which property is shown by: (2/3 × 4/5) × 1/2 = 2/3 × (4/5 × 1/2)?',
+            options: ['Commutative', 'Associative', 'Distributive', 'Closure'],
+            correct: 1,
+            hint: 'Grouping of multiplication changes while order stays the same.',
+            explanation: 'Changing parentheses in multiplication demonstrates the Associative Property.'
+          },
+          {
+            q: 'Which rational numbers are equal to their own reciprocals?',
+            options: ['0 and 1', '1 and -1', '1 and 2', '-1 and 0'],
+            correct: 1,
+            hint: 'Check 1/1 and 1/(-1).',
+            explanation: '1/1 = 1 and 1/(-1) = -1. Both 1 and -1 are their own reciprocals.'
+          },
+          {
+            q: 'How many rational numbers lie between 2 and 3?',
+            options: ['Zero', 'Only 1 (2.5)', '9', 'Infinitely many'],
+            correct: 3,
+            hint: 'Think of 2.1, 2.01, 2.001, 2.5, etc.',
+            explanation: 'By the density property, there are infinitely many rational numbers between any two rational numbers.'
+          }
+        ]
+      },
+      {
+        id: 'linear-equations',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
+        icon: '⚖️',
+        title: 'Linear Equations in One Variable',
+        subtitle: 'Solving equations with variables on one or both sides, cross-multiplication, and real-life word problems.',
+        theory: [
+          {
+            heading: 'Core Concepts',
+            points: [
+              '<strong>Algebraic Equation:</strong> An equality statement involving variables (like x, y) and constants with an <code>=</code> sign.',
+              '<strong>Linear Equation in One Variable:</strong> An equation with only one variable whose highest power (degree) is <strong>1</strong>. Standard form: <code>ax + b = 0</code> (where a ≠ 0).',
+              '<strong>LHS & RHS:</strong> Left-Hand Side and Right-Hand Side behave like a balanced weighing scale.'
+            ]
+          },
+          {
+            heading: 'Rules of Transposition',
+            points: [
+              'When moving a term from LHS to RHS (or vice versa), its operation reverses:',
+              '<code>+</code> becomes <code>-</code>, and <code>-</code> becomes <code>+</code>.',
+              '<code>×</code> (multiplication) becomes <code>÷</code> (division), and <code>÷</code> becomes <code>×</code>.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Standard Linear Form', expr: 'ax + b = 0  ⇒  x = -b / a', note: 'Unique solution for any a ≠ 0.' },
+          { name: 'Cross-Multiplication Rule', expr: '(ax + b) / (cx + d) = m / n  ⇒  n(ax + b) = m(cx + d)', note: 'Clears fractions immediately.' },
+          { name: 'Consecutive Integers Setup', expr: 'x,  x + 1,  x + 2', note: 'For consecutive even/odd integers, use x, x + 2, x + 4.' },
+          { name: 'Two-Digit Number Representation', expr: 'Number = 10 × (Tens digit) + (Units digit)', note: 'Reversing digits gives: 10 × (Units) + (Tens).' }
+        ],
+        examples: [
+          {
+            q: 'Solve for x: 5x - 7 = 2x + 8',
+            steps: [
+              'Transpose variable term 2x to LHS and constant -7 to RHS.',
+              '5x - 2x = 8 + 7.',
+              '3x = 15.',
+              'Divide both sides by 3: x = 15 ÷ 3 = 5.'
+            ],
+            ans: 'x = 5'
+          },
+          {
+            q: 'Solve: (x - 3)/5 + (x - 4)/7 = 6 - (2x - 1)/35',
+            steps: [
+              'Multiply the entire equation by LCM(5, 7, 35) = 35 to eliminate denominators.',
+              '7(x - 3) + 5(x - 4) = 35(6) - 1(2x - 1).',
+              '7x - 21 + 5x - 20 = 210 - 2x + 1.',
+              '12x - 41 = 211 - 2x → 14x = 252 → x = 18.'
+            ],
+            ans: 'x = 18'
+          },
+          {
+            q: 'The sum of three consecutive multiples of 8 is 888. Find the multiples.',
+            steps: [
+              'Let the three consecutive multiples of 8 be 8x, 8(x + 1), and 8(x + 2).',
+              'Sum = 8x + 8x + 8 + 8x + 16 = 888.',
+              '24x + 24 = 888 → 24x = 864 → x = 36.',
+              'The multiples are: 8×36 = 288, 8×37 = 296, and 8×38 = 304.'
+            ],
+            ans: '288, 296, 304'
+          }
+        ],
+        practice: [
+          {
+            q: 'Solve for x: 3x + 5 = 20',
+            options: ['3', '5', '15', '25/3'],
+            correct: 1,
+            hint: 'Subtract 5 from both sides first, then divide by 3.',
+            explanation: '3x = 20 - 5 = 15 → x = 15 / 3 = 5.'
+          },
+          {
+            q: 'If (2x / 3) = 18, what is the value of x?',
+            options: ['12', '27', '36', '54'],
+            correct: 1,
+            hint: 'Multiply 18 by 3, then divide by 2.',
+            explanation: '2x = 18 × 3 = 54 → x = 54 / 2 = 27.'
+          },
+          {
+            q: 'Two numbers are in the ratio 5 : 3. If they differ by 18, what is the larger number?',
+            options: ['27', '36', '45', '54'],
+            correct: 2,
+            hint: 'Let numbers be 5x and 3x, so 5x - 3x = 18.',
+            explanation: '2x = 18 → x = 9. Larger number = 5 × 9 = 45.'
+          },
+          {
+            q: 'Solve: 4(z - 2) = 2(z + 6)',
+            options: ['2', '6', '10', '14'],
+            correct: 2,
+            hint: 'Expand brackets on both sides: 4z - 8 = 2z + 12.',
+            explanation: '4z - 2z = 12 + 8 → 2z = 20 → z = 10.'
+          },
+          {
+            q: 'What is the degree of a linear equation in one variable?',
+            options: ['0', '1', '2', '3'],
+            correct: 1,
+            hint: 'Linear equations form a straight line when plotted.',
+            explanation: 'The highest power of the variable in a linear equation is always 1.'
+          }
+        ]
+      },
+      {
+        id: 'squares-cubes-roots',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
+        icon: '🎲',
+        title: 'Squares, Cubes & Their Roots',
+        subtitle: 'Perfect squares, Pythagorean triplets, prime factorization for square & cube roots, and patterns.',
+        theory: [
+          {
+            heading: 'Squares & Square Roots',
+            points: [
+              '<strong>Square Number:</strong> When a number n is multiplied by itself, we get n² (e.g., 7² = 49).',
+              '<strong>Unit Digit Rule:</strong> A perfect square NEVER ends in <strong>2, 3, 7, or 8</strong>, nor with an odd number of zeros.',
+              '<strong>Square Root (√):</strong> Inverse operation of squaring. Since 9² = 81, √81 = 9.'
+            ]
+          },
+          {
+            heading: 'Cubes & Cube Roots',
+            points: [
+              '<strong>Cube Number (Hardy-Ramanujan):</strong> Multiplying a number by itself three times gives n³ (e.g., 4³ = 64).',
+              '1729 is the smallest Hardy-Ramanujan number: expressible as sum of two cubes in two ways (1729 = 12³ + 1³ = 10³ + 9³).',
+              '<strong>Cube Root (∛):</strong> Inverse of cubing. Found by grouping prime factors into triplets (groups of 3).'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Sum of First n Odd Numbers', expr: '1 + 3 + 5 + ... + (2n - 1) = n²', note: 'Example: 1 + 3 + 5 + 7 = 4² = 16.' },
+          { name: 'Numbers Between Two Consecutive Squares', expr: 'Between n² and (n + 1)² there are 2n non-square numbers', note: 'Between 4² (16) and 5² (25), there are 2(4) = 8 numbers.' },
+          { name: 'Pythagorean Triplet Generator', expr: '(2m,  m² - 1,  m² + 1)', note: 'For any natural number m > 1.' },
+          { name: 'Cube of Negative Number', expr: '(-n)³ = -(n³)', note: 'Cube of a negative number is always negative; square is positive.' }
+        ],
+        examples: [
+          {
+            q: 'Find the square root of 1764 by prime factorization.',
+            steps: [
+              'Factorize 1764: 1764 = 2 × 882 = 2 × 2 × 441.',
+              'Factorize 441: 441 = 3 × 147 = 3 × 3 × 49 = 3 × 3 × 7 × 7.',
+              'Pair identical factors: 1764 = (2 × 2) × (3 × 3) × (7 × 7).',
+              'Take one factor from each pair: √1764 = 2 × 3 × 7 = 42.'
+            ],
+            ans: '42'
+          },
+          {
+            q: 'Find the smallest number by which 392 must be multiplied to make it a perfect cube.',
+            steps: [
+              'Prime factorize 392: 392 = 2 × 196 = 2 × 2 × 98 = 2 × 2 × 2 × 49 = (2 × 2 × 2) × (7 × 7).',
+              'Factor 2 forms a complete triplet, but factor 7 appears only twice.',
+              'To complete the triplet of 7, multiply by 7.',
+              '392 × 7 = 2744, whose cube root is 2 × 7 = 14.'
+            ],
+            ans: '7'
+          },
+          {
+            q: 'Write a Pythagorean triplet whose smallest member is 8.',
+            steps: [
+              'Using triplet form (2m, m² - 1, m² + 1), set 2m = 8 → m = 4.',
+              'Second member: m² - 1 = 4² - 1 = 16 - 1 = 15.',
+              'Third member: m² + 1 = 4² + 1 = 16 + 1 = 17.',
+              'Verify: 8² + 15² = 64 + 225 = 289 = 17².'
+            ],
+            ans: '8, 15, 17'
+          }
+        ],
+        practice: [
+          {
+            q: 'Which of the following numbers CANNOT be a perfect square?',
+            options: ['1024', '2025', '3457', '4096'],
+            correct: 2,
+            hint: 'Check the last (units) digit of each option.',
+            explanation: 'A perfect square never ends in 2, 3, 7, or 8. Since 3457 ends in 7, it cannot be a perfect square.'
+          },
+          {
+            q: 'What is the value of ∛1331?',
+            options: ['9', '11', '13', '21'],
+            correct: 1,
+            hint: '11 × 11 = 121. Multiply 121 by 11.',
+            explanation: '11 × 11 × 11 = 1331, so ∛1331 = 11.'
+          },
+          {
+            q: 'How many non-square natural numbers lie between 9² and 10²?',
+            options: ['9', '10', '18', '19'],
+            correct: 2,
+            hint: 'Between n² and (n+1)² there are 2n non-square numbers.',
+            explanation: 'Here n = 9, so 2n = 2 × 9 = 18 non-square numbers.'
+          },
+          {
+            q: 'What is the sum of first 7 odd natural numbers (1 + 3 + 5 + 7 + 9 + 11 + 13)?',
+            options: ['42', '49', '56', '64'],
+            correct: 1,
+            hint: 'Sum of first n odd numbers = n².',
+            explanation: 'Here n = 7, so sum = 7² = 49.'
+          },
+          {
+            q: 'What will be the unit digit of the cube of 47?',
+            options: ['3', '7', '9', '1'],
+            correct: 0,
+            hint: 'Find the cube of the unit digit 7 (7 × 7 × 7 = 343).',
+            explanation: '7³ = 343, which ends in 3. So 47³ also ends in 3.'
+          }
+        ]
+      },
+      {
+        id: 'comparing-quantities',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        icon: '💰',
+        title: 'Comparing Quantities (%, Profit/Loss & Interest)',
+        subtitle: 'Percentage change, discount, GST, Profit & Loss, Simple Interest, and Compound Interest.',
+        theory: [
+          {
+            heading: 'Profit, Loss & Discount',
+            points: [
+              '<strong>Cost Price (CP):</strong> Price at which an article is purchased.',
+              '<strong>Selling Price (SP):</strong> Price at which an article is sold.',
+              '<strong>Marked Price (MP):</strong> Printed tag price on which discount is offered.',
+              'Profit% and Loss% are always calculated on <strong>CP</strong>, whereas Discount% is always calculated on <strong>MP</strong>.'
+            ]
+          },
+          {
+            heading: 'Simple vs Compound Interest',
+            points: [
+              '<strong>Simple Interest (SI):</strong> Interest is calculated only on the original Principal (P) for the entire duration.',
+              '<strong>Compound Interest (CI):</strong> Interest is calculated on the Principal PLUS accumulated previous interest ("interest on interest").'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Profit & Loss Percentage', expr: 'Profit% = (Profit / CP) × 100  |  Loss% = (Loss / CP) × 100', note: 'Profit = SP - CP (when SP > CP); Loss = CP - SP.' },
+          { name: 'Discount & Selling Price', expr: 'Discount = MP - SP  |  Discount% = (Discount / MP) × 100', note: 'SP = MP × (100 - Discount%) / 100.' },
+          { name: 'Simple Interest (SI)', expr: 'SI = (P × R × T) / 100  |  Amount = P + SI', note: 'P = Principal, R = Rate% p.a., T = Time in years.' },
+          { name: 'Compound Interest (Annually)', expr: 'A = P (1 + R / 100)ⁿ  |  CI = A - P', note: 'For half-yearly compounding: Rate = R/2, Time = 2n.' }
+        ],
+        examples: [
+          {
+            q: 'A shopkeeper buys a fan for ₹1,200 and sells it at a 15% profit. Find the Selling Price.',
+            steps: [
+              'Given: CP = ₹1,200, Profit% = 15%.',
+              'Profit = 15% of 1200 = (15 / 100) × 1200 = ₹180.',
+              'Selling Price (SP) = CP + Profit = 1200 + 180 = ₹1,380.'
+            ],
+            ans: '₹1,380'
+          },
+          {
+            q: 'An item marked at ₹850 is sold for ₹714. What is the discount percentage?',
+            steps: [
+              'Marked Price (MP) = ₹850, Selling Price (SP) = ₹714.',
+              'Discount = MP - SP = 850 - 714 = ₹136.',
+              'Discount% = (Discount / MP) × 100 = (136 / 850) × 100 = 16%.'
+            ],
+            ans: '16%'
+          },
+          {
+            q: 'Find the Compound Interest on ₹10,000 for 2 years at 10% per annum compounded annually.',
+            steps: [
+              'Use Amount formula: A = P(1 + R/100)ⁿ.',
+              'A = 10000 × (1 + 10/100)² = 10000 × (11/10) × (11/10).',
+              'A = 100 × 121 = ₹12,100.',
+              'Compound Interest (CI) = A - P = 12,100 - 10,000 = ₹2,100.'
+            ],
+            ans: '₹2,100'
+          }
+        ],
+        practice: [
+          {
+            q: 'Convert the ratio 3 : 4 into percentage.',
+            options: ['25%', '50%', '75%', '80%'],
+            correct: 2,
+            hint: 'Multiply the fraction 3/4 by 100%.',
+            explanation: '(3/4) × 100% = 3 × 25% = 75%.'
+          },
+          {
+            q: 'If CP = ₹500 and SP = ₹450, what is the Loss percentage?',
+            options: ['5%', '10%', '11.1%', '50%'],
+            correct: 1,
+            hint: 'Loss = ₹50. Divide Loss by CP (₹500) and multiply by 100.',
+            explanation: 'Loss% = (50 / 500) × 100 = 10%.'
+          },
+          {
+            q: 'Find the Simple Interest on ₹4,000 at 5% per annum for 3 years.',
+            options: ['₹200', '₹400', '₹600', '₹800'],
+            correct: 2,
+            hint: 'SI = (P × R × T) / 100.',
+            explanation: 'SI = (4000 × 5 × 3) / 100 = 40 × 15 = ₹600.'
+          },
+          {
+            q: 'A jacket marked at ₹2,000 is available at 20% discount. What is its Selling Price?',
+            options: ['₹1,600', '₹1,800', '₹1,980', '₹400'],
+            correct: 0,
+            hint: '20% of 2000 is ₹400. Subtract discount from MP.',
+            explanation: 'Discount = 20% of 2000 = ₹400. SP = 2000 - 400 = ₹1,600.'
+          },
+          {
+            q: 'When interest is compounded half-yearly for 1.5 years at 8% p.a., what are the effective Rate and Time periods?',
+            options: ['R = 8%, n = 3', 'R = 4%, n = 3', 'R = 4%, n = 1.5', 'R = 16%, n = 3'],
+            correct: 1,
+            hint: 'Half-yearly halves the annual rate and doubles the number of years.',
+            explanation: 'Rate = 8%/2 = 4% per half-year; Time = 1.5 × 2 = 3 half-years.'
+          }
+        ]
+      },
+      {
+        id: 'algebraic-expressions',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
+        icon: '🔤',
+        title: 'Algebraic Expressions & Identities',
+        subtitle: 'Monomials, binomials, polynomials, multiplication of expressions, and standard algebraic identities.',
+        theory: [
+          {
+            heading: 'Terms, Coefficients & Polynomials',
+            points: [
+              '<strong>Like Terms:</strong> Terms having the exact same algebraic variables with the same exponents (e.g., 5x²y and -3x²y). Only like terms can be added or subtracted.',
+              '<strong>Monomial:</strong> Expression with 1 term (e.g., 7xy).',
+              '<strong>Binomial:</strong> Expression with 2 unlike terms (e.g., 3x + 5).',
+              '<strong>Trinomial:</strong> Expression with 3 unlike terms (e.g., x² + 5x + 6).'
+            ]
+          },
+          {
+            heading: 'What is an Algebraic Identity?',
+            points: [
+              'An <strong>identity</strong> is an equality that holds true for <strong>every value</strong> of the variables in it (unlike an equation which is true only for specific values).',
+              'Identities make fast mental multiplication and factorization effortless.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Identity I (Square of Sum)', expr: '(a + b)² = a² + 2ab + b²', note: 'Example: (x + 3)² = x² + 6x + 9.' },
+          { name: 'Identity II (Square of Difference)', expr: '(a - b)² = a² - 2ab + b²', note: 'Example: (2x - 5)² = 4x² - 20x + 25.' },
+          { name: 'Identity III (Difference of Squares)', expr: '(a + b)(a - b) = a² - b²', note: 'Extremely useful for fast calculation: 52 × 48 = 50² - 2² = 2496.' },
+          { name: 'Identity IV (General Binomial Product)', expr: '(x + a)(x + b) = x² + (a + b)x + ab', note: 'Example: (x + 4)(x + 5) = x² + 9x + 20.' }
+        ],
+        examples: [
+          {
+            q: 'Evaluate 98² using a suitable algebraic identity.',
+            steps: [
+              'Write 98 as (100 - 2).',
+              'Apply Identity II: (a - b)² = a² - 2ab + b² with a = 100, b = 2.',
+              '(100 - 2)² = 100² - 2(100)(2) + 2².',
+              '= 10000 - 400 + 4 = 9604.'
+            ],
+            ans: '9604'
+          },
+          {
+            q: 'Evaluate 103 × 97 without direct multiplication.',
+            steps: [
+              'Rewrite as (100 + 3)(100 - 3).',
+              'Apply Identity III: (a + b)(a - b) = a² - b².',
+              '= 100² - 3² = 10000 - 9 = 9991.'
+            ],
+            ans: '9991'
+          },
+          {
+            q: 'Multiply: (3x + 4y) and (2x - 5y)',
+            steps: [
+              'Multiply each term of first binomial with second binomial: 3x(2x - 5y) + 4y(2x - 5y).',
+              '= 6x² - 15xy + 8xy - 20y².',
+              'Combine like terms (-15xy + 8xy = -7xy).',
+              'Final result: 6x² - 7xy - 20y².'
+            ],
+            ans: '6x² - 7xy - 20y²'
+          }
+        ],
+        practice: [
+          {
+            q: 'Expand: (x + 6)²',
+            options: ['x² + 36', 'x² + 6x + 36', 'x² + 12x + 36', '2x + 12'],
+            correct: 2,
+            hint: 'Use (a + b)² = a² + 2ab + b².',
+            explanation: 'x² + 2(x)(6) + 6² = x² + 12x + 36.'
+          },
+          {
+            q: 'Simplify: (5p - 3q)(5p + 3q)',
+            options: ['25p² - 9q²', '25p² + 9q²', '5p² - 3q²', '25p² - 30pq + 9q²'],
+            correct: 0,
+            hint: 'Apply (a - b)(a + b) = a² - b².',
+            explanation: '(5p)² - (3q)² = 25p² - 9q².'
+          },
+          {
+            q: 'What is the product of -4p and 7pq?',
+            options: ['28p²q', '-28pq', '-28p²q', '3p²q'],
+            correct: 2,
+            hint: 'Multiply numerical coefficients (-4 × 7) and add powers of p (p¹ × p¹).',
+            explanation: '(-4 × 7) × (p × p) × q = -28p²q.'
+          },
+          {
+            q: 'Find the value of 51² - 49².',
+            options: ['2', '100', '200', '400'],
+            correct: 2,
+            hint: 'Use a² - b² = (a + b)(a - b).',
+            explanation: '(51 + 49)(51 - 49) = 100 × 2 = 200.'
+          },
+          {
+            q: 'Expand: (x + 3)(x + 7)',
+            options: ['x² + 10x + 21', 'x² + 21x + 10', 'x² + 10x + 10', 'x² + 4x + 21'],
+            correct: 0,
+            hint: 'Use (x + a)(x + b) = x² + (a + b)x + ab.',
+            explanation: 'x² + (3 + 7)x + (3 × 7) = x² + 10x + 21.'
+          }
+        ]
+      },
+      {
+        id: 'mensuration',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+        icon: '📦',
+        title: 'Mensuration (2D Areas & 3D Solids)',
+        subtitle: 'Area of trapezium, rhombus, circle; Surface Area & Volume of Cube, Cuboid, and Cylinder.',
+        theory: [
+          {
+            heading: '2D Shapes vs 3D Solids',
+            points: [
+              '<strong>Perimeter:</strong> Total boundary length of a closed 2D figure (measured in cm, m).',
+              '<strong>Area:</strong> Region enclosed inside a 2D figure (measured in cm², m²).',
+              '<strong>Surface Area (3D):</strong> Total area of all outer faces of a 3D solid. Lateral/Curved Surface Area (CSA) excludes top and bottom bases.',
+              '<strong>Volume (Capacity):</strong> Space occupied by a 3D object (measured in cm³, m³). Note: <code>1 m³ = 1000 Litres</code> and <code>1000 cm³ = 1 Litre</code>.'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Rectangle & Square', expr: 'Rect: Area = l × b, Perim = 2(l + b)  |  Sq: Area = a², Perim = 4a', note: 'Basic 2D quadrilaterals.' },
+          { name: 'Trapezium & Rhombus', expr: 'Trapezium = ½ × (a + b) × h  |  Rhombus = ½ × d₁ × d₂', note: 'a, b = parallel sides; d₁, d₂ = diagonals.' },
+          { name: 'Circle (π ≈ 22/7 or 3.14)', expr: 'Circumference = 2πr  |  Area = πr²', note: 'Diameter d = 2r.' },
+          { name: 'Cuboid (l, b, h)', expr: 'TSA = 2(lb + bh + hl)  |  LSA = 2h(l + b)  |  Vol = l × b × h', note: 'LSA is also the area of 4 walls of a room.' },
+          { name: 'Cube (side a)', expr: 'TSA = 6a²  |  LSA = 4a²  |  Volume = a³', note: 'All 6 faces are identical squares.' },
+          { name: 'Right Circular Cylinder (r, h)', expr: 'CSA = 2πrh  |  TSA = 2πr(r + h)  |  Volume = πr²h', note: 'Base is a circle of radius r.' }
+        ],
+        examples: [
+          {
+            q: 'The parallel sides of a trapezium are 14 cm and 10 cm, and the distance between them is 6 cm. Find its area.',
+            steps: [
+              'Given: a = 14 cm, b = 10 cm, height h = 6 cm.',
+              'Area of Trapezium = ½ × (a + b) × h.',
+              '= ½ × (14 + 10) × 6 = ½ × 24 × 6 = 12 × 6 = 72 cm².'
+            ],
+            ans: '72 cm²'
+          },
+          {
+            q: 'Find the Curved Surface Area and Volume of a cylinder of radius 7 cm and height 10 cm (Use π = 22/7).',
+            steps: [
+              'CSA = 2πrh = 2 × (22/7) × 7 × 10 = 44 × 10 = 440 cm².',
+              'Volume = πr²h = (22/7) × 7 × 7 × 10 = 22 × 70 = 1540 cm³.'
+            ],
+            ans: 'CSA = 440 cm², Volume = 1540 cm³'
+          },
+          {
+            q: 'A cuboidal water tank is 6 m long, 5 m wide, and 4.5 m deep. How many litres of water can it hold?',
+            steps: [
+              'Volume of tank = l × b × h = 6 × 5 × 4.5 = 135 m³.',
+              'Since 1 m³ = 1000 Litres, multiply volume by 1000.',
+              'Capacity = 135 × 1000 = 1,35,000 Litres.'
+            ],
+            ans: '1,35,000 Litres'
+          }
+        ],
+        practice: [
+          {
+            q: 'What is the area of a rhombus whose diagonals are 12 cm and 16 cm?',
+            options: ['48 cm²', '96 cm²', '192 cm²', '28 cm²'],
+            correct: 1,
+            hint: 'Area of rhombus = ½ × d₁ × d₂.',
+            explanation: 'Area = ½ × 12 × 16 = 6 × 16 = 96 cm².'
+          },
+          {
+            q: 'Find the Total Surface Area (TSA) of a cube whose edge is 5 cm.',
+            options: ['25 cm²', '100 cm²', '125 cm²', '150 cm²'],
+            correct: 3,
+            hint: 'A cube has 6 square faces, so TSA = 6a².',
+            explanation: 'TSA = 6 × 5² = 6 × 25 = 150 cm².'
+          },
+          {
+            q: 'If the radius of a circle is doubled, its area becomes how many times the original area?',
+            options: ['2 times', '3 times', '4 times', '8 times'],
+            correct: 2,
+            hint: 'Area = πr². Replace r with 2r.',
+            explanation: 'New Area = π(2r)² = 4πr², which is 4 times the original area.'
+          },
+          {
+            q: 'How many litres are equal to 2.5 cubic meters (m³)?',
+            options: ['25 L', '250 L', '2500 L', '25000 L'],
+            correct: 2,
+            hint: '1 m³ = 1000 Litres.',
+            explanation: '2.5 × 1000 = 2500 Litres.'
+          },
+          {
+            q: 'What is the formula for Curved Surface Area (CSA) of a cylinder?',
+            options: ['πr²h', '2πrh', '2πr(r + h)', '2(lb + bh + hl)'],
+            correct: 1,
+            hint: 'Circumference of base (2πr) multiplied by height (h).',
+            explanation: 'CSA of a cylinder is 2πrh.'
+          }
+        ]
+      },
+      {
+        id: 'exponents-powers',
+        classLevel: 'Class 8',
+        badgeColor: 'bg-orange-50 text-orange-700 border-orange-200',
+        icon: '🚀',
+        title: 'Exponents, Powers & Scientific Notation',
+        subtitle: 'Laws of exponents, negative powers, and expressing very large or very small numbers in standard form.',
+        theory: [
+          {
+            heading: 'Understanding Exponents',
+            points: [
+              'In <strong>aⁿ</strong>, <code>a</code> is called the <strong>Base</strong> and <code>n</code> is called the <strong>Exponent (Power)</strong>.',
+              'Example: 10⁴ = 10 × 10 × 10 × 10 = 10,000 (read as "10 raised to the power 4").',
+              '<strong>Negative Exponent:</strong> a⁻ⁿ = 1 / aⁿ. A negative exponent simply represents the reciprocal of the positive power.'
+            ]
+          },
+          {
+            heading: 'Standard Form (Scientific Notation)',
+            points: [
+              'A number is in <strong>Standard Form</strong> when written as <code>k × 10ⁿ</code>, where <code>1 ≤ k < 10</code> and <code>n</code> is an integer.',
+              'Large numbers have positive powers of 10 (e.g., Speed of light = 3 × 10⁸ m/s).',
+              'Very small numbers have negative powers of 10 (e.g., Size of bacteria = 5 × 10⁻⁷ m).'
+            ]
+          }
+        ],
+        formulas: [
+          { name: 'Product Law (Same Base)', expr: 'aᵐ × aⁿ = aᵐ⁺ⁿ', note: 'Multiply powers with same base → Add exponents.' },
+          { name: 'Quotient Law (Same Base)', expr: 'aᵐ ÷ aⁿ = aᵐ⁻ⁿ', note: 'Divide powers with same base → Subtract exponents.' },
+          { name: 'Power of a Power', expr: '(aᵐ)ⁿ = aᵐˣⁿ', note: 'Multiply the exponents.' },
+          { name: 'Zero & Negative Exponent', expr: 'a⁰ = 1 (for a ≠ 0)  |  a⁻ⁿ = 1 / aⁿ', note: 'Any non-zero number raised to power 0 is always 1.' },
+          { name: 'Same Exponent Laws', expr: 'aᵐ × bᵐ = (ab)ᵐ  |  (a / b)⁻ⁿ = (b / a)ⁿ', note: 'Flip fraction to turn negative exponent positive.' }
+        ],
+        examples: [
+          {
+            q: 'Evaluate: (1/3)⁻² + (1/2)⁻³ + (1/4)⁻¹',
+            steps: [
+              'Use (a/b)⁻ⁿ = (b/a)ⁿ to make all exponents positive.',
+              '(1/3)⁻² = 3² = 9;  (1/2)⁻³ = 2³ = 8;  (1/4)⁻¹ = 4¹ = 4.',
+              'Add them together: 9 + 8 + 4 = 21.'
+            ],
+            ans: '21'
+          },
+          {
+            q: 'Find the value of m for which 5ᵐ ÷ 5⁻³ = 5⁵.',
+            steps: [
+              'Apply Quotient Law on LHS: aᵐ ÷ aⁿ = aᵐ⁻ⁿ.',
+              '5ᵐ⁻⁽⁻³⁾ = 5⁵  ⇒  5ᵐ⁺³ = 5⁵.',
+              'Since bases are equal, equate exponents: m + 3 = 5.',
+              'm = 5 - 3 = 2.'
+            ],
+            ans: 'm = 2'
+          },
+          {
+            q: 'Express 0.00000085 in standard form.',
+            steps: [
+              'Move the decimal point 7 places to the right so the leading digit is between 1 and 10: 8.5.',
+              'Since the number is smaller than 1, the power of 10 is negative (-7).',
+              'Standard form = 8.5 × 10⁻⁷.'
+            ],
+            ans: '8.5 × 10⁻⁷'
+          }
+        ],
+        practice: [
+          {
+            q: 'What is the value of (3⁰ + 4⁰ + 5⁰)?',
+            options: ['0', '1', '3', '12'],
+            correct: 2,
+            hint: 'Remember: a⁰ = 1 for any non-zero number a.',
+            explanation: '1 + 1 + 1 = 3.'
+          },
+          {
+            q: 'Simplify: 2⁻³',
+            options: ['-6', '-8', '1/6', '1/8'],
+            correct: 3,
+            hint: 'Use a⁻ⁿ = 1 / aⁿ.',
+            explanation: '2⁻³ = 1 / 2³ = 1 / 8.'
+          },
+          {
+            q: 'Express 3,84,000,000 m (Earth-Moon distance) in standard form.',
+            options: ['384 × 10⁶ m', '3.84 × 10⁸ m', '3.84 × 10⁻⁸ m', '38.4 × 10⁷ m'],
+            correct: 1,
+            hint: 'In standard form k × 10ⁿ, k must satisfy 1 ≤ k < 10.',
+            explanation: 'Moving decimal 8 places left gives 3.84 × 10⁸ m.'
+          },
+          {
+            q: 'Simplify: (3²)³ ÷ 3⁴',
+            options: ['3', '9', '27', '1'],
+            correct: 1,
+            hint: 'First simplify (3²)³ = 3⁶, then subtract exponent 4.',
+            explanation: '3⁶ ÷ 3⁴ = 3⁶⁻⁴ = 3² = 9.'
+          },
+          {
+            q: 'What is the multiplicative inverse of 10⁻⁵?',
+            options: ['10⁵', '-10⁵', '1/10⁵', '5⁻¹⁰'],
+            correct: 0,
+            hint: 'Product of a number and its multiplicative inverse must equal 10⁰ = 1.',
+            explanation: '10⁻⁵ × 10⁵ = 10⁰ = 1, so the inverse is 10⁵.'
+          }
+        ]
+      }
+    ];
+
+    /**
+     * MASTER FORMULA BANK FOR REFERENCE VAULT
+     */
+    const MASTER_FORMULAS = [
+      { category: 'Mensuration', title: 'Rectangle Area & Perimeter', formula: 'Area = l × b  |  Perimeter = 2(l + b)' },
+      { category: 'Mensuration', title: 'Square Area & Perimeter', formula: 'Area = a²  |  Perimeter = 4a  |  Diagonal = a√2' },
+      { category: 'Mensuration', title: 'Triangle Area', formula: 'Area = ½ × base × height' },
+      { category: 'Mensuration', title: 'Circle Area & Circumference', formula: 'Area = πr²  |  Circumference = 2πr' },
+      { category: 'Mensuration', title: 'Trapezium & Rhombus Area', formula: 'Trapezium = ½(a + b)h  |  Rhombus = ½ × d₁ × d₂' },
+      { category: 'Mensuration', title: 'Cube TSA, LSA & Volume', formula: 'TSA = 6a²  |  LSA = 4a²  |  Volume = a³' },
+      { category: 'Mensuration', title: 'Cuboid TSA, LSA & Volume', formula: 'TSA = 2(lb + bh + hl)  |  LSA = 2h(l + b)  |  Vol = lbh' },
+      { category: 'Mensuration', title: 'Cylinder CSA, TSA & Volume', formula: 'CSA = 2πrh  |  TSA = 2πr(r + h)  |  Vol = πr²h' },
+      { category: 'Algebra', title: 'Square of Sum', formula: '(a + b)² = a² + 2ab + b²' },
+      { category: 'Algebra', title: 'Square of Difference', formula: '(a - b)² = a² - 2ab + b²' },
+      { category: 'Algebra', title: 'Difference of Two Squares', formula: 'a² - b² = (a + b)(a - b)' },
+      { category: 'Algebra', title: 'Binomial Product', formula: '(x + a)(x + b) = x² + (a + b)x + ab' },
+      { category: 'Commercial Math', title: 'Profit & Loss %', formula: 'Profit% = (Profit/CP) × 100  |  Loss% = (Loss/CP) × 100' },
+      { category: 'Commercial Math', title: 'Discount %', formula: 'Discount% = [(MP - SP) / MP] × 100' },
+      { category: 'Commercial Math', title: 'Simple Interest', formula: 'SI = (P × R × T) / 100  |  Amount = P + SI' },
+      { category: 'Commercial Math', title: 'Compound Interest (Annual)', formula: 'A = P(1 + R/100)ⁿ  |  CI = A - P' },
+      { category: 'Exponents', title: 'Product & Quotient Laws', formula: 'aᵐ × aⁿ = aᵐ⁺ⁿ  |  aᵐ ÷ aⁿ = aᵐ⁻ⁿ' },
+      { category: 'Exponents', title: 'Power, Zero & Negative Laws', formula: '(aᵐ)ⁿ = aᵐⁿ  |  a⁰ = 1  |  a⁻ⁿ = 1/aⁿ' },
+      { category: 'Geometry', title: 'Pythagoras Theorem', formula: 'Hypotenuse² = Base² + Perpendicular²' },
+      { category: 'Geometry', title: 'Polygon Interior Angle Sum', formula: 'Sum = (n - 2) × 180°  (n = number of sides)' },
+      { category: 'Number System', title: 'HCF & LCM Relation', formula: 'HCF(a, b) × LCM(a, b) = a × b' },
+      { category: 'Motion & Proportion', title: 'Speed, Distance & Time', formula: 'Speed = Distance / Time  |  1 km/h = 5/18 m/s' }
+    ];
+
+    // =========================================================
+    // APPLICATION STATE
+    // =========================================================
+    let state = {
+      activeTab: 'chapters',
+      selectedClassFilter: 'all',
+      activeChapterId: null,
+      activeStep: 1,
+      completedChapters: JSON.parse(localStorage.getItem('mathsetu_completed') || '[]'),
+      quizAnswers: {}, // { chapterId: { qIndex: selectedOptionIndex } }
+      quizSubmitted: {}, // { chapterId: boolean }
+      vaultSubTab: 'tables',
+      selectedVaultTableNum: 12,
+      formulaCategoryFilter: 'All'
+    };
+
+    // =========================================================
+    // INITIALIZATION
+    // =========================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      updateProgressBadge();
+      renderChapterCards();
+      generateCustomTable();
+      generateCustomSquare();
+      generateCustomCube();
+      renderVaultContent();
+    });
+
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'bg-slate-900 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2 fade-in';
+      toast.innerHTML = `<span>✨</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+      }, 2400);
+    }
+
+    function updateProgressBadge() {
+      const count = state.completedChapters.length;
+      document.getElementById('header-progress-text').textContent = `${count}/${CHAPTERS_DATA.length} Done`;
+    }
+
+    // =========================================================
+    // MAIN NAVIGATION TAB SWITCHING
+    // =========================================================
+    function switchMainTab(tabName) {
+      state.activeTab = tabName;
+
+      // Toggle main sections
+      ['chapters', 'generators', 'vault'].forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        if (t === tabName) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+
+      // Desktop nav styling
+      document.querySelectorAll('.nav-desk-btn').forEach(btn => {
+        btn.className = 'nav-desk-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900';
+      });
+      const activeDesk = document.getElementById(`nav-desk-${tabName}`);
+      if (activeDesk) {
+        activeDesk.className = 'nav-desk-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-white text-indigo-700 shadow-sm';
+      }
+
+      // Mobile nav styling
+      document.querySelectorAll('.nav-mob-btn').forEach(btn => {
+        btn.className = 'nav-mob-btn flex flex-col items-center justify-center gap-1 text-slate-500 font-semibold text-xs';
+      });
+      const activeMob = document.getElementById(`nav-mob-${tabName}`);
+      if (activeMob) {
+        activeMob.className = 'nav-mob-btn flex flex-col items-center justify-center gap-1 text-indigo-600 font-bold text-xs';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================
+    // TAB 1: CHAPTER LIST & 4-STEP LEARNING FLOW
+    // =========================================================
+    function filterChaptersByClass(classLevel) {
+      state.selectedClassFilter = classLevel;
+      document.querySelectorAll('.class-filter-btn').forEach(btn => {
+        if (btn.dataset.class === classLevel) {
+          btn.className = 'class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-indigo-700 shadow-sm whitespace-nowrap transition';
+        } else {
+          btn.className = 'class-filter-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/15 text-white hover:bg-white/25 whitespace-nowrap transition';
+        }
+      });
+      renderChapterCards();
+    }
+
+    function renderChapterCards() {
+      const grid = document.getElementById('chapters-grid');
+      const searchQuery = (document.getElementById('chapter-search')?.value || '').toLowerCase().trim();
+
+      const filtered = CHAPTERS_DATA.filter(ch => {
+        const matchesClass = state.selectedClassFilter === 'all' || ch.classLevel === state.selectedClassFilter;
+        const matchesSearch =
+          ch.title.toLowerCase().includes(searchQuery) ||
+          ch.subtitle.toLowerCase().includes(searchQuery) ||
+          ch.classLevel.toLowerCase().includes(searchQuery);
+        return matchesClass && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-2xl border border-slate-200 p-10 text-center">
+            <div class="text-4xl mb-2">🔍</div>
+            <h3 class="text-lg font-bold text-slate-800">No matching chapters found</h3>
+            <p class="text-sm text-slate-500 mt-1">Try clearing the search bar or switching to "All Chapters".</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((ch, idx) => {
+        const isDone = state.completedChapters.includes(ch.id);
+        return `
+          <div onclick="openChapterDetail('${ch.id}')" class="group bg-white rounded-2xl border border-slate-200 hover:border-indigo-300 p-5 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded-lg text-xs font-bold border ${ch.badgeColor}">${ch.classLevel}</span>
+                ${isDone
+                  ? '<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">✓ Completed</span>'
+                  : `<span class="text-xs font-semibold text-slate-400">Chapter ${idx + 1}</span>`
+                }
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 group-hover:bg-indigo-50 flex items-center justify-center text-2xl shrink-0 transition">
+                  ${ch.icon}
+                </div>
+                <div>
+                  <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-indigo-700 transition leading-snug">${ch.title}</h3>
+                  <p class="text-xs sm:text-sm text-slate-500 mt-1 line-clamp-2">${ch.subtitle}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
+              <div class="flex items-center gap-2">
+                <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded">Theory</span>
+                <span class="bg-amber-50 text-amber-700 px-2 py-0.5 rounded">${ch.formulas.length} Formulas</span>
+                <span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded">${ch.practice.length} Qs</span>
+              </div>
+              <span class="text-indigo-600 font-bold group-hover:translate-x-0.5 transition-transform">Start →</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openChapterDetail(chapterId) {
+      state.activeChapterId = chapterId;
+      state.activeStep = 1;
+      document.getElementById('chapter-list-view').classList.add('hidden');
+      document.getElementById('chapter-detail-view').classList.remove('hidden');
+
+      const ch = CHAPTERS_DATA.find(c => c.id === chapterId);
+      document.getElementById('detail-class-badge').textContent = ch.classLevel;
+      document.getElementById('detail-title').textContent = `${ch.icon} ${ch.title}`;
+      document.getElementById('detail-subtitle').textContent = ch.subtitle;
+
+      updateCompleteButtonUI();
+      switchChapterStep(1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeChapterDetail() {
+      state.activeChapterId = null;
+      document.getElementById('chapter-detail-view').classList.add('hidden');
+      document.getElementById('chapter-list-view').classList.remove('hidden');
+      renderChapterCards();
+    }
+
+    function toggleChapterComplete() {
+      if (!state.activeChapterId) return;
+      const idx = state.completedChapters.indexOf(state.activeChapterId);
+      if (idx === -1) {
+        state.completedChapters.push(state.activeChapterId);
+        showToast('Chapter marked as Completed!');
+      } else {
+        state.completedChapters.splice(idx, 1);
+        showToast('Chapter marked as In Progress');
+      }
+      localStorage.setItem('mathsetu_completed', JSON.stringify(state.completedChapters));
+      updateProgressBadge();
+      updateCompleteButtonUI();
+    }
+
+    function updateCompleteButtonUI() {
+      const btn = document.getElementById('mark-complete-btn');
+      const isDone = state.completedChapters.includes(state.activeChapterId);
+      if (isDone) {
+        btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border bg-emerald-600 text-white border-emerald-600 transition flex items-center gap-1.5';
+        btn.innerHTML = '✓ Completed';
+      } else {
+        btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border bg-white text-slate-700 border-slate-300 hover:bg-slate-50 transition flex items-center gap-1.5';
+        btn.innerHTML = 'Mark Completed';
+      }
+    }
+
+    function changeStepBy(delta) {
+      const next = state.activeStep + delta;
+      if (next >= 1 && next <= 4) {
+        switchChapterStep(next);
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      }
+    }
+
+    function switchChapterStep(stepNum) {
+      state.activeStep = stepNum;
+      const ch = CHAPTERS_DATA.find(c => c.id === state.activeChapterId);
+      if (!ch) return;
+
+      // Update Stepper Buttons Styling
+      const stepStyles = {
+        1: 'border-blue-600 bg-blue-50 text-blue-900',
+        2: 'border-amber-500 bg-amber-50 text-amber-900',
+        3: 'border-emerald-600 bg-emerald-50 text-emerald-900',
+        4: 'border-purple-600 bg-purple-50 text-purple-900'
+      };
+      const badgeStyles = {
+        1: 'bg-blue-600 text-white',
+        2: 'bg-amber-500 text-white',
+        3: 'bg-emerald-600 text-white',
+        4: 'bg-purple-600 text-white'
+      };
+
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`step-btn-${i}`);
+        const numBadge = btn.querySelector('span');
+        if (i === stepNum) {
+          btn.className = `step-tab-btn p-3 rounded-xl border-2 text-left transition flex items-center gap-2.5 shadow-sm ${stepStyles[i]}`;
+          numBadge.className = `w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${badgeStyles[i]}`;
+        } else {
+          btn.className = 'step-tab-btn p-3 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100 text-slate-600 text-left transition flex items-center gap-2.5';
+          numBadge.className = 'w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 bg-slate-200 text-slate-700';
+        }
+      }
+
+      // Update Bottom Navigation Controls
+      const prevBtn = document.getElementById('prev-step-btn');
+      const nextBtn = document.getElementById('next-step-btn');
+      const label = document.getElementById('step-indicator-label');
+      prevBtn.disabled = stepNum === 1;
+      label.textContent = `Step ${stepNum} of 4`;
+
+      const nextLabels = {
+        1: 'Next: Formulas →',
+        2: 'Next: Solved Examples →',
+        3: 'Next: Practice Quiz →',
+        4: 'Finish Chapter ✓'
+      };
+      nextBtn.textContent = nextLabels[stepNum];
+      nextBtn.onclick = stepNum === 4
+        ? () => {
+            if (!state.completedChapters.includes(ch.id)) toggleChapterComplete();
+            closeChapterDetail();
+          }
+        : () => changeStepBy(1);
+
+      // Render Step Body
+      const container = document.getElementById('chapter-step-content');
+
+      if (stepNum === 1) {
+        // STEP 1: THEORY & DEFINITIONS
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl border-l-4 border-l-blue-600 border border-slate-200 p-5 sm:p-7 shadow-sm fade-in">
+            <div class="flex items-center gap-2 text-blue-700 font-bold text-xs uppercase tracking-wider mb-1">
+              <span>📘 Step 1 of 4</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-5">Theory, Definitions & Core Rules</h3>
+            <div class="space-y-6">
+              ${ch.theory.map(sec => `
+                <div class="bg-blue-50/40 rounded-xl p-4 sm:p-5 border border-blue-100">
+                  <h4 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    ${sec.heading}
+                  </h4>
+                  <ul class="space-y-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">
+                    ${sec.points.map(pt => `
+                      <li class="flex items-start gap-2.5">
+                        <span class="text-blue-600 font-bold mt-0.5">•</span>
+                        <span>${pt}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (stepNum === 2) {
+        // STEP 2: ALL FORMULAS
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl border-l-4 border-l-amber-500 border border-slate-200 p-5 sm:p-7 shadow-sm fade-in">
+            <div class="flex items-center gap-2 text-amber-700 font-bold text-xs uppercase tracking-wider mb-1">
+              <span>📐 Step 2 of 4</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-5">All Important Formulas of This Topic</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${ch.formulas.map(f => `
+                <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 flex flex-col justify-between">
+                  <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-amber-800 mb-1.5">${f.name}</div>
+                    <div class="bg-white border border-amber-200/80 rounded-lg px-3.5 py-2.5 font-mono font-bold text-sm sm:text-base text-slate-900 shadow-xs">
+                      ${f.expr}
+                    </div>
+                  </div>
+                  <p class="text-xs text-slate-600 mt-2.5">${f.note}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (stepNum === 3) {
+        // STEP 3: STEP-BY-STEP SOLVED EXAMPLES
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl border-l-4 border-l-emerald-600 border border-slate-200 p-5 sm:p-7 shadow-sm fade-in">
+            <div class="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase tracking-wider mb-1">
+              <span>✍️ Step 3 of 4</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-5">Step-by-Step Solved Examples</h3>
+            <div class="space-y-5">
+              ${ch.examples.map((ex, i) => `
+                <div class="bg-slate-50 rounded-xl border border-slate-200 p-4 sm:p-5">
+                  <div class="flex items-start gap-3 mb-3">
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-xs font-extrabold shrink-0">Example ${i + 1}</span>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">${ex.q}</h4>
+                  </div>
+                  <div class="pl-2 sm:pl-4 border-l-2 border-emerald-300 space-y-2 my-3 text-sm text-slate-700">
+                    ${ex.steps.map((st, sIdx) => `
+                      <div><strong class="text-emerald-800">Step ${sIdx + 1}:</strong> ${st}</div>
+                    `).join('')}
+                  </div>
+                  <div class="mt-3 inline-flex items-center gap-2 bg-emerald-100/80 text-emerald-900 px-3.5 py-1.5 rounded-lg font-mono font-bold text-xs sm:text-sm">
+                    <span>✓ Final Answer:</span>
+                    <span>${ex.ans}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (stepNum === 4) {
+        // STEP 4: INTERACTIVE PRACTICE EXERCISE
+        renderPracticeExercise(ch, container);
+      }
+    }
+
+    function renderPracticeExercise(ch, container) {
+      const userAns = state.quizAnswers[ch.id] || {};
+      const isSubmitted = !!state.quizSubmitted[ch.id];
+      let score = 0;
+      if (isSubmitted) {
+        ch.practice.forEach((item, idx) => {
+          if (userAns[idx] === item.correct) score++;
+        });
+      }
+
+      container.innerHTML = `
+        <div class="bg-white rounded-2xl border-l-4 border-l-purple-600 border border-slate-200 p-5 sm:p-7 shadow-sm fade-in">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div>
+              <div class="text-purple-700 font-bold text-xs uppercase tracking-wider mb-1">🎯 Step 4 of 4</div>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Practice Exercise (${ch.practice.length} Questions)</h3>
+            </div>
+            ${isSubmitted ? `
+              <div class="bg-purple-600 text-white px-4 py-2 rounded-xl font-extrabold text-sm sm:text-base shadow-sm">
+                Score: ${score} / ${ch.practice.length} (${Math.round((score / ch.practice.length) * 100)}%)
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="space-y-6">
+            ${ch.practice.map((item, qIdx) => {
+              const selectedOpt = userAns[qIdx];
+              return `
+                <div class="p-4 sm:p-5 rounded-xl border border-slate-200 bg-slate-50/60">
+                  <div class="flex items-start justify-between gap-3 mb-3">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">
+                      <span class="text-purple-700 mr-1.5">Q${qIdx + 1}.</span>${item.q}
+                    </h4>
+                    <button onclick="toggleQuizHint('${ch.id}', ${qIdx})" class="shrink-0 px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold transition">
+                      💡 Hint
+                    </button>
+                  </div>
+
+                  <!-- Hint Box -->
+                  <div id="hint-box-${ch.id}-${qIdx}" class="hidden mb-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs sm:text-sm text-amber-900">
+                    <strong>Hint:</strong> ${item.hint}
+                  </div>
+
+                  <!-- Options Grid -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    ${item.options.map((opt, oIdx) => {
+                      let optClass = 'bg-white border-slate-200 hover:border-purple-400 text-slate-800';
+                      let badge = '';
+
+                      if (isSubmitted) {
+                        if (oIdx === item.correct) {
+                          optClass = 'bg-emerald-50 border-emerald-500 text-emerald-900 font-bold';
+                          badge = '<span class="ml-auto text-emerald-600 font-extrabold">✓ Correct</span>';
+                        } else if (selectedOpt === oIdx && oIdx !== item.correct) {
+                          optClass = 'bg-rose-50 border-rose-500 text-rose-900 font-semibold';
+                          badge = '<span class="ml-auto text-rose-600 font-extrabold">✗ Your Choice</span>';
+                        } else {
+                          optClass = 'bg-white border-slate-200 text-slate-400 opacity-75';
+                        }
+                      } else if (selectedOpt === oIdx) {
+                        optClass = 'bg-purple-50 border-purple-600 text-purple-900 font-bold ring-1 ring-purple-600';
+                      }
+
+                      return `
+                        <button
+                          onclick="selectQuizOption('${ch.id}', ${qIdx}, ${oIdx})"
+                          ${isSubmitted ? 'disabled' : ''}
+                          class="p-3 rounded-xl border text-left text-xs sm:text-sm transition flex items-center gap-2.5 ${optClass}"
+                        >
+                          <span class="w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs font-bold shrink-0">
+                            ${String.fromCharCode(65 + oIdx)}
+                          </span>
+                          <span>${opt}</span>
+                          ${badge}
+                        </button>
+                      `;
+                    }).join('')}
+                  </div>
+
+                  <!-- Step-by-Step Explanation shown after submit -->
+                  ${isSubmitted ? `
+                    <div class="mt-3 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-xs sm:text-sm text-indigo-950">
+                      <strong>Solution:</strong> ${item.explanation}
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Submit / Retry Controls -->
+          <div class="mt-6 pt-5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            ${!isSubmitted ? `
+              <button onclick="submitChapterQuiz('${ch.id}')" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm shadow-md shadow-purple-200 transition">
+                Submit Answers & Check Score
+              </button>
+            ` : `
+              <button onclick="resetChapterQuiz('${ch.id}')" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm transition">
+                ↻ Retry Practice Quiz
+              </button>
+            `}
+            <span class="text-xs text-slate-500">Need help? Click <strong>💡 Hint</strong> on any question before submitting.</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleQuizHint(chapterId, qIdx) {
+      const box = document.getElementById(`hint-box-${chapterId}-${qIdx}`);
+      if (box) box.classList.toggle('hidden');
+    }
+
+    function selectQuizOption(chapterId, qIdx, oIdx) {
+      if (state.quizSubmitted[chapterId]) return;
+      if (!state.quizAnswers[chapterId]) state.quizAnswers[chapterId] = {};
+      state.quizAnswers[chapterId][qIdx] = oIdx;
+      const ch = CHAPTERS_DATA.find(c => c.id === chapterId);
+      renderPracticeExercise(ch, document.getElementById('chapter-step-content'));
+    }
+
+    function submitChapterQuiz(chapterId) {
+      const ch = CHAPTERS_DATA.find(c => c.id === chapterId);
+      const ans = state.quizAnswers[chapterId] || {};
+      if (Object.keys(ans).length < ch.practice.length) {
+        showToast(`Please answer all ${ch.practice.length} questions first!`);
+        return;
+      }
+      state.quizSubmitted[chapterId] = true;
+      renderPracticeExercise(ch, document.getElementById('chapter-step-content'));
+      showToast('Quiz evaluated! Check your solutions below.');
+    }
+
+    function resetChapterQuiz(chapterId) {
+      state.quizAnswers[chapterId] = {};
+      state.quizSubmitted[chapterId] = false;
+      const ch = CHAPTERS_DATA.find(c => c.id === chapterId);
+      renderPracticeExercise(ch, document.getElementById('chapter-step-content'));
+    }
+
+    // =========================================================
+    // TAB 2: SMART GENERATORS (TABLES, SQUARES, CUBES)
+    // =========================================================
+    function formatNumClean(val) {
+      if (!Number.isFinite(val)) return '0';
+      return Number.isInteger(val) ? val.toLocaleString('en-IN') : parseFloat(val.toFixed(6)).toString();
+    }
+
+    function generateCustomTable() {
+      const rawVal = document.getElementById('gen-table-num').value;
+      const limit = parseInt(document.getElementById('gen-table-limit').value, 10) || 10;
+      const output = document.getElementById('gen-table-output');
+
+      const num = parseFloat(rawVal);
+      if (rawVal === '' || isNaN(num)) {
+        output.innerHTML = `<div class="py-8 text-center text-slate-400 font-sans text-sm">Enter any number above to generate its multiplication table.</div>`;
+        return;
+      }
+
+      let rowsHtml = '';
+      for (let i = 1; i <= limit; i++) {
+        const prod = num * i;
+        rowsHtml += `
+          <div class="flex items-center justify-between py-2 px-2.5 hover:bg-white rounded-lg transition">
+            <span class="text-slate-600 font-semibold">${num} × ${i}</span>
+            <span class="text-indigo-700 font-extrabold">= ${formatNumClean(prod)}</span>
+          </div>
+        `;
+      }
+      output.innerHTML = rowsHtml;
+    }
+
+    function speakCurrentTable() {
+      if (!('speechSynthesis' in window)) {
+        showToast('Speech synthesis is not supported in this browser.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const rawVal = document.getElementById('gen-table-num').value;
+      const limit = parseInt(document.getElementById('gen-table-limit').value, 10) || 10;
+      const num = parseFloat(rawVal);
+      if (isNaN(num)) return;
+
+      let lines = [];
+      for (let i = 1; i <= limit; i++) {
+        const prod = Number.isInteger(num * i) ? num * i : parseFloat((num * i).toFixed(4));
+        lines.push(`${num} times ${i} is ${prod}.`);
+      }
+      const utterance = new SpeechSynthesisUtterance(lines.join(' '));
+      utterance.lang = 'en-IN';
+      utterance.rate = 0.92;
+      window.speechSynthesis.speak(utterance);
+      showToast(`Reading table of ${num} aloud...`);
+    }
+
+    function stopSpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function copyGeneratedTable() {
+      const rawVal = document.getElementById('gen-table-num').value;
+      const limit = parseInt(document.getElementById('gen-table-limit').value, 10) || 10;
+      const num = parseFloat(rawVal);
+      if (isNaN(num)) return;
+
+      let text = `Multiplication Table of ${num}:\n`;
+      for (let i = 1; i <= limit; i++) {
+        text += `${num} × ${i} = ${formatNumClean(num * i)}\n`;
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      showToast(`Table of ${num} copied to clipboard!`);
+    }
+
+    function generateCustomSquare() {
+      const rawVal = document.getElementById('gen-square-num').value;
+      const out = document.getElementById('gen-square-output');
+      const n = parseFloat(rawVal);
+
+      if (rawVal === '' || isNaN(n)) {
+        out.innerHTML = `<div class="text-sm text-slate-500">Enter a valid number to calculate its square.</div>`;
+        return;
+      }
+
+      const sq = n * n;
+      const parity = Number.isInteger(n) ? (Math.abs(n) % 2 === 0 ? 'Even Square' : 'Odd Square') : 'Decimal Square';
+      out.innerHTML = `
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <div class="text-xs font-bold uppercase tracking-wider text-amber-800">Result (${n}²)</div>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-amber-200/70 text-amber-900">${parity}</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-mono font-extrabold text-slate-900 mt-1">${formatNumClean(sq)}</div>
+        <div class="text-xs sm:text-sm font-mono text-slate-600 mt-2 pt-2 border-t border-amber-200/80">
+          Breakdown: ${n} × ${n} = ${formatNumClean(sq)}
+        </div>
+      `;
+    }
+
+    function generateCustomCube() {
+      const rawVal = document.getElementById('gen-cube-num').value;
+      const out = document.getElementById('gen-cube-output');
+      const n = parseFloat(rawVal);
+
+      if (rawVal === '' || isNaN(n)) {
+        out.innerHTML = `<div class="text-sm text-slate-500">Enter a valid number to calculate its cube.</div>`;
+        return;
+      }
+
+      const sq = n * n;
+      const cb = n * n * n;
+      out.innerHTML = `
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <div class="text-xs font-bold uppercase tracking-wider text-purple-800">Result (${n}³)</div>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-purple-200/70 text-purple-900">${n < 0 ? 'Negative Cube' : 'Positive Cube'}</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-mono font-extrabold text-slate-900 mt-1">${formatNumClean(cb)}</div>
+        <div class="text-xs sm:text-sm font-mono text-slate-600 mt-2 pt-2 border-t border-purple-200/80">
+          Step 1: ${n} × ${n} = ${formatNumClean(sq)}<br/>
+          Step 2: ${formatNumClean(sq)} × ${n} = ${formatNumClean(cb)}
+        </div>
+      `;
+    }
+
+    // =========================================================
+    // TAB 3: PRELOADED REFERENCE VAULT (TABLES 0-20, SQ/CB 1-30, FORMULAS)
+    // =========================================================
+    function switchVaultSubTab(subTab) {
+      state.vaultSubTab = subTab;
+      ['tables', 'squares', 'cubes', 'formulas'].forEach(t => {
+        const btn = document.getElementById(`vault-btn-${t}`);
+        if (t === subTab) {
+          btn.className = 'vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-indigo-600 text-white shadow-sm';
+        } else {
+          btn.className = 'vault-sub-btn px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition bg-slate-100 text-slate-700 hover:bg-slate-200';
+        }
+      });
+      renderVaultContent();
+    }
+
+    function selectVaultTable(num) {
+      state.selectedVaultTableNum = num;
+      renderVaultContent();
+    }
+
+    function speakVaultTable(num) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      let lines = [];
+      for (let i = 1; i <= 10; i++) {
+        lines.push(`${num} times ${i} is ${num * i}.`);
+      }
+      const u = new SpeechSynthesisUtterance(lines.join(' '));
+      u.lang = 'en-IN';
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+      showToast(`Reading Table of ${num}...`);
+    }
+
+    function filterMasterFormulas(cat) {
+      state.formulaCategoryFilter = cat;
+      renderVaultContent();
+    }
+
+    function renderVaultContent() {
+      const area = document.getElementById('vault-content-area');
+
+      if (state.vaultSubTab === 'tables') {
+        // Preloaded Tables 0 to 20
+        const nums = Array.from({ length: 21 }, (_, i) => i);
+        const sel = state.selectedVaultTableNum;
+
+        let rows = '';
+        for (let i = 1; i <= 10; i++) {
+          rows += `
+            <div class="flex items-center justify-between py-2.5 px-4 bg-slate-50 rounded-xl border border-slate-200/70 font-mono text-base sm:text-lg">
+              <span class="font-semibold text-slate-700">${sel} × ${i}</span>
+              <span class="font-extrabold text-indigo-700">= ${sel * i}</span>
+            </div>
+          `;
+        }
+
+        area.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm fade-in">
+            <div class="mb-4">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Select Any Table (0 to 20)</div>
+              <div class="flex flex-wrap gap-2">
+                ${nums.map(n => `
+                  <button
+                    onclick="selectVaultTable(${n})"
+                    class="w-10 h-10 rounded-xl font-mono font-bold text-sm transition ${n === sel
+                      ? 'bg-indigo-600 text-white shadow-sm'
+                      : 'bg-slate-100 hover:bg-indigo-50 text-slate-700'}"
+                  >
+                    ${n}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h3 class="text-xl font-extrabold text-slate-900">Multiplication Table of ${sel}</h3>
+                <div class="flex items-center gap-2">
+                  <button onclick="speakVaultTable(${sel})" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">
+                    🔊 Listen Table
+                  </button>
+                  <button onclick="stopSpeech()" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+                    ⏹ Stop
+                  </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                ${rows}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (state.vaultSubTab === 'squares') {
+        // Preloaded Squares 1 to 30
+        const items = Array.from({ length: 30 }, (_, i) => i + 1);
+        area.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm fade-in">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+              <div>
+                <h3 class="text-xl font-extrabold text-slate-900">Preloaded Squares (1² to 30²)</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Memorizing squares up to 30 boosts calculation speed in Mensuration & Pythagoras problems.</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">Tip: (n+1)² = n² + 2n + 1</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+              ${items.map(n => `
+                <div class="p-3.5 rounded-xl bg-amber-50/50 border border-amber-200/80 flex items-center justify-between font-mono">
+                  <span class="text-sm font-bold text-slate-700">${n}²</span>
+                  <span class="text-base sm:text-lg font-extrabold text-amber-800">${n * n}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (state.vaultSubTab === 'cubes') {
+        // Preloaded Cubes 1 to 30
+        const items = Array.from({ length: 30 }, (_, i) => i + 1);
+        area.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm fade-in">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+              <div>
+                <h3 class="text-xl font-extrabold text-slate-900">Preloaded Cubes (1³ to 30³)</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Complete reference chart of cubes from 1 to 30 for rapid cube root estimation.</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold">1729 = 12³ + 1³ = 10³ + 9³</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+              ${items.map(n => `
+                <div class="p-3.5 rounded-xl bg-purple-50/50 border border-purple-200/80 flex items-center justify-between font-mono">
+                  <span class="text-sm font-bold text-slate-700">${n}³</span>
+                  <span class="text-sm sm:text-base font-extrabold text-purple-900">${(n * n * n).toLocaleString('en-IN')}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (state.vaultSubTab === 'formulas') {
+        // Master Formula Sheet
+        const categories = ['All', ...new Set(MASTER_FORMULAS.map(f => f.category))];
+        const searchTerm = (document.getElementById('vault-formula-search')?.value || '').toLowerCase();
+        const filtered = MASTER_FORMULAS.filter(f => {
+          const catOk = state.formulaCategoryFilter === 'All' || f.category === state.formulaCategoryFilter;
+          const textOk = f.title.toLowerCase().includes(searchTerm) || f.formula.toLowerCase().includes(searchTerm) || f.category.toLowerCase().includes(searchTerm);
+          return catOk && textOk;
+        });
+
+        area.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm fade-in">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+              <div>
+                <h3 class="text-xl font-extrabold text-slate-900">Master Formula Bank (Class 1–8)</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Filter by branch or search any formula instantly.</p>
+              </div>
+              <input
+                type="text"
+                id="vault-formula-search"
+                value="${searchTerm}"
+                oninput="renderVaultContent()"
+                placeholder="Search formula (e.g., cylinder, interest, area)..."
+                class="w-full md:w-72 px-3.5 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-4 border-b border-slate-100">
+              ${categories.map(cat => `
+                <button
+                  onclick="filterMasterFormulas('${cat}')"
+                  class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${cat === state.formulaCategoryFilter
+                    ? 'bg-slate-900 text-white'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                >
+                  ${cat}
+                </button>
+              `).join('')}
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${filtered.map(f => `
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/90 flex flex-col justify-between">
+                  <div class="flex items-center justify-between gap-2 mb-2">
+                    <span class="font-bold text-slate-900 text-sm">${f.title}</span>
+                    <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">${f.category}</span>
+                  </div>
+                  <div class="bg-white px-3.5 py-2.5 rounded-lg border border-slate-200 font-mono font-bold text-xs sm:text-sm text-slate-800">
+                    ${f.formula}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
