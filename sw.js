@@ -1,11 +1,12 @@
-const CACHE_NAME = 'mathsetu-pwa-v1';
+const CACHE_NAME = 'mathsetu-pwa-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
-// Install event: Cache core files
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -15,7 +16,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate event: Clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -31,7 +31,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch event: Cache-first strategy with network fallback
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
