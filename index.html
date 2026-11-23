@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MathSetu — Class 1st to 8th Interactive Math App</title>
-  <meta name="description" content="Complete Class 1st to 8th Mathematics Learning App with Theory, Formulas, Solved Examples, Practice Exercises, Smart Generators, and Preloaded Reference Vault." />
+  <title>MathSetu — Class 1st to 8th Interactive Mathematics Learning Hub</title>
+  <meta name="description" content="Complete Class 1st to 8th Foundation-Wise Mathematics Learning App with Theory, Inline SVG Diagrams, Formulas, Solved Examples, Practice Exercises, Smart Generators, and Reference Vault." />
   <meta name="theme-color" content="#4f46e5" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -29,8 +29,8 @@
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --radius: 14px;
-      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+      --radius: 16px;
+      --shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
     }
 
     * {
@@ -44,22 +44,23 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: 84px;
+      padding-bottom: 48px;
+      overflow-x: hidden;
     }
 
-    /* Header */
+    /* Sticky Header */
     header {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
-      padding: 16px 20px;
+      padding: 14px 18px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 12px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 3px 14px rgba(79, 70, 229, 0.25);
     }
 
     .header-inner {
-      max-width: 1100px;
+      max-width: 1140px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -80,13 +81,15 @@
       border-radius: 12px;
       object-fit: cover;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+      flex-shrink: 0;
     }
 
     .brand h1 {
-      font-size: 1.35rem;
+      font-size: 1.32rem;
       font-weight: 800;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
     }
 
     .brand p {
@@ -96,23 +99,25 @@
 
     .stats-pill {
       background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     /* Main Container */
     main {
-      max-width: 1100px;
-      margin: 20px auto;
+      max-width: 1140px;
+      margin: 18px auto;
       padding: 0 16px;
     }
 
-    /* Navigation Tabs */
+    /* Top 3 Navigation Tabs */
     .nav-tabs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -121,7 +126,7 @@
       padding: 8px;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       border: 1px solid var(--border);
     }
 
@@ -129,8 +134,8 @@
       border: none;
       background: transparent;
       padding: 12px 10px;
-      border-radius: 10px;
-      font-size: 0.92rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
@@ -138,7 +143,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
+      text-align: center;
     }
 
     .nav-btn:hover {
@@ -149,12 +155,12 @@
     .nav-btn.active {
       background: var(--primary);
       color: #fff;
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.28);
     }
 
     .tab-section {
       display: none;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 0.22s ease;
     }
 
     .tab-section.active {
@@ -162,11 +168,11 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards & Utilities */
+    /* Cards & Common Components */
     .card {
       background: var(--surface);
       border-radius: var(--radius);
@@ -179,45 +185,58 @@
     .section-title {
       font-size: 1.15rem;
       font-weight: 800;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       color: var(--text);
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    /* Class Filter Pills */
+    /* Stage Filter Pills & Search */
+    .filter-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
     .filter-bar {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
     }
 
     .filter-pill {
       border: 1px solid var(--border);
       background: var(--surface);
-      padding: 7px 15px;
+      padding: 8px 15px;
       border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
       transition: 0.2s;
     }
 
+    .filter-pill:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
     .filter-pill.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
+      box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
     }
 
     /* Chapters Grid */
     .chapters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
       gap: 16px;
     }
 
@@ -228,7 +247,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -237,27 +256,39 @@
     .chapter-card:hover {
       transform: translateY(-3px);
       border-color: var(--primary);
+      box-shadow: 0 8px 22px rgba(79, 70, 229, 0.12);
     }
 
-    .chapter-badge {
-      display: inline-block;
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
+    .badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 10px;
-      width: fit-content;
     }
+
+    .stage-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .s1-badge { background: #e0f2fe; color: #0369a1; }
+    .s2-badge { background: #dcfce7; color: #15803d; }
+    .s3-badge { background: #eef2ff; color: #4338ca; }
+    .s4-badge { background: #fae8ff; color: #86198f; }
 
     .chapter-card h3 {
-      font-size: 1.08rem;
+      font-size: 1.06rem;
+      font-weight: 800;
       margin-bottom: 6px;
+      color: var(--text);
     }
 
     .chapter-card p {
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 14px;
     }
@@ -273,25 +304,27 @@
       padding-top: 10px;
     }
 
-    /* Chapter Detail View */
+    /* Chapter Detail 4-Step View */
     .back-btn {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 9px 15px;
+      border-radius: 12px;
       font-weight: 700;
       font-size: 0.88rem;
       cursor: pointer;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       color: var(--text);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
     .back-btn:hover {
       background: var(--primary-light);
       color: var(--primary);
+      border-color: var(--primary);
     }
 
     .step-badge {
@@ -302,9 +335,27 @@
       color: #fff;
       padding: 4px 12px;
       border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 0.76rem;
+      font-weight: 800;
       margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .svg-container {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+
+    .svg-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 6px;
     }
 
     .theory-list {
@@ -317,13 +368,34 @@
       background: #f8fafc;
       padding: 12px 14px;
       border-left: 4px solid var(--primary);
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.94rem;
+    }
+
+    .daily-life-box {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+
+    .daily-life-box h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+
+    .daily-life-box ul {
+      padding-left: 18px;
+      font-size: 0.88rem;
+      color: #064e3b;
     }
 
     .formula-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 12px;
     }
 
@@ -335,14 +407,14 @@
     }
 
     .formula-box .f-name {
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-size: 0.8rem;
+      font-weight: 800;
       color: var(--primary-dark);
       margin-bottom: 4px;
     }
 
     .formula-box .f-expr {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       color: var(--text);
       font-family: 'Cambria Math', 'Segoe UI', monospace;
@@ -357,30 +429,32 @@
     }
 
     .example-q {
-      font-weight: 700;
+      font-weight: 800;
       color: #92400e;
       margin-bottom: 8px;
+      font-size: 0.95rem;
     }
 
     .example-steps {
-      font-size: 0.92rem;
+      font-size: 0.91rem;
       color: #334155;
-      padding-left: 16px;
+      padding-left: 12px;
     }
 
-    /* Practice Exercise */
+    /* Interactive Practice Quiz */
     .quiz-item {
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 16px;
       margin-bottom: 14px;
       background: #fff;
     }
 
     .quiz-q {
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 12px;
-      font-size: 0.98rem;
+      font-size: 0.97rem;
+      color: var(--text);
     }
 
     .options-grid {
@@ -393,24 +467,26 @@
     .option-label {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       padding: 10px 12px;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 10px;
       cursor: pointer;
-      font-size: 0.92rem;
+      font-size: 0.91rem;
+      font-weight: 600;
       transition: 0.15s;
     }
 
     .option-label:hover {
       background: var(--primary-light);
+      border-color: var(--primary);
     }
 
     .hint-btn {
       background: #fef3c7;
       color: #92400e;
       border: 1px solid #fcd34d;
-      padding: 5px 12px;
+      padding: 6px 12px;
       border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 700;
@@ -420,8 +496,9 @@
     .hint-text {
       display: none;
       margin-top: 8px;
-      padding: 8px 12px;
+      padding: 9px 12px;
       background: #fffbeb;
+      border: 1px solid #fde68a;
       border-radius: 8px;
       font-size: 0.85rem;
       color: #78350f;
@@ -431,7 +508,7 @@
       margin-top: 8px;
       font-size: 0.88rem;
       font-weight: 700;
-      padding: 8px 12px;
+      padding: 9px 12px;
       border-radius: 8px;
       display: none;
     }
@@ -439,16 +516,18 @@
     .feedback-correct {
       background: var(--success-bg);
       color: #065f46;
+      border: 1px solid #a7f3d0;
       display: block;
     }
 
     .feedback-wrong {
       background: var(--danger-bg);
       color: #991b1b;
+      border: 1px solid #fecaca;
       display: block;
     }
 
-    /* Smart Generators Tab */
+    /* Smart Generators & Inputs */
     .gen-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
@@ -467,9 +546,10 @@
       min-width: 120px;
       padding: 11px 14px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.98rem;
+      border-radius: 12px;
+      font-size: 0.96rem;
       outline: none;
+      background: #fff;
     }
 
     input:focus, select:focus {
@@ -481,7 +561,7 @@
       color: #fff;
       border: none;
       padding: 11px 18px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 700;
       font-size: 0.92rem;
       cursor: pointer;
@@ -500,7 +580,7 @@
       color: var(--primary);
       border: 1px solid #c7d2fe;
       padding: 8px 13px;
-      border-radius: 9px;
+      border-radius: 10px;
       font-weight: 700;
       font-size: 0.84rem;
       cursor: pointer;
@@ -519,7 +599,7 @@
       justify-content: space-between;
       padding: 6px 10px;
       border-bottom: 1px dashed var(--border);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.95rem;
     }
 
@@ -535,6 +615,23 @@
       word-break: break-all;
     }
 
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      z-index: 999;
+      display: none;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
     /* Vault Sub-tabs */
     .sub-tabs {
       display: flex;
@@ -544,12 +641,12 @@
     }
 
     .sub-tab-btn {
-      padding: 8px 16px;
+      padding: 9px 15px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--surface);
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       cursor: pointer;
       color: var(--text-muted);
     }
@@ -562,27 +659,27 @@
 
     .vault-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: 10px;
     }
 
     .vault-tile {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 12px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
     }
 
     .vault-tile .num {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       font-weight: 700;
     }
 
     .vault-tile .val {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 800;
       color: var(--primary);
       margin-top: 2px;
@@ -611,9 +708,20 @@
       border-color: var(--primary);
     }
 
-    @media (max-width: 600px) {
-      .nav-btn { font-size: 0.8rem; padding: 10px 6px; }
+    footer {
+      max-width: 1140px;
+      margin: 28px auto 0;
+      padding: 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .nav-btn { font-size: 0.78rem; padding: 10px 6px; }
       .brand h1 { font-size: 1.15rem; }
+      .card { padding: 16px; }
     }
   </style>
 </head>
@@ -622,10 +730,10 @@
 <header>
   <div class="header-inner">
     <div class="brand">
-      <img src="./icon-192.png" alt="MathSetu Logo" class="brand-icon" />
+      <img src="./icon-192.png" alt="MathSetu Logo" class="brand-icon" onerror="this.style.display='none'" />
       <div>
         <h1>MathSetu</h1>
-        <p>Class 1st to 8th Complete Math Learning & Practice Hub</p>
+        <p>Class 1st to 8th Interactive Mathematics Learning Hub</p>
       </div>
     </div>
     <div class="stats-pill" id="progressPill">
@@ -635,22 +743,29 @@
 </header>
 
 <main>
-  <!-- Top Navigation -->
+  <!-- Top 3 Main Navigation Tabs -->
   <nav class="nav-tabs">
-    <button class="nav-btn active" onclick="switchMainTab('chapters', this)">📚 Chapters (1st–8th)</button>
+    <button class="nav-btn active" onclick="switchMainTab('chapters', this)">📚 Foundation Chapters (1st–8th)</button>
     <button class="nav-btn" onclick="switchMainTab('generators', this)">⚡ Smart Generators</button>
-    <button class="nav-btn" onclick="switchMainTab('vault', this)">Vault: 0–20 & 1–30</button>
+    <button class="nav-btn" onclick="switchMainTab('vault', this)">Vault: Tables, Squares, Cubes & Formulas</button>
   </nav>
 
-  <!-- TAB 1: CHAPTERS -->
+  <!-- ========================================================= -->
+  <!-- TAB 1: FOUNDATION CHAPTERS (4 STAGES: CLASS 1 TO 8)       -->
+  <!-- ========================================================= -->
   <section id="tab-chapters" class="tab-section active">
     <div id="chaptersListView">
-      <div class="filter-bar" id="classFilterBar">
-        <button class="filter-pill active" onclick="filterChapters('All', this)">All Classes</button>
-        <button class="filter-pill" onclick="filterChapters('Class 1–5', this)">Class 1–5 (Foundation)</button>
-        <button class="filter-pill" onclick="filterChapters('Class 6', this)">Class 6</button>
-        <button class="filter-pill" onclick="filterChapters('Class 7', this)">Class 7</button>
-        <button class="filter-pill" onclick="filterChapters('Class 8', this)">Class 8</button>
+      <div class="filter-header">
+        <div class="filter-bar" id="stageFilterBar">
+          <button class="filter-pill active" onclick="filterChapters('All', this)">All Stages</button>
+          <button class="filter-pill" onclick="filterChapters('Stage 1', this)">Stage 1: Early Numeracy (Class 1–2)</button>
+          <button class="filter-pill" onclick="filterChapters('Stage 2', this)">Stage 2: Primary Analytical (Class 3–5)</button>
+          <button class="filter-pill" onclick="filterChapters('Stage 3', this)">Stage 3: Middle Core (Class 6–7)</button>
+          <button class="filter-pill" onclick="filterChapters('Stage 4', this)">Stage 4: Pre-High School (Class 8)</button>
+        </div>
+        <div class="input-group" style="margin-bottom: 0;">
+          <input type="text" id="chapterSearchInput" placeholder="Search chapter, class (e.g. Class 6), or topic (e.g. Fractions, Pythagoras, Algebra)..." oninput="renderChaptersGrid()" />
+        </div>
       </div>
       <div class="chapters-grid" id="chaptersGrid"></div>
     </div>
@@ -661,48 +776,49 @@
     </div>
   </section>
 
-  <!-- TAB 2: SMART GENERATORS -->
+  <!-- ========================================================= -->
+  <!-- TAB 2: SMART GENERATORS (TABLES, SQUARES, CUBES)          -->
+  <!-- ========================================================= -->
   <section id="tab-generators" class="tab-section">
     <div class="gen-grid">
-      <!-- 1. Table Generator -->
+      <!-- Multiplication Table Generator -->
       <div class="card">
         <div class="section-title">✖️ Smart Multiplication Table Generator</div>
         <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
-          Enter any number (even big numbers like 27, 145, or decimals) to generate its instant table.
+          Enter any number (integers, big numbers, or decimals) to generate its instant multiplication table.
         </p>
         <div class="input-group">
-          <input type="number" id="genTableNum" placeholder="Enter number (e.g. 19)" value="17" step="any" />
-          <select id="genTableLimit" style="max-width: 110px;">
+          <input type="number" id="genTableNum" placeholder="Enter number (e.g. 17)" value="17" step="any" />
+          <select id="genTableLimit" style="max-width: 125px;">
             <option value="10">Up to 10</option>
             <option value="20">Up to 20</option>
           </select>
           <button class="btn-primary" onclick="generateCustomTable()">Generate</button>
         </div>
-        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
           <button class="btn-secondary" onclick="speakGeneratedTable()">🔊 Listen (Read Aloud)</button>
           <button class="btn-secondary" onclick="copyGeneratedTable()">📋 Copy Table</button>
         </div>
         <div class="result-panel" id="genTableOutput"></div>
       </div>
 
-      <!-- 2. Square Generator -->
+      <!-- Smart Square & Cube Calculators -->
       <div class="card">
         <div class="section-title">² Smart Square Calculator (n²)</div>
         <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
-          Write any number to instantly calculate its square ($n \times n$) with step breakdown.
+          Write any number to instantly calculate its square (n × n) with step breakdown.
         </p>
         <div class="input-group">
-          <input type="number" id="genSquareNum" placeholder="Enter number (e.g. 45)" value="25" step="any" oninput="calculateSquare()" />
+          <input type="number" id="genSquareNum" placeholder="Enter number (e.g. 25)" value="25" step="any" oninput="calculateSquare()" />
           <button class="btn-primary" onclick="calculateSquare()">Get Square</button>
         </div>
         <div class="result-panel" id="genSquareOutput"></div>
 
         <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;" />
 
-        <!-- 3. Cube Generator -->
         <div class="section-title">³ Smart Cube Calculator (n³)</div>
         <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 12px;">
-          Write any number to instantly calculate its cube ($n \times n \times n$) with step breakdown.
+          Write any number to instantly calculate its cube (n × n × n) with step breakdown.
         </p>
         <div class="input-group">
           <input type="number" id="genCubeNum" placeholder="Enter number (e.g. 12)" value="12" step="any" oninput="calculateCube()" />
@@ -713,45 +829,47 @@
     </div>
   </section>
 
-  <!-- TAB 3: PRELOADED REFERENCE VAULT -->
+  <!-- ========================================================= -->
+  <!-- TAB 3: PRELOADED REFERENCE VAULT                          -->
+  <!-- ========================================================= -->
   <section id="tab-vault" class="tab-section">
     <div class="card">
       <div class="sub-tabs">
         <button class="sub-tab-btn active" onclick="switchVaultTab('tables0to20', this)">📊 Tables (0 to 20)</button>
-        <button class="sub-tab-btn" onclick="switchVaultTab('squares1to30', this)">🟦 Squares (1 to 30)</button>
-        <button class="sub-tab-btn" onclick="switchVaultTab('cubes1to30', this)">🧊 Cubes (1 to 30)</button>
-        <button class="sub-tab-btn" onclick="switchVaultTab('formulasBank', this)">📐 Important Formulas</button>
+        <button class="sub-tab-btn" onclick="switchVaultTab('squares1to30', this)">🟦 Squares (1² to 30²)</button>
+        <button class="sub-tab-btn" onclick="switchVaultTab('cubes1to30', this)">🧊 Cubes (1³ to 30³)</button>
+        <button class="sub-tab-btn" onclick="switchVaultTab('formulasBank', this)">📐 Master Formula Bank</button>
       </div>
 
-      <!-- Vault 1: Tables 0 to 20 -->
+      <!-- Sub-tab 1: Tables 0 to 20 -->
       <div id="vault-tables0to20" class="vault-pane">
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
-          Tap any number from <strong>0 to 20</strong> to view and listen to its complete table:
+          Tap any number from <strong>0 to 20</strong> to view and listen to its multiplication table:
         </p>
         <div class="table-selector-grid" id="preloadedTableChips"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <h3 id="preloadedTableTitle" style="color: var(--primary);">Table of 2</h3>
-          <button class="btn-secondary" onclick="speakPreloadedTable()">🔊 Read Aloud</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+          <h3 id="preloadedTableTitle" style="color: var(--primary);">Multiplication Table of 2</h3>
+          <button class="btn-secondary" onclick="speakPreloadedTable()">🔊 Listen (Read Aloud)</button>
         </div>
         <div class="result-panel" id="preloadedTableDisplay"></div>
       </div>
 
-      <!-- Vault 2: Squares 1 to 30 -->
+      <!-- Sub-tab 2: Squares 1 to 30 -->
       <div id="vault-squares1to30" class="vault-pane" style="display: none;">
         <h3 style="margin-bottom: 12px;">Preloaded Squares (1² to 30²)</h3>
         <div class="vault-grid" id="squaresGrid"></div>
       </div>
 
-      <!-- Vault 3: Cubes 1 to 30 -->
+      <!-- Sub-tab 3: Cubes 1 to 30 -->
       <div id="vault-cubes1to30" class="vault-pane" style="display: none;">
         <h3 style="margin-bottom: 12px;">Preloaded Cubes (1³ to 30³)</h3>
         <div class="vault-grid" id="cubesGrid"></div>
       </div>
 
-      <!-- Vault 4: Important Formulas -->
+      <!-- Sub-tab 4: Searchable Master Formula Bank -->
       <div id="vault-formulasBank" class="vault-pane" style="display: none;">
         <div class="input-group">
-          <input type="text" id="formulaSearchInput" placeholder="Search formula (e.g., Area, Circle, Profit, Interest, Algebra)..." oninput="renderMasterFormulas()" />
+          <input type="text" id="formulaSearchInput" placeholder="Search formula by topic or keyword (e.g. Circle, Cylinder, Profit, Algebra, Exponents, HCF)..." oninput="renderMasterFormulas()" />
         </div>
         <div id="masterFormulasContainer"></div>
       </div>
@@ -759,623 +877,955 @@
   </section>
 </main>
 
+<footer>
+  MathSetu — Complete Class 1st to 8th Interactive Mathematics Learning Hub • Offline-Ready PWA
+</footer>
+
+<div class="toast-msg" id="toastMsg"></div>
+
 <script>
-  // ==========================================
-  // 1. CURRICULUM DATA (Theory -> Formulas -> Examples -> Practice)
-  // ==========================================
+  // =========================================================================
+  // 1. COMPLETE 4-STAGE FOUNDATION CURRICULUM (CLASSES 1 TO 8)
+  // =========================================================================
   const CHAPTERS_DATA = [
+    // -----------------------------------------------------------------------
+    // STAGE 1: EARLY NUMERACY FOUNDATION (CLASS 1–2)
+    // -----------------------------------------------------------------------
     {
-      id: "ch1",
-      grade: "Class 1–5",
-      title: "Number System, Place Value & BODMAS",
-      summary: "Natural numbers, whole numbers, even/odd, prime numbers, and order of operations.",
+      id: "ch1_1",
+      stage: "Stage 1",
+      stageClass: "s1-badge",
+      grade: "Class 1",
+      title: "Ch 1.1: Pre-Number Concepts & Numbers up to 100",
+      summary: "Size & position comparison, digits 0–9, Tens & Ones place value, before/after/between, and ordering.",
+      diagramCaption: "Base-10 Place Value Model: 4 Tens Rods (40) + 3 Ones Cubes (3) = 43",
+      svg: `<svg viewBox="0 0 600 155" style="width:100%;max-height:175px;display:block;margin:auto;">
+        <g fill="#dbeafe" stroke="#2563eb" stroke-width="1.5">
+          <rect x="20" y="18" width="16" height="95" rx="2"/><rect x="42" y="18" width="16" height="95" rx="2"/>
+          <rect x="64" y="18" width="16" height="95" rx="2"/><rect x="86" y="18" width="16" height="95" rx="2"/>
+        </g>
+        <text x="61" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">4 Tens = 40</text>
+        <text x="142" y="72" text-anchor="middle" font-size="22" font-weight="bold" fill="#475569">+</text>
+        <g fill="#fef3c7" stroke="#d97706" stroke-width="1.5">
+          <rect x="175" y="92" width="18" height="18" rx="2"/><rect x="199" y="92" width="18" height="18" rx="2"/>
+          <rect x="223" y="92" width="18" height="18" rx="2"/>
+        </g>
+        <text x="208" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">3 Ones = 3</text>
+        <text x="282" y="72" text-anchor="middle" font-size="22" font-weight="bold" fill="#475569">=</text>
+        <rect x="320" y="18" width="110" height="32" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+        <rect x="430" y="18" width="110" height="32" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+        <text x="375" y="39" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">TENS</text>
+        <text x="485" y="39" text-anchor="middle" font-size="13" font-weight="bold" fill="#b45309">ONES</text>
+        <rect x="320" y="50" width="110" height="58" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+        <rect x="430" y="50" width="110" height="58" fill="#ffffff" stroke="#b45309" stroke-width="1.5"/>
+        <text x="375" y="88" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">4</text>
+        <text x="485" y="88" text-anchor="middle" font-size="28" font-weight="bold" fill="#0f172a">3</text>
+        <text x="430" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">Number = 43 (Forty-three)</text>
+      </svg>`,
       theory: [
-        "<strong>Natural Numbers (N):</strong> Counting numbers starting from 1 (1, 2, 3, 4, ...).",
-        "<strong>Whole Numbers (W):</strong> All natural numbers including 0 (0, 1, 2, 3, ...).",
-        "<strong>Even & Odd Numbers:</strong> Numbers divisible by 2 are Even (2, 4, 6...); numbers not divisible by 2 are Odd (1, 3, 5...).",
-        "<strong>Prime Numbers:</strong> Numbers greater than 1 having only two factors: 1 and itself (2, 3, 5, 7, 11, 13...). Note: 2 is the only even prime number.",
-        "<strong>BODMAS Rule:</strong> Defines the exact sequence to simplify expressions: Brackets → Orders (Powers/Roots) → Division → Multiplication → Addition → Subtraction."
+        "<strong>Pre-Number Comparison:</strong> Comparing objects by size (big/small), height (tall/short), weight (heavy/light), and position (inside/outside, top/bottom) before formal counting begins.",
+        "<strong>Digits:</strong> The ten basic number symbols (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) used to build every number.",
+        "<strong>Place Value (Tens & Ones):</strong> In a 2-digit number, the right seat is Ones and the left seat is Tens (1 Ten = 10 Ones).",
+        "<strong>Before, After & Between:</strong> Before is 1 less (N − 1); After is 1 more (N + 1); Between sits right in the middle of two consecutive numbers.",
+        "<strong>Ascending & Descending Order:</strong> Ascending climbs up from smallest to greatest; Descending steps down from greatest to smallest."
+      ],
+      dailyLife: [
+        "Crayon Boxes: 3 full packs of 10 crayons and 5 loose crayons make 35 crayons.",
+        "Elevator & Stairs: Riding a lift from Floor 12 down to Floor 4 is descending order; climbing steps 1 to 20 is ascending order."
       ],
       formulas: [
-        { name: "Dividend Formula", expr: "Dividend = (Divisor × Quotient) + Remainder" },
-        { name: "Place Value", expr: "Place Value = Face Value × Value of Place" },
-        { name: "Sum of First n Natural Numbers", expr: "Sum = n(n + 1) / 2" },
-        { name: "BODMAS Order", expr: "B → O → D → M → A → S" }
+        { name: "Two-Digit Expansion", expr: "Number = (Tens × 10) + (Ones × 1)" },
+        { name: "Before & After Rules", expr: "Before = N − 1   |   After = N + 1" },
+        { name: "Comparison Symbols", expr: "> (Greater than),  < (Less than),  = (Equal to)" }
       ],
       examples: [
         {
-          q: "Example 1: Simplify using BODMAS: 24 + 12 ÷ 4 × 3 − 5",
-          steps: [
-            "Step 1 (Division): 12 ÷ 4 = 3 → Expression becomes: 24 + 3 × 3 − 5",
-            "Step 2 (Multiplication): 3 × 3 = 9 → Expression becomes: 24 + 9 − 5",
-            "Step 3 (Addition): 24 + 9 = 33 → Expression becomes: 33 − 5",
-            "Step 4 (Subtraction): 33 − 5 = 28 (Answer)"
-          ]
+          q: "Example 1: Write the Tens, Ones, expanded form, and number name for 68.",
+          steps: ["68 = 6 Tens + 8 Ones = 60 + 8.", "Number name: Sixty-eight."]
         },
         {
-          q: "Example 2: Find the place value and face value of 7 in 47,892.",
-          steps: [
-            "Step 1: The digit 7 is in the Thousands place.",
-            "Step 2: Face Value of 7 = 7.",
-            "Step 3: Place Value of 7 = 7 × 1000 = 7,000."
-          ]
+          q: "Example 2: Find the number just before 50 and just after 50.",
+          steps: ["Just before 50: 50 − 1 = 49.", "Just after 50: 50 + 1 = 51."]
+        },
+        {
+          q: "Example 3: Arrange 34, 19, 72, 45 in ascending order.",
+          steps: ["Compare Tens digits (1 < 3 < 4 < 7).", "Ascending order: 19, 34, 45, 72."]
         }
       ],
       practice: [
-        {
-          q: "What is the smallest prime number?",
-          options: ["1", "2", "3", "0"],
-          ans: 1,
-          hint: "1 has only one factor, so it is neither prime nor composite.",
-          explanation: "2 is the smallest and only even prime number."
-        },
-        {
-          q: "Solve: 18 − 6 ÷ 2 + 4",
-          options: ["10", "19", "15", "7"],
-          ans: 1,
-          hint: "Perform Division (6 ÷ 2) first before subtraction or addition.",
-          explanation: "18 − 3 + 4 = 15 + 4 = 19."
-        },
-        {
-          q: "If Divisor = 8, Quotient = 5, and Remainder = 3, find the Dividend.",
-          options: ["40", "43", "29", "45"],
-          ans: 1,
-          hint: "Use Dividend = (Divisor × Quotient) + Remainder.",
-          explanation: "(8 × 5) + 3 = 40 + 3 = 43."
-        }
+        { q: "Write the number formed by 4 Tens + 9 Ones:", options: ["94", "49", "409", "13"], ans: 1, hint: "4 Tens = 40 and 9 Ones = 9.", explanation: "40 + 9 = 49." },
+        { q: "What comes just before 90?", options: ["91", "89", "80", "88"], ans: 1, hint: "Subtract 1 from 90.", explanation: "90 − 1 = 89." },
+        { q: "What comes between 67 and 69?", options: ["66", "68", "70", "65"], ans: 1, hint: "Count 67, __, 69.", explanation: "68 lies between 67 and 69." },
+        { q: "Put the correct sign: 40 + 7 [ ] 47", options: [">", "<", "="], ans: 2, hint: "Calculate 40 + 7 first.", explanation: "40 + 7 = 47, so both sides are equal (=)." },
+        { q: "Riya has 4 bundles of 10 pencils each and 6 loose pencils. Total pencils?", options: ["46", "64", "10", "406"], ans: 0, hint: "4 × 10 + 6.", explanation: "40 + 6 = 46 pencils." }
       ]
     },
     {
-      id: "ch2",
+      id: "ch1_2",
+      stage: "Stage 1",
+      stageClass: "s1-badge",
+      grade: "Class 1",
+      title: "Ch 1.2: Addition & Subtraction (Up to 2-Digit Numbers)",
+      summary: "Addends, sum, difference, number line jumps, order & zero properties, and 2-digit column operations.",
+      diagramCaption: "Number Line Model: Jumping forward (right) adds numbers (4 + 3 = 7)",
+      svg: `<svg viewBox="0 0 600 125" style="width:100%;max-height:150px;display:block;margin:auto;">
+        <text x="300" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f766e">+1    +1    +1   (3 jumps forward: 4 + 3 = 7)</text>
+        <line x1="25" y1="78" x2="575" y2="78" stroke="#1e293b" stroke-width="2.5"/>
+        <path d="M 245 70 Q 270 35 295 70" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+        <path d="M 295 70 Q 320 35 345 70" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+        <path d="M 345 70 Q 370 35 395 70" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+        <g stroke="#1e293b" stroke-width="2">
+          <line x1="45" y1="70" x2="45" y2="86"/><line x1="95" y1="70" x2="95" y2="86"/><line x1="145" y1="70" x2="145" y2="86"/>
+          <line x1="195" y1="70" x2="195" y2="86"/><line x1="245" y1="70" x2="245" y2="86"/><line x1="295" y1="70" x2="295" y2="86"/>
+          <line x1="345" y1="70" x2="345" y2="86"/><line x1="395" y1="70" x2="395" y2="86"/><line x1="445" y1="70" x2="445" y2="86"/>
+          <line x1="495" y1="70" x2="495" y2="86"/><line x1="545" y1="70" x2="545" y2="86"/>
+        </g>
+        <circle cx="245" cy="78" r="5" fill="#2563eb"/><circle cx="395" cy="78" r="5" fill="#d97706"/>
+        <g font-size="13" text-anchor="middle" fill="#1e293b">
+          <text x="45" y="106">0</text><text x="95" y="106">1</text><text x="145" y="106">2</text><text x="195" y="106">3</text>
+          <text x="245" y="106" font-weight="bold" fill="#2563eb">4</text><text x="295" y="106">5</text><text x="345" y="106">6</text>
+          <text x="395" y="106" font-weight="bold" fill="#d97706">7</text><text x="445" y="106">8</text><text x="495" y="106">9</text><text x="545" y="106">10</text>
+        </g>
+      </svg>`,
+      theory: [
+        "<strong>Addition (+):</strong> Combining two or more groups together to find the total. Numbers being added are Addends, and the answer is the Sum.",
+        "<strong>Subtraction (−):</strong> Taking away a smaller number from a larger number to find what remains (the Difference).",
+        "<strong>Number Line Jumps:</strong> Jumping forward (right) adds; jumping backward (left) subtracts.",
+        "<strong>Column Rule:</strong> Always add or subtract the Ones column first, then the Tens column."
+      ],
+      dailyLife: [
+        "Tiffin Sharing: 6 biscuits + 3 more = 9 biscuits; eating 4 leaves 9 − 4 = 5 biscuits.",
+        "School Bus: 15 passengers + 12 boarding = 27; 7 getting off leaves 20."
+      ],
+      formulas: [
+        { name: "Order Property of Addition", expr: "a + b = b + a   (e.g., 5 + 3 = 3 + 5 = 8)" },
+        { name: "Zero Properties", expr: "a + 0 = a   |   a − 0 = a   |   a − a = 0" }
+      ],
+      examples: [
+        { q: "Example 1: Add 34 + 25.", steps: ["Ones: 4 + 5 = 9.", "Tens: 3 + 2 = 5.", "Total = 59."] },
+        { q: "Example 2: Subtract 42 from 78.", steps: ["Ones: 8 − 2 = 6.", "Tens: 7 − 4 = 3.", "Difference = 36."] },
+        { q: "Example 3: Aarav scored 22 runs in the first over and 16 in the second. Total runs?", steps: ["22 + 16 = 38 runs."] }
+      ],
+      practice: [
+        { q: "Add: 43 + 35 =", options: ["68", "78", "88", "77"], ans: 1, hint: "Ones: 3 + 5 = 8; Tens: 4 + 3 = 7.", explanation: "43 + 35 = 78." },
+        { q: "Subtract: 89 − 54 =", options: ["35", "45", "33", "25"], ans: 0, hint: "Ones: 9 − 4 = 5; Tens: 8 − 5 = 3.", explanation: "89 − 54 = 35." },
+        { q: "Fill in the missing digit: 24 + [ ] = 29", options: ["4", "5", "6", "3"], ans: 1, hint: "Count up from 24 to 29.", explanation: "24 + 5 = 29." },
+        { q: "What is 38 − 38?", options: ["38", "76", "0", "1"], ans: 2, hint: "Subtracting a number from itself gives 0.", explanation: "38 − 38 = 0." },
+        { q: "There were 48 birds on a tree and 15 flew away. How many are left?", options: ["63", "33", "23", "32"], ans: 1, hint: "Subtract 15 from 48.", explanation: "48 − 15 = 33 birds." }
+      ]
+    },
+    {
+      id: "ch1_3_2_3",
+      stage: "Stage 1",
+      stageClass: "s1-badge",
+      grade: "Class 1–2",
+      title: "Ch 1.3 & 2.3: 2D/3D Shapes, Patterns, Time, Measurement & Currency",
+      summary: "Plane shapes, 3D solids (Faces, Edges, Vertices), clock reading (o'clock & half-hour), metric units, and ₹/paise.",
+      diagramCaption: "Basic 2D Plane Shapes & Analog Clock showing 3:00 (Hour hand on 3, Minute hand on 12)",
+      svg: `<svg viewBox="0 0 600 145" style="width:100%;max-height:165px;display:block;margin:auto;">
+        <rect x="20" y="22" width="56" height="56" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="48" y="98" text-anchor="middle" font-size="11" font-weight="bold">Square (4 equal)</text>
+        <rect x="105" y="30" width="80" height="42" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="145" y="98" text-anchor="middle" font-size="11" font-weight="bold">Rectangle</text>
+        <polygon points="240,22 210,78 270,78" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="240" y="98" text-anchor="middle" font-size="11" font-weight="bold">Triangle (3)</text>
+        <circle cx="325" cy="50" r="28" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+        <text x="325" y="98" text-anchor="middle" font-size="11" font-weight="bold">Circle (0 sides)</text>
+        <circle cx="485" cy="62" r="44" fill="#f8fafc" stroke="#0f172a" stroke-width="2.5"/>
+        <text x="485" y="32" text-anchor="middle" font-size="11" font-weight="bold">12</text>
+        <text x="517" y="66" text-anchor="middle" font-size="11" font-weight="bold">3</text>
+        <text x="485" y="99" text-anchor="middle" font-size="11" font-weight="bold">6</text>
+        <text x="453" y="66" text-anchor="middle" font-size="11" font-weight="bold">9</text>
+        <line x1="485" y1="62" x2="485" y2="35" stroke="#0d9488" stroke-width="2.5"/>
+        <line x1="485" y1="62" x2="508" y2="62" stroke="#d97706" stroke-width="3.5"/>
+        <circle cx="485" cy="62" r="3.5" fill="#0f172a"/>
+        <text x="485" y="124" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">3 o'clock (3:00)</text>
+      </svg>`,
+      theory: [
+        "<strong>Plane (2D) Shapes:</strong> Square (4 equal sides, 4 corners), Rectangle (opposite sides equal), Triangle (3 sides, 3 corners), Circle (0 straight sides, 0 corners).",
+        "<strong>Solid (3D) Shapes:</strong> Cube & Cuboid (6 Faces, 12 Edges, 8 Vertices); Cylinder (3F, 2E, 0V); Cone (2F, 1E, 1V); Sphere (1 curved face, 0E, 0V).",
+        "<strong>Clock Hands:</strong> Short hand = Hour; Long hand = Minutes. Minute hand at 12 = o'clock; at 6 = half past (:30).",
+        "<strong>Pictographs:</strong> Show data using picture symbols with a key."
+      ],
+      dailyLife: [
+        "3D Solids at Home: Ludo dice is a Cube, shoebox is a Cuboid, cold-drink can is a Cylinder, party cap is a Cone, cricket ball is a Sphere.",
+        "Shopping: Two ₹5 coins equal ₹10."
+      ],
+      formulas: [
+        { name: "Metric Standards", expr: "1 m = 100 cm   |   1 kg = 1,000 g   |   1 l = 1,000 ml" },
+        { name: "Time & Calendar", expr: "1 Hour = 60 Min  |  Half-hour = 30 Min  |  1 Week = 7 Days" },
+        { name: "Indian Currency", expr: "₹1 = 100 Paise" }
+      ],
+      examples: [
+        { q: "Example 1: Complete the pattern: 5, 10, 15, __, __.", steps: ["Rule: Add 5 each step → 20, 25."] },
+        { q: "Example 2: If 1 ★ = 2 books in a pictograph, how many books do 4 ★ represent?", steps: ["4 × 2 = 8 books."] },
+        { q: "Example 3: Kabir wants a ₹15 toy and has a ₹10 note. Which coin does he need?", steps: ["₹15 − ₹10 = ₹5 coin."] }
+      ],
+      practice: [
+        { q: "How many vertices (corners) does a cube have?", options: ["6", "8", "12", "4"], ans: 1, hint: "Count the corners of a dice.", explanation: "A cube has 8 vertices." },
+        { q: "Name a 3D shape with 1 flat circular face and 1 vertex:", options: ["Cylinder", "Sphere", "Cone", "Cube"], ans: 2, hint: "Think of an ice-cream cone or birthday cap.", explanation: "A Cone has 1 flat circular base and 1 vertex." },
+        { q: "Convert 3 m into centimetres:", options: ["30 cm", "300 cm", "3,000 cm", "103 cm"], ans: 1, hint: "1 m = 100 cm.", explanation: "3 × 100 = 300 cm." },
+        { q: "Where does the minute hand point at 3:30?", options: ["At 12", "At 3", "At 6", "At 9"], ans: 2, hint: "30 minutes = half an hour.", explanation: "At :30, the minute hand points to 6." },
+        { q: "A jug holds 2 l of juice and a bottle holds 500 ml. Total liquid in ml?", options: ["700 ml", "2,500 ml", "250 ml", "2,050 ml"], ans: 1, hint: "2 l = 2,000 ml; add 500 ml.", explanation: "2,000 + 500 = 2,500 ml." }
+      ]
+    },
+    {
+      id: "ch2_1_2_2",
+      stage: "Stage 1",
+      stageClass: "s1-badge",
+      grade: "Class 2",
+      title: "Ch 2.1 & 2.2: Numbers to 999, Regrouping, Multiplication & Division",
+      summary: "Hundreds-Tens-Ones, expanded form, ordinal numbers, even/odd, carrying/borrowing, and array multiplication/division.",
+      diagramCaption: "Visual Array Model: 3 rows × 4 dots = 12 (Repeated Addition & Equal Sharing)",
+      svg: `<svg viewBox="0 0 600 135" style="width:100%;max-height:155px;display:block;margin:auto;">
+        <rect x="20" y="12" width="215" height="106" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <g fill="#2563eb"><circle cx="52" cy="34" r="8"/><circle cx="95" cy="34" r="8"/><circle cx="138" cy="34" r="8"/><circle cx="181" cy="34" r="8"/></g>
+        <g fill="#0d9488"><circle cx="52" cy="64" r="8"/><circle cx="95" cy="64" r="8"/><circle cx="138" cy="64" r="8"/><circle cx="181" cy="64" r="8"/></g>
+        <g fill="#d97706"><circle cx="52" cy="94" r="8"/><circle cx="95" cy="94" r="8"/><circle cx="138" cy="94" r="8"/><circle cx="181" cy="94" r="8"/></g>
+        <text x="258" y="38" font-size="13" font-weight="bold" fill="#0f172a">Repeated Addition: 4 + 4 + 4 = 12</text>
+        <text x="258" y="68" font-size="13" font-weight="bold" fill="#2563eb">Multiplication: 3 rows × 4 dots = 12</text>
+        <text x="258" y="98" font-size="13" font-weight="bold" fill="#0f766e">Division: 12 ÷ 3 rows = 4 per row</text>
+      </svg>`,
+      theory: [
+        "<strong>Hundreds, Tens & Ones (H-T-O):</strong> 10 Tens = 1 Hundred = 100 Ones.",
+        "<strong>Face Value vs Place Value:</strong> Face value is the digit itself; Place value is digit × column (100, 10, or 1).",
+        "<strong>Even & Odd Numbers:</strong> Even numbers end in 0, 2, 4, 6, 8; Odd numbers end in 1, 3, 5, 7, 9.",
+        "<strong>Regrouping:</strong> Carrying 10 Ones as 1 Ten in addition; borrowing 1 from the left column in subtraction.",
+        "<strong>Multiplication & Division:</strong> Multiplication (×) is repeated addition; Division (÷) is equal sharing."
+      ],
+      dailyLife: [
+        "Egg Cartons & Pizza Slices: 3 rows × 4 cups = 12 muffins; 8 pizza slices shared among 4 friends = 2 slices each."
+      ],
+      formulas: [
+        { name: "Three-Digit Value", expr: "(Hundreds × 100) + (Tens × 10) + (Ones × 1)" },
+        { name: "Multiplication Properties", expr: "a × 0 = 0   |   a × 1 = a   |   a × b = b × a" },
+        { name: "Division Properties", expr: "a ÷ 1 = a   |   a ÷ a = 1   |   0 ÷ a = 0 (a ≠ 0)" }
+      ],
+      examples: [
+        { q: "Example 1: Write 509 in expanded form and find place value of 7 in 742.", steps: ["509 = 500 + 0 + 9.", "In 742, 7 is in Hundreds place → Place value = 700."] },
+        { q: "Example 2: Add 268 + 157.", steps: ["Ones: 8 + 7 = 15 (write 5, carry 1).", "Tens: 6 + 5 + 1 = 12 (write 2, carry 1).", "Hundreds: 2 + 1 + 1 = 4 → Sum = 425."] }
+      ],
+      practice: [
+        { q: "Write the standard form of 900 + 30 + 6:", options: ["936", "963", "639", "9036"], ans: 0, hint: "9 Hundreds, 3 Tens, 6 Ones.", explanation: "900 + 30 + 6 = 936." },
+        { q: "Form the smallest 3-digit number using 5, 0, 3 (do not start with 0):", options: ["035", "305", "350", "503"], ans: 1, hint: "Start with smallest non-zero digit 3, then 0, then 5.", explanation: "305." },
+        { q: "What is 347 + 285?", options: ["622", "632", "532", "642"], ans: 1, hint: "Regroup Ones (7+5=12) and Tens (4+8+1=13).", explanation: "347 + 285 = 632." },
+        { q: "Write as multiplication: 7 + 7 + 7 + 7 + 7 =", options: ["4 × 7 = 28", "5 × 7 = 35", "7 × 7 = 49", "5 + 7 = 12"], ans: 1, hint: "Count how many 7s are added.", explanation: "5 × 7 = 35." },
+        { q: "A baker packs 42 cookies equally into 6 boxes. Cookies per box?", options: ["6", "7", "8", "9"], ans: 1, hint: "42 ÷ 6.", explanation: "42 ÷ 6 = 7 cookies per box." }
+      ]
+    },
+
+    // -----------------------------------------------------------------------
+    // STAGE 2: PRIMARY ANALYTICAL FOUNDATION (CLASS 3–5)
+    // -----------------------------------------------------------------------
+    {
+      id: "ch3_1_4_1",
+      stage: "Stage 2",
+      stageClass: "s2-badge",
+      grade: "Class 3–4",
+      title: "Ch 3.1 & 4.1: Large Numbers (Indian/International), Rounding & Roman Numerals",
+      summary: "4-digit to 7-digit numbers, 3-2-2 vs 3-3-3 comma rules, rounding to 10/100, and Roman numerals.",
+      diagramCaption: "Rounding Off on a Number Line: Digits ≥ 5 round UP to the next ten (347 → 350)",
+      svg: `<svg viewBox="0 0 600 130" style="width:100%;max-height:150px;display:block;margin:auto;">
+        <text x="150" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#475569">341–344 round DOWN to 340</text>
+        <text x="450" y="24" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">347 rounds UP to 350</text>
+        <line x1="35" y1="72" x2="565" y2="72" stroke="#1e293b" stroke-width="2.5"/>
+        <path d="M 380 62 Q 445 30 510 62" fill="none" stroke="#0d9488" stroke-width="2.5"/>
+        <circle cx="380" cy="72" r="5" fill="#0d9488"/>
+        <g font-size="11" text-anchor="middle" fill="#1e293b">
+          <text x="60" y="98" font-weight="bold">340</text><text x="150" y="98">342</text>
+          <text x="285" y="98" font-weight="bold" fill="#b45309">345 (Mid)</text>
+          <text x="380" y="98" font-weight="bold" fill="#0d9488">347</text><text x="510" y="98" font-weight="bold">350</text>
+        </g>
+        <line x1="60" y1="62" x2="60" y2="82" stroke="#1e293b" stroke-width="2"/>
+        <line x1="285" y1="58" x2="285" y2="86" stroke="#d97706" stroke-width="2.5"/>
+        <line x1="510" y1="62" x2="510" y2="82" stroke="#1e293b" stroke-width="2"/>
+      </svg>`,
+      theory: [
+        "<strong>Indian Place Value System:</strong> Grouped into periods of 3, 2, 2 from the right: Ones, Thousands, Lakhs, Crores (e.g., 7,48,592).",
+        "<strong>International Place Value System:</strong> Grouped into periods of 3, 3, 3 from the right: Ones, Thousands, Millions (e.g., 748,592).",
+        "<strong>Rounding Off Rule:</strong> Look at the deciding digit to the right—if ≥ 5, round UP; if < 5, round DOWN.",
+        "<strong>Roman Numerals:</strong> Symbols I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Repeat I, X, C, M at most 3 times; never repeat V, L, D."
+      ],
+      dailyLife: [
+        "YouTube vs Indian Headlines: 1 Million (1M) views equals 10 Lakh views.",
+        "Monuments & Clocks: Historic plaques use Roman numerals like MCMXLVII = 1947."
+      ],
+      formulas: [
+        { name: "Indian–International Bridge", expr: "1 Lakh = 100 Thousand   |   10 Lakhs = 1 Million" },
+        { name: "Subtractive Roman Pairs", expr: "IV=4, IX=9, XL=40, XC=90, CD=400, CM=900" }
+      ],
+      examples: [
+        { q: "Example 1: Round 3,468 to the nearest 10 and nearest 100.", steps: ["Nearest 10 (Ones digit 8 ≥ 5): 3,470.", "Nearest 100 (Tens digit 6 ≥ 5): 3,500."] },
+        { q: "Example 2: Convert 94 into Roman numerals and decode MCMXLVII.", steps: ["94 = 90 + 4 = XC + IV = XCIV.", "MCMXLVII = 1000 + 900 + 40 + 7 = 1947."] }
+      ],
+      practice: [
+        { q: "Round 2,349 to the nearest 100:", options: ["2,400", "2,300", "2,350", "2,000"], ans: 1, hint: "Tens digit is 4 (< 5), so round down.", explanation: "2,349 rounds down to 2,300." },
+        { q: "How many thousands make 1 lakh?", options: ["10", "100", "1,000", "10,000"], ans: 1, hint: "1,00,000 ÷ 1,000.", explanation: "100 thousands make 1 lakh." },
+        { q: "Write XCIX in Hindu-Arabic numerals:", options: ["119", "99", "91", "109"], ans: 1, hint: "XC = 90 and IX = 9.", explanation: "90 + 9 = 99." },
+        { q: "Write 144 in Roman numerals:", options: ["CXLIV", "CXXXIV", "CLXIV", "XLIV"], ans: 0, hint: "100 (C) + 40 (XL) + 4 (IV).", explanation: "CXLIV." },
+        { q: "Find the difference between the place values of the two 6s in 6,48,612:", options: ["0", "5,99,400", "6,00,600", "5,94,000"], ans: 1, hint: "6,00,000 − 600.", explanation: "6,00,000 − 600 = 5,99,400." }
+      ]
+    },
+    {
+      id: "ch3_2_4_3_5_2",
+      stage: "Stage 2",
+      stageClass: "s2-badge",
+      grade: "Class 3–5",
+      title: "Ch 3.2, 4.3 & 5.2: Fractions & Decimals Mastery (Up to Thousandths)",
+      summary: "Division check, equivalent, proper/improper/mixed fractions, LCM operations, reciprocals, and decimals.",
+      diagramCaption: "Equivalent Fraction Bars (1/2 = 2/4 = 4/8) & Decimal Tenths Model (7/10 = 0.7)",
+      svg: `<svg viewBox="0 0 600 135" style="width:100%;max-height:155px;display:block;margin:auto;">
+        <rect x="20" y="16" width="110" height="22" fill="#93c5fd" stroke="#1e3a8a" stroke-width="1.5"/>
+        <rect x="130" y="16" width="110" height="22" fill="#fff" stroke="#1e3a8a" stroke-width="1.5"/>
+        <text x="252" y="32" font-size="12" font-weight="bold">1/2</text>
+        <rect x="20" y="46" width="55" height="22" fill="#6ee7b7" stroke="#065f46" stroke-width="1.5"/>
+        <rect x="75" y="46" width="55" height="22" fill="#6ee7b7" stroke="#065f46" stroke-width="1.5"/>
+        <rect x="130" y="46" width="110" height="22" fill="#fff" stroke="#065f46" stroke-width="1.5"/>
+        <text x="252" y="62" font-size="12" font-weight="bold">2/4</text>
+        <rect x="20" y="76" width="110" height="22" fill="#fcd34d" stroke="#92400e" stroke-width="1.5"/>
+        <rect x="130" y="76" width="110" height="22" fill="#fff" stroke="#92400e" stroke-width="1.5"/>
+        <text x="252" y="92" font-size="12" font-weight="bold">4/8</text>
+        <text x="130" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Equivalent: 1/2 = 2/4 = 4/8</text>
+        <rect x="330" y="32" width="175" height="34" fill="#e0e7ff" stroke="#3730a3" stroke-width="1.5"/>
+        <rect x="505" y="32" width="75" height="34" fill="#fff" stroke="#3730a3" stroke-width="1.5"/>
+        <text x="455" y="92" text-anchor="middle" font-size="13" font-weight="bold" fill="#3730a3">7/10 = 0.7 (Seven Tenths)</text>
+      </svg>`,
+      theory: [
+        "<strong>Division Terms & Check:</strong> Dividend = (Divisor × Quotient) + Remainder (where Remainder < Divisor).",
+        "<strong>Proper, Improper & Mixed Fractions:</strong> Proper (Num < Den, e.g. 3/5); Improper (Num ≥ Den, e.g. 7/4); Mixed (Whole + Proper, e.g. 1 3/4).",
+        "<strong>Unlike Fractions:</strong> Convert to equivalent like fractions using the LCM of denominators before adding or subtracting.",
+        "<strong>Reciprocal & Decimals:</strong> Reciprocal flips numerator and denominator (product = 1). Decimal places: Tenths (0.1), Hundredths (0.01), Thousandths (0.001)."
+      ],
+      dailyLife: [
+        "Cooking & Money: Halving 3/4 cup sugar uses 1/2 × 3/4 = 3/8 cup; 50 paise = ₹0.50."
+      ],
+      formulas: [
+        { name: "Mixed to Improper", expr: "Whole (Num/Den) = [(Whole × Den) + Num] / Den" },
+        { name: "Fraction Multiply & Divide", expr: "(a/b) × (c/d) = ac / bd   |   (a/b) ÷ (c/d) = (a/b) × (d/c)" },
+        { name: "Decimal Shift Rule", expr: "×10, ×100 shifts point right  |  ÷10, ÷100 shifts point left" }
+      ],
+      examples: [
+        { q: "Example 1: Add 2/3 + 3/4.", steps: ["LCM of 3 and 4 = 12.", "8/12 + 9/12 = 17/12 = 1 (5/12)."] },
+        { q: "Example 2: Divide 3/5 ÷ 6/7 and multiply 2.4 × 0.15.", steps: ["(3/5) × (7/6) = 21/30 = 7/10.", "24 × 15 = 360 with 3 decimal places = 0.36."] }
+      ],
+      practice: [
+        { q: "Find Dividend if Divisor = 6, Quotient = 42, Remainder = 3:", options: ["252", "255", "51", "249"], ans: 1, hint: "Use (Divisor × Quotient) + Remainder.", explanation: "(6 × 42) + 3 = 252 + 3 = 255." },
+        { q: "Add unlike fractions: 3/5 + 1/2 =", options: ["4/7", "11/10", "3/10", "7/10"], ans: 1, hint: "LCM of 5 and 2 is 10: 6/10 + 5/10.", explanation: "11/10 (or 1 1/10)." },
+        { q: "Multiply: 4/9 × 3/8 =", options: ["12/72", "1/6", "3/2", "7/17"], ans: 1, hint: "Cancel 4 with 8 and 3 with 9.", explanation: "(1/3) × (1/2) = 1/6." },
+        { q: "Subtract decimals: 20 − 7.36 =", options: ["13.64", "12.64", "12.74", "13.74"], ans: 1, hint: "Write 20 as 20.00 before subtracting.", explanation: "20.00 − 7.36 = 12.64." },
+        { q: "In a class of 45 students, 3/5 travel by bus. How many use the bus?", options: ["9", "15", "27", "30"], ans: 2, hint: "(45 ÷ 5) × 3.", explanation: "9 × 3 = 27 students." }
+      ]
+    },
+    {
+      id: "ch4_2_5_1",
+      stage: "Stage 2",
+      stageClass: "s2-badge",
+      grade: "Class 4–5",
+      title: "Ch 4.2 & 5.1: Factors, Multiples, Prime Factorization, HCF & LCM",
+      summary: "Factors vs multiples, prime & composite numbers, divisibility rules, factor tree, and HCF × LCM = A × B.",
+      diagramCaption: "Factor Tree breaking composite number 36 down into prime leaves: 36 = 2 × 2 × 3 × 3",
+      svg: `<svg viewBox="0 0 600 145" style="width:100%;max-height:165px;display:block;margin:auto;">
+        <circle cx="200" cy="26" r="19" fill="#1e3a8a"/><text x="200" y="31" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">36</text>
+        <line x1="185" y1="40" x2="120" y2="68" stroke="#475569" stroke-width="2"/>
+        <line x1="215" y1="40" x2="280" y2="68" stroke="#475569" stroke-width="2"/>
+        <circle cx="120" cy="78" r="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="120" y="83" text-anchor="middle" font-size="13" font-weight="bold">4</text>
+        <circle cx="280" cy="78" r="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="280" y="83" text-anchor="middle" font-size="13" font-weight="bold">9</text>
+        <line x1="108" y1="92" x2="80" y2="116" stroke="#475569" stroke-width="1.8"/>
+        <line x1="132" y1="92" x2="160" y2="116" stroke="#475569" stroke-width="1.8"/>
+        <line x1="268" y1="92" x2="240" y2="116" stroke="#475569" stroke-width="1.8"/>
+        <line x1="292" y1="92" x2="320" y2="116" stroke="#475569" stroke-width="1.8"/>
+        <circle cx="80" cy="124" r="13" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="80" y="129" text-anchor="middle" font-size="12" font-weight="bold">2</text>
+        <circle cx="160" cy="124" r="13" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="160" y="129" text-anchor="middle" font-size="12" font-weight="bold">2</text>
+        <circle cx="240" cy="124" r="13" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="240" y="129" text-anchor="middle" font-size="12" font-weight="bold">3</text>
+        <circle cx="320" cy="124" r="13" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="320" y="129" text-anchor="middle" font-size="12" font-weight="bold">3</text>
+        <text x="465" y="82" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f766e">36 = 2 × 2 × 3 × 3</text>
+      </svg>`,
+      theory: [
+        "<strong>Factor & Multiple:</strong> A Factor divides a number with zero remainder; a Multiple is obtained by multiplying by 1, 2, 3, ...",
+        "<strong>Prime vs Composite:</strong> Prime numbers (> 1) have exactly 2 factors (1 and itself); Composite numbers have > 2 factors. Note: 1 is neither prime nor composite.",
+        "<strong>HCF (Highest Common Factor):</strong> Largest number dividing two or more numbers evenly.",
+        "<strong>LCM (Lowest Common Multiple):</strong> Smallest non-zero common multiple of two or more numbers."
+      ],
+      dailyLife: [
+        "Cutting Ribbons & Bells: Cutting ropes into longest equal strips without waste uses HCF; school bells ringing together again uses LCM."
+      ],
+      formulas: [
+        { name: "HCF & LCM Product Identity", expr: "HCF(A, B) × LCM(A, B) = A × B" },
+        { name: "Co-Prime Numbers Rule", expr: "For co-primes, HCF = 1  and  LCM = A × B" },
+        { name: "Divisibility Shortcuts", expr: "By 2: even | By 3: digit sum ÷ 3 | By 5: ends in 0,5 | By 10: ends in 0" }
+      ],
+      examples: [
+        { q: "Example 1: Find HCF and LCM of 18 and 24.", steps: ["18 = 2 × 3 × 3; 24 = 2 × 2 × 2 × 3.", "Common factors: 2 × 3 → HCF = 6.", "LCM = 6 × 3 × 2 × 2 = 72."] },
+        { q: "Example 2: Two joggers run a circular track in 12 min and 18 min. When do they meet again?", steps: ["LCM(12, 18) = 36 minutes."] }
+      ],
+      practice: [
+        { q: "Identify the only even prime number:", options: ["0", "1", "2", "4"], ans: 2, hint: "2 has only two factors: 1 and 2.", explanation: "2 is the only even prime number." },
+        { q: "Find the HCF of 36, 48, and 60:", options: ["6", "12", "24", "4"], ans: 1, hint: "12 is the greatest number dividing 36, 48, and 60.", explanation: "HCF = 12." },
+        { q: "The product of two numbers is 432 and their HCF is 6. Find their LCM:", options: ["72", "36", "2,592", "64"], ans: 0, hint: "LCM = Product ÷ HCF = 432 ÷ 6.", explanation: "432 ÷ 6 = 72." },
+        { q: "What is the HCF of two co-prime numbers 9 and 16?", options: ["1", "9", "16", "144"], ans: 0, hint: "Co-prime numbers share no common factor other than 1.", explanation: "HCF = 1." },
+        { q: "Find the smallest number which when divided by 12 and 16 leaves remainder 3:", options: ["45", "51", "48", "19"], ans: 1, hint: "Find LCM(12, 16) = 48, then add 3.", explanation: "48 + 3 = 51." }
+      ]
+    },
+    {
+      id: "ch4_4_5_4",
+      stage: "Stage 2",
+      stageClass: "s2-badge",
+      grade: "Class 4–5",
+      title: "Ch 4.4 & 5.4: Angles, Circles, Perimeter, Area, Volume & Speed-Distance-Time",
+      summary: "Acute/right/obtuse angles, circle radius & diameter, perimeter, area, cuboid/cube volume, and DST triangle.",
+      diagramCaption: "Cuboid Volume (l × b × h) & Distance–Speed–Time Formula Triangle",
+      svg: `<svg viewBox="0 0 600 145" style="width:100%;max-height:165px;display:block;margin:auto;">
+        <rect x="40" y="42" width="110" height="60" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+        <polygon points="40,42 68,22 178,22 150,42" fill="#bfdbfe" stroke="#1e3a8a" stroke-width="1.8"/>
+        <polygon points="150,42 178,22 178,82 150,102" fill="#93c5fd" stroke="#1e3a8a" stroke-width="1.8"/>
+        <text x="105" y="126" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Cuboid Volume = l × b × h</text>
+        <polygon points="435,14 350,104 520,104" fill="#fffbeb" stroke="#b45309" stroke-width="2.2"/>
+        <line x1="392" y1="60" x2="478" y2="60" stroke="#b45309" stroke-width="2"/>
+        <line x1="435" y1="60" x2="435" y2="104" stroke="#b45309" stroke-width="2"/>
+        <text x="435" y="47" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e3a8a">D</text>
+        <text x="398" y="89" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f766e">S</text>
+        <text x="472" y="89" text-anchor="middle" font-size="17" font-weight="bold" fill="#b45309">T</text>
+        <text x="435" y="130" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">D = S × T  |  S = D ÷ T  |  T = D ÷ S</text>
+      </svg>`,
+      theory: [
+        "<strong>Angles:</strong> Acute (< 90°), Right (= 90°), Obtuse (> 90° and < 180°), Straight (= 180°).",
+        "<strong>Circle Parts:</strong> Radius (r) connects center to edge; Chord connects two points on circle; Diameter (d = 2r) passes through the center.",
+        "<strong>Perimeter, Area & Volume:</strong> Perimeter is outer boundary length; Area is flat surface covered (cm², m²); Volume is 3D space inside (cm³, m³)."
+      ],
+      dailyLife: [
+        "Fencing vs Carpeting vs Water Tank: Fencing uses Perimeter, carpeting uses Area, and aquarium capacity uses Volume."
+      ],
+      formulas: [
+        { name: "Circle & Perimeters", expr: "d = 2r  |  Square P = 4s  |  Rect P = 2(l + b)" },
+        { name: "2D Area & 3D Volume", expr: "Rect Area = l × b  |  Cuboid Vol = l × b × h  |  Cube Vol = s³" },
+        { name: "Speed, Distance, Time", expr: "Speed = D ÷ T  |  Distance = S × T  |  Time = D ÷ S" }
+      ],
+      examples: [
+        { q: "Example 1: Find the volume of a cuboid box measuring 10 cm × 6 cm × 4 cm.", steps: ["Volume = 10 × 6 × 4 = 240 cm³."] },
+        { q: "Example 2: A train travels 360 km in 4 hours. Find its speed.", steps: ["Speed = Distance ÷ Time = 360 ÷ 4 = 90 km/hr."] }
+      ],
+      practice: [
+        { q: "If the diameter of a wheel is 48 cm, find its radius:", options: ["96 cm", "24 cm", "12 cm", "48 cm"], ans: 1, hint: "Radius = Diameter ÷ 2.", explanation: "48 ÷ 2 = 24 cm." },
+        { q: "Find the volume of a cube of side 5 cm:", options: ["25 cm³", "100 cm³", "125 cm³", "150 cm³"], ans: 2, hint: "5 × 5 × 5.", explanation: "125 cm³." },
+        { q: "Two angles of a triangle measure 55° and 65°. Find the third angle:", options: ["50°", "60°", "70°", "120°"], ans: 1, hint: "Sum of angles in a triangle = 180°.", explanation: "180° − (55° + 65°) = 60°." },
+        { q: "Find Speed if Distance = 240 km and Time = 3 hours:", options: ["720 km/hr", "80 km/hr", "60 km/hr", "90 km/hr"], ans: 1, hint: "Speed = Distance ÷ Time.", explanation: "240 ÷ 3 = 80 km/hr." },
+        { q: "Which has greater volume: a cube of side 6 cm or a cuboid 8 cm × 5 cm × 5 cm?", options: ["Cube (by 16 cm³)", "Cuboid (by 16 cm³)", "Both equal (200 cm³)", "Cube (by 36 cm³)"], ans: 0, hint: "Cube = 6³ = 216 cm³; Cuboid = 8 × 5 × 5 = 200 cm³.", explanation: "Cube (216 cm³) is greater than Cuboid (200 cm³) by 16 cm³." }
+      ]
+    },
+    {
+      id: "ch5_3",
+      stage: "Stage 2",
+      stageClass: "s2-badge",
+      grade: "Class 5",
+      title: "Ch 5.3: Percentage, Unitary Method & Averages",
+      summary: "Per hundred (%), converting fractions/decimals to %, unitary method (1-unit rule), and arithmetic mean.",
+      diagramCaption: "Percentage Benchmark Bar: Connecting Quarters and Halves to Out-of-100",
+      svg: `<svg viewBox="0 0 600 105" style="width:100%;max-height:125px;display:block;margin:auto;">
+        <rect x="25" y="20" width="137" height="34" fill="#dbeafe" stroke="#1e3a8a" stroke-width="1.5"/>
+        <rect x="162" y="20" width="137" height="34" fill="#93c5fd" stroke="#1e3a8a" stroke-width="1.5"/>
+        <rect x="299" y="20" width="137" height="34" fill="#60a5fa" stroke="#1e3a8a" stroke-width="1.5"/>
+        <rect x="436" y="20" width="137" height="34" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5"/>
+        <text x="25" y="78" font-size="12" font-weight="bold">0%</text>
+        <text x="162" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">25% (1/4)</text>
+        <text x="299" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">50% (1/2)</text>
+        <text x="436" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">75% (3/4)</text>
+        <text x="573" y="78" text-anchor="end" font-size="12" font-weight="bold">100% (Whole)</text>
+      </svg>`,
+      theory: [
+        "<strong>Percentage (%):</strong> Means 'per hundred' or out of 100 (x% = x/100).",
+        "<strong>Unitary Method:</strong> Find the value of 1 single unit first (by division), then multiply to find the value of many units.",
+        "<strong>Average (Arithmetic Mean):</strong> A fair-share middle value found by dividing the sum of all observations by the count."
+      ],
+      dailyLife: [
+        "Report Cards & Store Sales: Scoring 42/50 = 84%; a 15% discount on ₹800 saves ₹120."
+      ],
+      formulas: [
+        { name: "Percentage Conversions", expr: "Fraction/Decimal to %: × 100%   |   % to Fraction: ÷ 100" },
+        { name: "Percentage of a Quantity", expr: "P% of X = (P / 100) × X" },
+        { name: "Average & Total Sum", expr: "Average = Sum ÷ Count   |   Sum = Average × Count" }
+      ],
+      examples: [
+        { q: "Example 1: If 6 notebooks cost ₹150, find the cost of 10 notebooks.", steps: ["Cost of 1 notebook = 150 ÷ 6 = ₹25.", "Cost of 10 notebooks = 25 × 10 = ₹250."] },
+        { q: "Example 2: Find the average of 14, 18, 22, 26.", steps: ["Sum = 14 + 18 + 22 + 26 = 80.", "Average = 80 ÷ 4 = 20."] }
+      ],
+      practice: [
+        { q: "Convert 45% into a fraction in lowest terms:", options: ["45/10", "9/20", "4/5", "9/10"], ans: 1, hint: "45/100; divide numerator and denominator by 5.", explanation: "45/100 = 9/20." },
+        { q: "Find 20% of 250:", options: ["20", "50", "75", "125"], ans: 1, hint: "(20/100) × 250.", explanation: "250 ÷ 5 = 50." },
+        { q: "If 5 kg of apples cost ₹400, find the cost of 3 kg of apples:", options: ["₹80", "₹240", "₹120", "₹300"], ans: 1, hint: "1 kg = 400 ÷ 5 = ₹80.", explanation: "3 × 80 = ₹240." },
+        { q: "If the average of 5 numbers is 16, what is their sum?", options: ["21", "80", "11", "64"], ans: 1, hint: "Sum = Average × Count.", explanation: "16 × 5 = 80." },
+        { q: "Out of 600 students in a school, 15% were absent. How many were present?", options: ["90", "510", "490", "585"], ans: 1, hint: "15% of 600 = 90 absent; subtract from 600.", explanation: "600 − 90 = 510 students present." }
+      ]
+    },
+
+    // -----------------------------------------------------------------------
+    // STAGE 3: MIDDLE SCHOOL CORE FOUNDATION (CLASS 6–7)
+    // -----------------------------------------------------------------------
+    {
+      id: "ch6_1",
+      stage: "Stage 3",
+      stageClass: "s3-badge",
       grade: "Class 6",
-      title: "Fractions, Decimals & Basic Ratios",
-      summary: "Proper, improper, mixed fractions, LCM addition, decimals, and ratio comparison.",
+      title: "Ch 6.1: Knowing Our Numbers, Whole Numbers & Playing with Numbers",
+      summary: "Closure, commutative, associative & distributive laws, divisibility tests (2–11), twin primes, and perfect numbers.",
+      diagramCaption: "Geometric Area Model proving Distributive Law: 6 × (10 + 4) = (6 × 10) + (6 × 4) = 84",
+      svg: `<svg viewBox="0 0 600 135" style="width:100%;max-height:155px;display:block;margin:auto;">
+        <rect x="40" y="30" width="140" height="68" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+        <rect x="180" y="30" width="65" height="68" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+        <text x="24" y="68" font-size="13" font-weight="bold" fill="#0f172a">6</text>
+        <text x="110" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">10</text>
+        <text x="212" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">4</text>
+        <text x="110" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">6 × 10 = 60</text>
+        <text x="212" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">6 × 4 = 24</text>
+        <text x="280" y="48" font-size="13" font-weight="bold" fill="#0f172a">6 × 14 = 6 × (10 + 4)</text>
+        <text x="280" y="72" font-size="13" font-weight="bold" fill="#4f46e5">= (6 × 10) + (6 × 4)</text>
+        <text x="280" y="96" font-size="13" font-weight="bold" fill="#0f766e">= 60 + 24 = 84</text>
+      </svg>`,
       theory: [
-        "<strong>Fraction:</strong> Represents a part of a whole in the form p/q where q ≠ 0. 'p' is Numerator and 'q' is Denominator.",
-        "<strong>Proper & Improper Fractions:</strong> When Numerator < Denominator (e.g., 3/5), it is Proper. When Numerator ≥ Denominator (e.g., 7/4), it is Improper.",
-        "<strong>Like & Unlike Fractions:</strong> Fractions with the same denominator are Like fractions; different denominators are Unlike fractions.",
-        "<strong>Ratio:</strong> Comparison of two quantities of the same unit using division, written as a : b."
+        "<strong>Whole Number Properties:</strong> Closure, Commutative (a + b = b + a), Associative ((a + b) + c = a + (b + c)), and Distributive (a × (b + c) = ab + ac).",
+        "<strong>Twin Primes & Co-Primes:</strong> Twin primes are prime pairs differing by 2, e.g. (3, 5), (11, 13), (59, 61). Co-prime numbers have 1 as their only common factor (e.g. 8 and 15).",
+        "<strong>Perfect Number:</strong> A number whose factors add up to twice the number itself (e.g. 6: 1 + 2 + 3 + 6 = 12 = 2 × 6; next is 28)."
+      ],
+      dailyLife: [
+        "Mental Billing: Buying 8 notebooks at ₹98 each is effortless using 8 × (100 − 2) = 800 − 16 = ₹784.",
+        "Digital Security: Internet encryption locks bank transactions using massive prime factorizations."
       ],
       formulas: [
-        { name: "Mixed to Improper", expr: "a (b/c) = [(a × c) + b] / c" },
-        { name: "Fraction Multiplication", expr: "(a/b) × (c/d) = (a × c) / (b × d)" },
-        { name: "Fraction Division", expr: "(a/b) ÷ (c/d) = (a/b) × (d/c)" },
-        { name: "Percentage from Fraction", expr: "(Part / Whole) × 100%" }
+        { name: "Distributive Law", expr: "a × (b ± c) = (a × b) ± (a × c)" },
+        { name: "Divisibility by 4, 8, 9", expr: "By 4: last 2 digits ÷ 4 | By 8: last 3 digits ÷ 8 | By 9: digit sum ÷ 9" },
+        { name: "Divisibility by 11", expr: "|(Sum of odd-place digits) − (Sum of even-place digits)| = 0 or multiple of 11" }
       ],
       examples: [
-        {
-          q: "Example 1: Add 2/3 + 3/4",
-          steps: [
-            "Step 1: Find LCM of denominators 3 and 4 → LCM = 12.",
-            "Step 2: Convert to like fractions: 2/3 = 8/12 and 3/4 = 9/12.",
-            "Step 3: Add numerators: (8 + 9)/12 = 17/12 = 1 (5/12)."
-          ]
-        },
-        {
-          q: "Example 2: Simplify the ratio 45 minutes to 2 hours.",
-          steps: [
-            "Step 1: Convert both to the same unit (minutes): 2 hours = 2 × 60 = 120 minutes.",
-            "Step 2: Write ratio: 45 : 120.",
-            "Step 3: Divide both by HCF (15): 45÷15 : 120÷15 = 3 : 8."
-          ]
-        }
+        { q: "Example 1: Evaluate 485 × 97 + 485 × 3 using a suitable property.", steps: ["By distributive property: 485 × (97 + 3) = 485 × 100 = 48,500."] },
+        { q: "Example 2: Find the greatest number that divides 245 and 1,029 leaving remainder 5 in each case.", steps: ["Subtract remainder first: 245 − 5 = 240 and 1,029 − 5 = 1,024.", "HCF(240, 1024) = 2⁴ = 16."] },
+        { q: "Example 3: Find the smallest 4-digit number exactly divisible by 18, 24, and 32.", steps: ["LCM(18, 24, 32) = 288.", "1000 ÷ 288 = 3 remainder 136 → 1000 + (288 − 136) = 1,152."] }
       ],
       practice: [
-        {
-          q: "Convert 3 (2/5) into an improper fraction:",
-          options: ["11/5", "17/5", "15/2", "13/5"],
-          ans: 1,
-          hint: "Multiply whole number 3 by denominator 5, then add numerator 2.",
-          explanation: "(3 × 5 + 2) / 5 = 17/5."
-        },
-        {
-          q: "What is 3/5 ÷ 6/5?",
-          options: ["18/25", "1/2", "2", "3/6"],
-          ans: 1,
-          hint: "Multiply 3/5 by the reciprocal of 6/5 (which is 5/6).",
-          explanation: "(3/5) × (5/6) = 3/6 = 1/2."
-        },
-        {
-          q: "Find the ratio of 50 cm to 2 meters:",
-          options: ["25 : 1", "1 : 4", "50 : 2", "1 : 40"],
-          ans: 1,
-          hint: "1 meter = 100 cm, so 2 meters = 200 cm.",
-          explanation: "50 : 200 simplifies by dividing by 50 to 1 : 4."
-        }
+        { q: "Evaluate using distributive property: 625 × 178 − 625 × 78", options: ["6,250", "62,500", "625", "1,00,000"], ans: 1, hint: "Take 625 common: 625 × (178 − 78).", explanation: "625 × 100 = 62,500." },
+        { q: "Replace * by the smallest digit so that 67*19 is divisible by 9:", options: ["2", "4", "5", "1"], ans: 1, hint: "Sum of digits = 6 + 7 + * + 1 + 9 = 23 + * must be a multiple of 9 (27).", explanation: "27 − 23 = 4." },
+        { q: "The HCF and LCM of two numbers are 13 and 1,989. If one number is 117, find the other:", options: ["221", "169", "247", "153"], ans: 0, hint: "Other number = (13 × 1989) ÷ 117.", explanation: "(13 × 1989) ÷ 117 = 221." },
+        { q: "Three tankers contain 403 L, 434 L, and 465 L of diesel. Maximum container capacity to measure all exact times?", options: ["13 L", "31 L", "62 L", "15 L"], ans: 1, hint: "Find HCF(403, 434, 465).", explanation: "403 = 13 × 31, 434 = 14 × 31, 465 = 15 × 31 → HCF = 31 litres." },
+        { q: "Four traffic lights change every 24, 36, 48, and 60 seconds. If they change together at 9:00:00 AM, when next?", options: ["9:06:00 AM", "9:12:00 AM", "9:10:00 AM", "9:15:00 AM"], ans: 1, hint: "Find LCM(24, 36, 48, 60) in seconds and convert to minutes.", explanation: "LCM = 720 seconds = 12 minutes → 9:12:00 AM." }
       ]
     },
     {
-      id: "ch3",
-      grade: "Class 6",
-      title: "Lines, Angles & Triangles",
-      summary: "Acute, obtuse, complementary, supplementary angles, and triangle properties.",
+      id: "ch6_2_7_1",
+      stage: "Stage 3",
+      stageClass: "s3-badge",
+      grade: "Class 6–7",
+      title: "Ch 6.2 & 7.1: Integers, Rational Numbers & Laws of Exponents",
+      summary: "Integer sign rules, number line jumps, standard rational form p/q, 7 Laws of Exponents, and scientific notation.",
+      diagramCaption: "Integer Number Line: Starting at −4 and moving 7 units RIGHT gives (−4) + (+7) = +3",
+      svg: `<svg viewBox="0 0 600 125" style="width:100%;max-height:150px;display:block;margin:auto;">
+        <text x="300" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f766e">Move 7 units RIGHT: (−4) + (+7) = +3</text>
+        <line x1="25" y1="78" x2="575" y2="78" stroke="#1e293b" stroke-width="2.5"/>
+        <path d="M 125 70 Q 275 28 425 70" fill="none" stroke="#0d9488" stroke-width="2.8"/>
+        <circle cx="125" cy="78" r="5" fill="#dc2626"/><circle cx="425" cy="78" r="5" fill="#0d9488"/>
+        <line x1="297" y1="64" x2="297" y2="92" stroke="#1e3a8a" stroke-width="2.5"/>
+        <g font-size="12" text-anchor="middle" fill="#1e293b">
+          <text x="40" y="105">−6</text><text x="82" y="105">−5</text>
+          <text x="125" y="105" font-weight="bold" fill="#dc2626">−4</text>
+          <text x="168" y="105">−3</text><text x="211" y="105">−2</text><text x="254" y="105">−1</text>
+          <text x="297" y="105" font-weight="bold" fill="#1e3a8a">0</text>
+          <text x="340" y="105">+1</text><text x="382" y="105">+2</text>
+          <text x="425" y="105" font-weight="bold" fill="#0d9488">+3</text>
+          <text x="468" y="105">+4</text><text x="511" y="105">+5</text><text x="554" y="105">+6</text>
+        </g>
+      </svg>`,
       theory: [
-        "<strong>Line Segment, Ray & Line:</strong> A line segment has 2 endpoints; a ray has 1 endpoint; a line extends endlessly in both directions.",
-        "<strong>Types of Angles:</strong> Acute (< 90°), Right (= 90°), Obtuse (between 90° and 180°), Straight (= 180°), Reflex (between 180° and 360°).",
-        "<strong>Complementary & Supplementary Angles:</strong> Two angles are Complementary if their sum is 90°, and Supplementary if their sum is 180°.",
-        "<strong>Angle Sum Property of Triangle:</strong> The sum of all three interior angles of any triangle is always 180°."
+        "<strong>Integers (Z):</strong> Collection of negative numbers, zero, and positive numbers (..., −3, −2, −1, 0, 1, 2, 3, ...). Zero is neither positive nor negative.",
+        "<strong>Sign Rules:</strong> (+)×(+) = (+); (−)×(−) = (+); (+)×(−) = (−). Even count of negatives → Positive; Odd count → Negative.",
+        "<strong>Rational Number (Q):</strong> Any number expressible as p/q where p, q are integers and q ≠ 0 (in standard form, q > 0 and HCF(|p|, q) = 1).",
+        "<strong>Scientific Standard Form:</strong> Writing large numbers as k × 10ⁿ where 1 ≤ k < 10."
+      ],
+      dailyLife: [
+        "Sub-Zero Weather & Speed of Light: Leh temperatures drop to −14°C; speed of light is written cleanly as 3 × 10⁸ m/s."
       ],
       formulas: [
-        { name: "Complementary Angles", expr: "∠A + ∠B = 90°" },
-        { name: "Supplementary Angles", expr: "∠A + ∠B = 180°" },
-        { name: "Linear Pair", expr: "Adjacent angles on a straight line = 180°" },
-        { name: "Triangle Angle Sum", expr: "∠A + ∠B + ∠C = 180°" }
+        { name: "Product & Quotient Laws", expr: "aᵐ × aⁿ = aᵐ⁺ⁿ   |   aᵐ ÷ aⁿ = aᵐ⁻ⁿ" },
+        { name: "Power & Zero Laws", expr: "(aᵐ)ⁿ = aᵐˣⁿ   |   (ab)ᵐ = aᵐbᵐ   |   a⁰ = 1 (a ≠ 0)" },
+        { name: "Negative One Parity", expr: "(−1)^even = +1   |   (−1)^odd = −1" }
       ],
       examples: [
-        {
-          q: "Example 1: Find the complement and supplement of 35°.",
-          steps: [
-            "Step 1 (Complement): 90° − 35° = 55°.",
-            "Step 2 (Supplement): 180° − 35° = 145°."
-          ]
-        },
-        {
-          q: "Example 2: Two angles of a triangle are 50° and 65°. Find the third angle.",
-          steps: [
-            "Step 1: Sum of angles in a triangle = 180°.",
-            "Step 2: 50° + 65° + x = 180° → 115° + x = 180°.",
-            "Step 3: x = 180° − 115° = 65°."
-          ]
-        }
+        { q: "Example 1: Evaluate (−41) × 102 and 625 × (−35) + (−625) × 65.", steps: ["(−41) × (100 + 2) = −4,100 − 82 = −4,182.", "625 × (−35 − 65) = 625 × (−100) = −62,500."] },
+        { q: "Example 2: Simplify using exponent laws: (2⁵)² × 7³ ÷ (8³ × 7).", steps: ["Note 8³ = (2³)³ = 2⁹.", "(2¹⁰ × 7³) ÷ (2⁹ × 7¹) = 2¹⁰⁻⁹ × 7³⁻¹ = 2 × 49 = 98."] }
       ],
       practice: [
-        {
-          q: "What is the supplement of 110°?",
-          options: ["20°", "70°", "90°", "250°"],
-          ans: 1,
-          hint: "Supplementary angles add up to 180°.",
-          explanation: "180° − 110° = 70°."
-        },
-        {
-          q: "An angle measuring 135° is called:",
-          options: ["Acute angle", "Right angle", "Obtuse angle", "Reflex angle"],
-          ans: 2,
-          hint: "It is greater than 90° but less than 180°.",
-          explanation: "Angles between 90° and 180° are Obtuse angles."
-        },
-        {
-          q: "If all three angles of a triangle are equal, each angle measures:",
-          options: ["45°", "60°", "90°", "30°"],
-          ans: 1,
-          hint: "Divide 180° equally among 3 angles.",
-          explanation: "180° ÷ 3 = 60° (Equilateral triangle)."
-        }
+        { q: "Evaluate: (−3) × (−6) × (−2) × (−1)", options: ["−36", "36", "−12", "12"], ans: 1, hint: "There are 4 (even) negative signs, so the product is positive.", explanation: "3 × 6 × 2 × 1 = +36." },
+        { q: "Find the value of |−18| − |−7| + |12|:", options: ["−13", "23", "37", "13"], ans: 1, hint: "Absolute value |-a| = a.", explanation: "18 − 7 + 12 = 23." },
+        { q: "Find the value of (5⁰ + 7⁰) × (9⁰ − 2⁰):", options: ["2", "0", "14", "1"], ans: 1, hint: "Any non-zero number to the power 0 equals 1.", explanation: "(1 + 1) × (1 − 1) = 2 × 0 = 0." },
+        { q: "Write the distance from Earth to Sun (149,600,000,000 m) in standard form:", options: ["14.96 × 10¹⁰ m", "1.496 × 10¹¹ m", "1.496 × 10⁹ m", "149.6 × 10⁹ m"], ans: 1, hint: "Move decimal 11 places left so 1 ≤ k < 10.", explanation: "1.496 × 10¹¹ m." },
+        { q: "An elevator starts 10 m above ground and descends at 6 m/min. Time to reach −350 m?", options: ["50 min", "60 min", "58 min", "65 min"], ans: 1, hint: "Total descent = 10 − (−350) = 360 m; divide by 6 m/min.", explanation: "360 ÷ 6 = 60 minutes (1 hour)." }
       ]
     },
     {
-      id: "ch4",
+      id: "ch6_3_7_3",
+      stage: "Stage 3",
+      stageClass: "s3-badge",
+      grade: "Class 6–7",
+      title: "Ch 6.3 & 7.3: Lines, Angles, Triangles, Congruence & Pythagoras",
+      summary: "Complementary/supplementary angles, parallel lines & transversal, exterior angle theorem, SSS/SAS/ASA/RHS, and Pythagoras.",
+      diagramCaption: "Parallel Lines Cut by Transversal (Alt. Interior ∠3 = ∠5) & Right Triangle Pythagoras (a² + b² = c²)",
+      svg: `<svg viewBox="0 0 600 145" style="width:100%;max-height:165px;display:block;margin:auto;">
+        <line x1="25" y1="38" x2="255" y2="38" stroke="#1e3a8a" stroke-width="2.5"/>
+        <line x1="25" y1="102" x2="255" y2="102" stroke="#1e3a8a" stroke-width="2.5"/>
+        <line x1="85" y1="12" x2="195" y2="128" stroke="#b45309" stroke-width="2.5"/>
+        <text x="128" y="30" font-size="12" font-weight="bold" fill="#0d9488">∠1</text>
+        <text x="135" y="56" font-size="12" font-weight="bold" fill="#dc2626">∠3</text>
+        <text x="155" y="96" font-size="12" font-weight="bold" fill="#dc2626">∠5</text>
+        <text x="140" y="138" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">Alt. Int: ∠3 = ∠5 | Corr: ∠1 = ∠5</text>
+        <polygon points="365,24 365,104 485,104" fill="#eef2ff" stroke="#4338ca" stroke-width="2.5"/>
+        <rect x="365" y="90" width="14" height="14" fill="none" stroke="#dc2626" stroke-width="1.8"/>
+        <text x="345" y="68" font-size="12" font-weight="bold">a=3</text>
+        <text x="425" y="122" text-anchor="middle" font-size="12" font-weight="bold">b=4</text>
+        <text x="442" y="58" font-size="12" font-weight="bold" fill="#4338ca">c=5</text>
+        <text x="445" y="138" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f766e">Pythagoras: 3² + 4² = 9 + 16 = 25 = 5²</text>
+      </svg>`,
+      theory: [
+        "<strong>Angle Pairs:</strong> Complementary sum to 90°; Supplementary sum to 180°; Linear Pair angles on a straight line sum to 180°; Vertically Opposite angles are equal.",
+        "<strong>Parallel Lines & Transversal:</strong> Corresponding angles are equal; Alternate Interior angles are equal; Co-interior angles sum to 180°.",
+        "<strong>Triangle Theorems:</strong> Interior angles sum to 180°; Exterior angle = Sum of two opposite interior angles; Triangle Inequality: sum of any two sides > third side.",
+        "<strong>Congruence Criteria:</strong> Two triangles are congruent by SSS, SAS, ASA, or RHS (Note: AAA gives similar triangles, not congruent)."
+      ],
+      dailyLife: [
+        "Ladders & Roof Trusses: Right-angled triangles give structural rigidity and allow exact height calculations via Pythagoras."
+      ],
+      formulas: [
+        { name: "Triangle Angle & Exterior Laws", expr: "∠A + ∠B + ∠C = 180°   |   Exterior ∠ACD = ∠A + ∠B" },
+        { name: "Pythagoras Theorem", expr: "Hypotenuse² = Base² + Perpendicular²  (c² = a² + b²)" },
+        { name: "Primitive Pythagorean Triplets", expr: "(3,4,5), (5,12,13), (8,15,17), (7,24,25), (9,40,41)" }
+      ],
+      examples: [
+        { q: "Example 1: A tree is broken at a height of 5 m from the ground and its top touches the ground 12 m from the base. Find original height.", steps: ["Broken slant part = √(5² + 12²) = √(25 + 144) = √169 = 13 m.", "Original height = 5 + 13 = 18 m."] },
+        { q: "Example 2: Find the perimeter of a rhombus whose diagonals are 16 cm and 30 cm.", steps: ["Diagonals bisect at 90° → half-diagonals are 8 cm and 15 cm.", "Side = √(8² + 15²) = √289 = 17 cm → Perimeter = 4 × 17 = 68 cm."] }
+      ],
+      practice: [
+        { q: "What is the supplement of 110°?", options: ["20°", "70°", "90°", "250°"], ans: 1, hint: "Supplementary angles add up to 180°.", explanation: "180° − 110° = 70°." },
+        { q: "Find the angle which is double of its complement:", options: ["30°", "45°", "60°", "120°"], ans: 2, hint: "Let complement = x, angle = 2x → x + 2x = 90°.", explanation: "3x = 90° → x = 30°, so the angle is 60°." },
+        { q: "In ΔABC, exterior ∠ACD = 125° and ∠A = 55°. Find ∠B:", options: ["55°", "70°", "180°", "65°"], ans: 1, hint: "Exterior angle = ∠A + ∠B.", explanation: "125° − 55° = 70°." },
+        { q: "Two poles of heights 6 m and 11 m stand 12 m apart on flat ground. Distance between their tops?", options: ["12 m", "13 m", "15 m", "17 m"], ans: 1, hint: "Height difference = 11 − 6 = 5 m; base = 12 m.", explanation: "√(5² + 12²) = √169 = 13 m." },
+        { q: "Which criterion does NOT guarantee triangle congruence?", options: ["SSS", "SAS", "ASA", "AAA"], ans: 3, hint: "Two equilateral triangles of sides 4 cm and 8 cm have equal angles (60°-60°-60°) but different sizes.", explanation: "AAA produces similar shapes, not congruent triangles." }
+      ]
+    },
+    {
+      id: "ch6_4_7_2",
+      stage: "Stage 3",
+      stageClass: "s3-badge",
+      grade: "Class 6–7",
+      title: "Ch 6.4 & 7.2: Simple Linear Equations, Algebra & Ratio-Proportion",
+      summary: "Variables, coefficients, like/unlike terms, monomial/binomial/trinomial, transposition rules, and proportion.",
+      diagramCaption: "Balanced Equation Principle: Transposing terms across '=' flips + ↔ − and × ↔ ÷",
+      svg: `<svg viewBox="0 0 600 115" style="width:100%;max-height:135px;display:block;margin:auto;">
+        <rect x="30" y="20" width="220" height="72" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+        <text x="140" y="50" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a8a">LHS = RHS Balance</text>
+        <text x="140" y="74" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">3x + 4 = 19  ⇒  3x = 15  ⇒  x = 5</text>
+        <rect x="280" y="20" width="290" height="72" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+        <text x="425" y="50" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Proportion Law (a : b :: c : d)</text>
+        <text x="425" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Product of Extremes (a×d) = Means (b×c)</text>
+      </svg>`,
+      theory: [
+        "<strong>Term, Factor & Coefficient:</strong> In 7x² − 4xy + 9, the terms are 7x², −4xy, and 9. Numerical coefficient of −4xy is −4.",
+        "<strong>Monomial, Binomial & Trinomial:</strong> Expressions with 1 term (monomial), 2 unlike terms (binomial), and 3 unlike terms (trinomial).",
+        "<strong>Like Terms Rule:</strong> Only terms with identical variable parts and powers (e.g. 5x²y and −2x²y) can be added or subtracted.",
+        "<strong>Transposition Rule:</strong> Moving a term across '=' flips its operation: (+) ↔ (−) and (×) ↔ (÷)."
+      ],
+      dailyLife: [
+        "Cab Fare Formula: Base fare ₹50 + ₹12/km gives 12x + 50. Setting 12x + 50 = 230 solves distance x = 15 km."
+      ],
+      formulas: [
+        { name: "Linear Equation Form", expr: "ax + b = c   ⇒   x = (c − b) / a" },
+        { name: "Proportion Condition", expr: "a : b :: c : d   ⇔   a × d = b × c" }
+      ],
+      examples: [
+        { q: "Example 1: Subtract 24ab − 10b − 18a from 30ab + 12b + 14a.", steps: ["(30 − 24)ab + (12 + 10)b + (14 + 18)a = 6ab + 22b + 32a."] },
+        { q: "Example 2: Laxmi's father is 49 years old, which is 4 years older than three times Laxmi's age. Find Laxmi's age.", steps: ["3y + 4 = 49 → 3y = 45 → y = 15 years."] }
+      ],
+      practice: [
+        { q: "Solve: 16 = 4 + 3(t + 2)", options: ["t = 2", "t = 4", "t = 6", "t = −2"], ans: 0, hint: "Subtract 4 first: 12 = 3(t + 2) → t + 2 = 4.", explanation: "t = 4 − 2 = 2." },
+        { q: "Subtract −5y² from y²:", options: ["−4y²", "6y²", "−6y²", "4y²"], ans: 1, hint: "y² − (−5y²) = y² + 5y².", explanation: "6y²." },
+        { q: "Find x if 6 : 18 :: x : 45", options: ["12", "15", "18", "9"], ans: 1, hint: "18 × x = 6 × 45 = 270.", explanation: "x = 270 ÷ 18 = 15." },
+        { q: "The sum of three consecutive integers is 51. Find the integers:", options: ["15, 16, 17", "16, 17, 18", "17, 18, 19", "14, 15, 16"], ans: 1, hint: "x + (x + 1) + (x + 2) = 51 → 3x + 3 = 51.", explanation: "3x = 48 → x = 16, so 16, 17, 18." },
+        { q: "Sachin scored twice as many runs as Rahul. Together they fell 2 short of 200. Rahul's runs?", options: ["66", "132", "68", "99"], ans: 0, hint: "x + 2x = 198 → 3x = 198.", explanation: "Rahul = 66 runs (Sachin = 132)." }
+      ]
+    },
+    {
+      id: "ch7_4_7_5",
+      stage: "Stage 3",
+      stageClass: "s3-badge",
       grade: "Class 7",
-      title: "Integers & Rational Numbers",
-      summary: "Sign rules for addition/multiplication, additive inverse, and rational operations.",
+      title: "Ch 7.4 & 7.5: Circles, Cross-Paths, Annulus, Profit/Loss & Data Handling",
+      summary: "Circumference & area of circle, perpendicular crossroads, circular ring, Profit/Loss %, Simple Interest, and Mean/Median/Mode.",
+      diagramCaption: "Perpendicular Crossroads (lw + bw − w²) & Concentric Circular Ring / Annulus π(R² − r²)",
+      svg: `<svg viewBox="0 0 600 145" style="width:100%;max-height:165px;display:block;margin:auto;">
+        <rect x="40" y="20" width="190" height="92" fill="#ecfdf5" stroke="#0d9488" stroke-width="2"/>
+        <rect x="40" y="56" width="190" height="20" fill="#fde68a" stroke="#b45309" stroke-width="1.2"/>
+        <rect x="125" y="20" width="20" height="92" fill="#fde68a" stroke="#b45309" stroke-width="1.2"/>
+        <rect x="125" y="56" width="20" height="20" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/>
+        <text x="135" y="132" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Crossroads: Area = lw + bw − w²</text>
+        <circle cx="445" cy="66" r="46" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+        <circle cx="445" cy="66" r="24" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+        <line x1="445" y1="66" x2="482" y2="38" stroke="#dc2626" stroke-width="2"/>
+        <line x1="445" y1="66" x2="469" y2="66" stroke="#0d9488" stroke-width="2"/>
+        <text x="470" y="45" font-size="11" font-weight="bold" fill="#dc2626">R</text>
+        <text x="457" y="62" font-size="11" font-weight="bold" fill="#0d9488">r</text>
+        <text x="445" y="132" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">Annulus Ring Area = π(R² − r²)</text>
+      </svg>`,
       theory: [
-        "<strong>Integers (Z):</strong> Collection of positive numbers, negative numbers, and zero (..., −3, −2, −1, 0, 1, 2, 3, ...).",
-        "<strong>Multiplication Sign Rules:</strong> (+) × (+) = (+); (−) × (−) = (+); (+) × (−) = (−); (−) × (+) = (−).",
-        "<strong>Additive Inverse:</strong> For any number 'a', its additive inverse is '−a' because a + (−a) = 0.",
-        "<strong>Rational Numbers (Q):</strong> Any number that can be written in the form p/q where p and q are integers and q ≠ 0."
+        "<strong>Circle Geometry:</strong> Every single rotation of a wheel moves it forward by one exact Circumference (2πr).",
+        "<strong>Double-Counted Center Square:</strong> For two perpendicular crossroads of width w in an l × b park, subtract the central overlap square w² once.",
+        "<strong>CP vs SP Percentage Base:</strong> Profit% and Loss% are always calculated on Cost Price (CP), never on Selling Price.",
+        "<strong>Central Tendency & Probability:</strong> Mean = Sum ÷ n; Median = Middle value when sorted; Mode = Most frequent value; P(E) = Favorable ÷ Total."
+      ],
+      dailyLife: [
+        "Bicycle Wheels & Fixed Deposits: Wheel rotations measure road distance; banks compute interest via SI = PRT/100."
       ],
       formulas: [
-        { name: "Additive Identity", expr: "a + 0 = a" },
-        { name: "Multiplicative Identity", expr: "a × 1 = a" },
-        { name: "Distributive Property", expr: "a × (b + c) = (a × b) + (a × c)" },
-        { name: "Multiplicative Inverse", expr: "Reciprocal of (p/q) is (q/p)" }
+        { name: "Parallelogram, Triangle & Circle", expr: "Para = b×h  |  Tri = ½bh  |  Circle C = 2πr,  A = πr²" },
+        { name: "Paths & Circular Ring", expr: "Crossroads = lw + bw − w²  |  Ring = π(R² − r²)" },
+        { name: "Profit, Loss & Simple Interest", expr: "Profit% = (Profit/CP)×100  |  SI = (P × R × T) / 100" }
       ],
       examples: [
-        {
-          q: "Example 1: Evaluate (−12) × (−5) + (−20)",
-          steps: [
-            "Step 1: Multiply (−12) × (−5). Since both are negative, product is positive = +60.",
-            "Step 2: Add (−20) → 60 + (−20) = 60 − 20 = 40."
-          ]
-        }
+        { q: "Example 1: Two crossroads of width 10 m cut through the center of a 700 m × 300 m park. Find road area.", steps: ["Area = (700 × 10) + (300 × 10) − 10² = 7,000 + 3,000 − 100 = 9,900 m² (0.99 hectares)."] },
+        { q: "Example 2: An article was sold for ₹680 at a loss of 15%. Find its Cost Price.", steps: ["CP = (680 × 100) ÷ (100 − 15) = 68,000 ÷ 85 = ₹800."] }
       ],
       practice: [
-        {
-          q: "What is (−8) × (−7)?",
-          options: ["−56", "56", "−15", "15"],
-          ans: 1,
-          hint: "Negative × Negative always gives a Positive result.",
-          explanation: "(−8) × (−7) = +56."
-        },
-        {
-          q: "Find the additive inverse of −19:",
-          options: ["−19", "0", "19", "1/19"],
-          ans: 2,
-          hint: "What number added to −19 gives 0?",
-          explanation: "−19 + 19 = 0, so 19 is the additive inverse."
-        },
-        {
-          q: "What is the reciprocal (multiplicative inverse) of −3/7?",
-          options: ["3/7", "−7/3", "7/3", "0"],
-          ans: 1,
-          hint: "Flip numerator and denominator while keeping the sign.",
-          explanation: "(−3/7) × (−7/3) = 1."
-        }
+        { q: "How many times must a wheel of radius 28 cm rotate to go 352 m (35,200 cm)? (π = 22/7)", options: ["100", "200", "250", "400"], ans: 1, hint: "Circumference = 2 × (22/7) × 28 = 176 cm. Divide 35,200 by 176.", explanation: "35,200 ÷ 176 = 200 rotations." },
+        { q: "From a circular sheet of radius 4 cm, a circle of radius 3 cm is removed. Remaining area? (π = 3.14)", options: ["3.14 cm²", "21.98 cm²", "50.24 cm²", "12.56 cm²"], ans: 1, hint: "π(R² − r²) = 3.14 × (16 − 9) = 3.14 × 7.", explanation: "21.98 cm²." },
+        { q: "Juhi sells a washing machine for ₹13,500 at a 20% loss. What was her Cost Price?", options: ["₹16,200", "₹16,875", "₹15,000", "₹10,800"], ans: 1, hint: "80% of CP = 13,500 → CP = (13,500 × 100) ÷ 80.", explanation: "₹16,875." },
+        { q: "In how many years will ₹1,200 amount to ₹1,632 at 9% p.a. simple interest?", options: ["3 years", "4 years", "5 years", "4.5 years"], ans: 1, hint: "SI = 1632 − 1200 = ₹432. T = (432 × 100) ÷ (1200 × 9).", explanation: "43,200 ÷ 10,800 = 4 years." },
+        { q: "Find the median of: 24, 36, 46, 17, 18, 25, 35", options: ["17", "25", "35", "24"], ans: 1, hint: "Sort first: 17, 18, 24, 25, 35, 36, 46.", explanation: "The 4th (middle) term is 25." }
       ]
     },
+
+    // -----------------------------------------------------------------------
+    // STAGE 4: PRE-HIGH SCHOOL MASTERY FOUNDATION (CLASS 8)
+    // -----------------------------------------------------------------------
     {
-      id: "ch5",
-      grade: "Class 7",
-      title: "Simple Linear Equations in One Variable",
-      summary: "Variables, constants, LHS = RHS balancing, and transposition method.",
-      theory: [
-        "<strong>Variable & Constant:</strong> A variable (x, y, z) can take different values; a constant (5, −2, 10) has a fixed value.",
-        "<strong>Linear Equation:</strong> An equation where the highest power of the variable is 1 (e.g., 3x + 5 = 20).",
-        "<strong>Transposition Rule:</strong> When moving a term across the '=' sign: (+) becomes (−), (−) becomes (+), (×) becomes (÷), and (÷) becomes (×)."
-      ],
-      formulas: [
-        { name: "Standard Form", expr: "ax + b = c  (where a ≠ 0)" },
-        { name: "Direct Solution", expr: "x = (c − b) / a" },
-        { name: "Cross Multiplication", expr: "If (a/b) = (c/d), then a × d = b × c" }
-      ],
-      examples: [
-        {
-          q: "Example 1: Solve 4x − 7 = 21",
-          steps: [
-            "Step 1: Transpose −7 to RHS → 4x = 21 + 7",
-            "Step 2: Simplify RHS → 4x = 28",
-            "Step 3: Transpose 4 (divide) → x = 28 / 4 = 7."
-          ]
-        },
-        {
-          q: "Example 2: The sum of two consecutive numbers is 45. Find the numbers.",
-          steps: [
-            "Step 1: Let the first number be x, so the next consecutive number is (x + 1).",
-            "Step 2: Equation: x + (x + 1) = 45 → 2x + 1 = 45.",
-            "Step 3: 2x = 44 → x = 22. So numbers are 22 and 23."
-          ]
-        }
-      ],
-      practice: [
-        {
-          q: "Solve for x: 5x + 3 = 28",
-          options: ["4", "5", "6", "31/5"],
-          ans: 1,
-          hint: "Subtract 3 from 28 first, then divide by 5.",
-          explanation: "5x = 28 − 3 = 25 → x = 25/5 = 5."
-        },
-        {
-          q: "If x/4 − 2 = 3, what is x?",
-          options: ["4", "12", "20", "5"],
-          ans: 2,
-          hint: "Move −2 to RHS first: x/4 = 3 + 2 = 5.",
-          explanation: "x/4 = 5 → x = 5 × 4 = 20."
-        },
-        {
-          q: "Twice a number decreased by 6 equals 14. Find the number.",
-          options: ["4", "10", "8", "20"],
-          ans: 1,
-          hint: "Form equation: 2x − 6 = 14.",
-          explanation: "2x = 14 + 6 = 20 → x = 10."
-        }
-      ]
-    },
-    {
-      id: "ch6",
+      id: "ch8_1",
+      stage: "Stage 4",
+      stageClass: "s4-badge",
       grade: "Class 8",
-      title: "Squares, Square Roots, Cubes & Cube Roots",
-      summary: "Perfect squares, Pythagorean triplets, prime factorization, and cube roots.",
+      title: "Ch 8.1: Rational Numbers, Negative Exponents & Number Play",
+      summary: "Density of rationals, negative exponent laws, scientific notation for tiny numbers, and digit-reversal tricks.",
+      diagramCaption: "Negative Exponents & Scientific Notation for Microscopic Sizes (0.000007 m = 7 × 10⁻⁶ m)",
+      svg: `<svg viewBox="0 0 600 110" style="width:100%;max-height:130px;display:block;margin:auto;">
+        <rect x="25" y="18" width="260" height="72" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+        <text x="155" y="46" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Negative Exponent Reciprocal Law</text>
+        <text x="155" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">a⁻ᵐ = 1 / aᵐ   |   (a/b)⁻ᵐ = (b/a)ᵐ</text>
+        <rect x="305" y="18" width="270" height="72" rx="12" fill="#ecfdf5" stroke="#0d9488" stroke-width="2"/>
+        <text x="440" y="46" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">Digit Generalised Form (ab = 10a + b)</text>
+        <text x="440" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">ab + ba = 11(a + b)  |  |ab − ba| = 9|a − b|</text>
+      </svg>`,
       theory: [
-        "<strong>Square Number:</strong> When a number is multiplied by itself (n × n = n²). A number ending in 2, 3, 7, or 8 is never a perfect square.",
-        "<strong>Square Root (√):</strong> Inverse operation of squaring. Example: √64 = 8 because 8² = 64.",
-        "<strong>Pythagorean Triplet:</strong> For any natural number m > 1, (2m, m² − 1, m² + 1) forms a Pythagorean triplet.",
-        "<strong>Cube & Cube Root (∛):</strong> Multiplying a number three times gives its cube (n³). Example: ∛125 = 5 because 5³ = 125."
+        "<strong>Density Property:</strong> Between any two distinct rational numbers, there exist infinitely many rational numbers.",
+        "<strong>Negative Exponents:</strong> For any non-zero rational a, a⁻ᵐ = 1 / aᵐ and (a/b)⁻ᵐ = (b/a)ᵐ.",
+        "<strong>Scientific Notation for Very Small Numbers:</strong> Moving the decimal n places to the right gives k × 10⁻ⁿ (e.g. 0.000007 = 7 × 10⁻⁶)."
+      ],
+      dailyLife: [
+        "Microbiology & Chips: Red blood cell diameter is 7 × 10⁻⁶ m; microchip transistors are 5 × 10⁻⁹ m (5 nanometres)."
       ],
       formulas: [
-        { name: "Square of n", expr: "n² = n × n" },
-        { name: "Sum of First n Odd Numbers", expr: "1 + 3 + 5 + ... (n terms) = n²" },
-        { name: "Pythagorean Triplet", expr: "(2m)² + (m² − 1)² = (m² + 1)²" },
-        { name: "Cube of n", expr: "n³ = n × n × n" }
+        { name: "Negative Exponent Laws", expr: "a⁻ᵐ = 1 / aᵐ   |   (a/b)⁻ᵐ = (b/a)ᵐ" },
+        { name: "Generalised 2 & 3-Digit Forms", expr: "ab = 10a + b   |   abc = 100a + 10b + c" }
       ],
       examples: [
-        {
-          q: "Example 1: Find a Pythagorean triplet whose smallest member is 6.",
-          steps: [
-            "Step 1: Take 2m = 6 → m = 3.",
-            "Step 2: Second member: m² − 1 = 3² − 1 = 9 − 1 = 8.",
-            "Step 3: Third member: m² + 1 = 3² + 1 = 9 + 1 = 10.",
-            "Answer: The triplet is (6, 8, 10)."
-          ]
-        },
-        {
-          q: "Example 2: Find the cube root of 216 by prime factorization.",
-          steps: [
-            "Step 1: 216 = 2 × 2 × 2 × 3 × 3 × 3.",
-            "Step 2: Group in triplets: (2 × 2 × 2) × (3 × 3 × 3).",
-            "Step 3: Take one factor from each triplet: 2 × 3 = 6."
-          ]
-        }
+        { q: "Example 1: Evaluate (1/3)⁻² + (1/2)⁻³ + (1/4)⁻².", steps: ["3² + 2³ + 4² = 9 + 8 + 16 = 33."] },
+        { q: "Example 2: Find m so that (−3)ᵐ⁺¹ × (−3)⁵ = (−3)⁷.", steps: ["Equate exponents: m + 1 + 5 = 7 → m + 6 = 7 → m = 1."] }
       ],
       practice: [
-        {
-          q: "Which of the following numbers CANNOT be a perfect square?",
-          options: ["144", "225", "347", "400"],
-          ans: 2,
-          hint: "Check the last digit: squares never end in 2, 3, 7, or 8.",
-          explanation: "347 ends in 7, so it cannot be a perfect square."
-        },
-        {
-          q: "What is the value of √289?",
-          options: ["13", "17", "19", "23"],
-          ans: 1,
-          hint: "7 × 7 ends in 9, check 17 × 17.",
-          explanation: "17 × 17 = 289, so √289 = 17."
-        },
-        {
-          q: "Find the cube root of 512 (∛512):",
-          options: ["6", "7", "8", "9"],
-          ans: 2,
-          hint: "8 × 8 = 64; multiply 64 by 8.",
-          explanation: "8³ = 8 × 8 × 8 = 512."
-        }
+        { q: "Evaluate: (3⁻¹ + 4⁻¹ + 5⁻¹)⁰", options: ["12/60", "1", "0", "12"], ans: 1, hint: "Anything non-zero raised to power 0 is always 1.", explanation: "(Something non-zero)⁰ = 1." },
+        { q: "Evaluate: {(1/3)⁻¹ − (1/4)⁻¹}⁻¹", options: ["1", "−1", "7", "−7"], ans: 1, hint: "(3 − 4)⁻¹ = (−1)⁻¹.", explanation: "(−1)⁻¹ = −1." },
+        { q: "Express 0.00000000837 in standard form:", options: ["8.37 × 10⁻⁸", "8.37 × 10⁻⁹", "83.7 × 10⁻¹⁰", "8.37 × 10⁹"], ans: 1, hint: "Count decimal shifts to the right up to 8.37.", explanation: "8.37 × 10⁻⁹." },
+        { q: "Find x if (2/5)²ˣ⁺¹ × (2/5)³ = (2/5)¹⁰:", options: ["2", "3", "4", "6"], ans: 1, hint: "2x + 1 + 3 = 10 → 2x + 4 = 10.", explanation: "2x = 6 → x = 3." },
+        { q: "If the 3-digit number 24x is divisible by 9, find digit x:", options: ["0", "3", "6", "9"], ans: 1, hint: "2 + 4 + x = 6 + x must be a multiple of 9.", explanation: "6 + 3 = 9 → x = 3." }
       ]
     },
     {
-      id: "ch7",
+      id: "ch8_2",
+      stage: "Stage 4",
+      stageClass: "s4-badge",
       grade: "Class 8",
-      title: "Comparing Quantities: Percentage, Profit & Loss, Interest",
-      summary: "Discount, Profit %, Loss %, Simple Interest (SI), and Compound Interest (CI).",
+      title: "Ch 8.2: Linear Equations, Algebraic Identities & Factorisation",
+      summary: "Cross-multiplication equations, 4 standard algebraic identities, regrouping, and splitting the middle term.",
+      diagramCaption: "Visual Area Dissection proving (a + b)² = a² + 2ab + b²",
+      svg: `<svg viewBox="0 0 600 155" style="width:100%;max-height:175px;display:block;margin:auto;">
+        <rect x="45" y="22" width="72" height="72" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+        <rect x="117" y="22" width="42" height="72" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+        <rect x="45" y="94" width="72" height="42" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+        <rect x="117" y="94" width="42" height="42" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+        <text x="81" y="15" text-anchor="middle" font-size="12" font-weight="bold">a</text>
+        <text x="138" y="15" text-anchor="middle" font-size="12" font-weight="bold">b</text>
+        <text x="34" y="62" font-size="12" font-weight="bold">a</text>
+        <text x="34" y="118" font-size="12" font-weight="bold">b</text>
+        <text x="81" y="63" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">a²</text>
+        <text x="138" y="63" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">ab</text>
+        <text x="81" y="119" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">ab</text>
+        <text x="138" y="119" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">b²</text>
+        <text x="210" y="52" font-size="13" font-weight="bold" fill="#0f172a">Total Area = (a + b) × (a + b)</text>
+        <text x="210" y="78" font-size="13" font-weight="bold" fill="#4f46e5">Sum of 4 Regions = a² + ab + ab + b²</text>
+        <text x="210" y="106" font-size="14" font-weight="bold" fill="#0f766e">∴ (a + b)² = a² + 2ab + b²</text>
+      </svg>`,
       theory: [
-        "<strong>Cost Price (CP) & Selling Price (SP):</strong> CP is the buying price; SP is the selling price. If SP > CP → Profit; if CP > SP → Loss.",
-        "<strong>Discount:</strong> Reduction given on Marked Price (MP). Discount = MP − SP.",
-        "<strong>Simple Interest (SI):</strong> Interest calculated only on the original Principal (P) for the entire time period.",
-        "<strong>Compound Interest (CI):</strong> Interest calculated on Principal + previous accumulated interest."
+        "<strong>Algebraic Identity:</strong> An equality that holds true for every numerical value of its variables.",
+        "<strong>Factorisation:</strong> Expressing an algebraic expression as a product of its irreducible factors (the reverse of expansion).",
+        "<strong>Splitting the Middle Term:</strong> To factorise x² + px + q, find two numbers a, b such that a + b = p and a × b = q, giving (x + a)(x + b)."
+      ],
+      dailyLife: [
+        "Lightning Mental Squares: 103² = (100 + 3)² = 10,000 + 600 + 9 = 10,609; 98 × 102 = 100² − 2² = 9,996."
       ],
       formulas: [
-        { name: "Profit %", expr: "(Profit / CP) × 100" },
-        { name: "Loss %", expr: "(Loss / CP) × 100" },
-        { name: "Discount %", expr: "(Discount / Marked Price) × 100" },
-        { name: "Simple Interest (SI)", expr: "SI = (P × R × T) / 100" },
-        { name: "Compound Amount (A)", expr: "A = P × (1 + R/100)ⁿ ;  CI = A − P" }
-      ],
-      examples: [
-        {
-          q: "Example 1: A cycle bought for ₹2,000 is sold for ₹2,300. Find Profit %.",
-          steps: [
-            "Step 1: Profit = SP − CP = 2300 − 2000 = ₹300.",
-            "Step 2: Profit % = (300 / 2000) × 100 = 15%."
-          ]
-        },
-        {
-          q: "Example 2: Find Simple Interest on ₹5,000 at 8% per annum for 2 years.",
-          steps: [
-            "Step 1: SI = (P × R × T) / 100 = (5000 × 8 × 2) / 100",
-            "Step 2: SI = 50 × 16 = ₹800. Total Amount = 5000 + 800 = ₹5,800."
-          ]
-        }
-      ],
-      practice: [
-        {
-          q: "An item with Marked Price ₹800 is sold for ₹680. What is the Discount %?",
-          options: ["12%", "15%", "20%", "120%"],
-          ans: 1,
-          hint: "Discount = 800 − 680 = 120. Divide by MP (800) and multiply by 100.",
-          explanation: "(120 / 800) × 100 = 15%."
-        },
-        {
-          q: "Find Simple Interest on ₹4,000 at 5% p.a. for 3 years:",
-          options: ["₹500", "₹600", "₹450", "₹800"],
-          ans: 1,
-          hint: "SI = (4000 × 5 × 3) / 100.",
-          explanation: "(4000 × 15) / 100 = ₹600."
-        },
-        {
-          q: "If CP = ₹500 and Loss = 10%, what is the Selling Price (SP)?",
-          options: ["₹490", "₹450", "₹550", "₹400"],
-          ans: 1,
-          hint: "10% of 500 = ₹50 loss. Subtract loss from CP.",
-          explanation: "SP = 500 − 50 = ₹450."
-        }
-      ]
-    },
-    {
-      id: "ch8",
-      grade: "Class 8",
-      title: "Algebraic Expressions & Standard Identities",
-      summary: "Monomials, binomials, polynomials, multiplication, and 4 key algebraic identities.",
-      theory: [
-        "<strong>Terms & Like Terms:</strong> Terms having the exact same algebraic factors (like 5x² and −3x²) are Like Terms and can be added/subtracted.",
-        "<strong>Polynomial Types:</strong> Monomial (1 term: 4x), Binomial (2 terms: a + b), Trinomial (3 terms: x² + 2x + 1).",
-        "<strong>Algebraic Identity:</strong> An equality that holds true for every value of the variables in it."
-      ],
-      formulas: [
-        { name: "Identity I", expr: "(a + b)² = a² + 2ab + b²" },
-        { name: "Identity II", expr: "(a − b)² = a² − 2ab + b²" },
+        { name: "Identity I & II", expr: "(a + b)² = a² + 2ab + b²   |   (a − b)² = a² − 2ab + b²" },
         { name: "Identity III", expr: "(a + b)(a − b) = a² − b²" },
         { name: "Identity IV", expr: "(x + a)(x + b) = x² + (a + b)x + ab" }
       ],
       examples: [
-        {
-          q: "Example 1: Expand (3x + 4)² using Identity I.",
-          steps: [
-            "Step 1: Compare with (a + b)² where a = 3x and b = 4.",
-            "Step 2: (3x)² + 2(3x)(4) + (4)²",
-            "Step 3: 9x² + 24x + 16."
-          ]
-        },
-        {
-          q: "Example 2: Evaluate 98 × 102 using Identity III.",
-          steps: [
-            "Step 1: Write as (100 − 2)(100 + 2).",
-            "Step 2: Apply (a − b)(a + b) = a² − b² → 100² − 2²",
-            "Step 3: 10000 − 4 = 9,996."
-          ]
-        }
+        { q: "Example 1: Factorise 49p² − 36 and a⁴ − b⁴.", steps: ["49p² − 36 = (7p)² − 6² = (7p + 6)(7p − 6).", "a⁴ − b⁴ = (a² + b²)(a² − b²) = (a² + b²)(a + b)(a − b)."] },
+        { q: "Example 2: Factorise x² + 7x + 12 and z² − 4z − 12.", steps: ["For x² + 7x + 12: 3 + 4 = 7 and 3 × 4 = 12 → (x + 3)(x + 4).", "For z² − 4z − 12: −6 + 2 = −4 and −6 × 2 = −12 → (z − 6)(z + 2)."] }
       ],
       practice: [
-        {
-          q: "Expand (x − 5)²:",
-          options: ["x² − 25", "x² − 10x + 25", "x² + 10x + 25", "x² − 5x + 25"],
-          ans: 1,
-          hint: "Use (a − b)² = a² − 2ab + b² with a = x, b = 5.",
-          explanation: "x² − 2(x)(5) + 5² = x² − 10x + 25."
-        },
-        {
-          q: "Evaluate 51² − 49² using a² − b² = (a + b)(a − b):",
-          options: ["100", "200", "4", "2500"],
-          ans: 1,
-          hint: "(51 + 49) × (51 − 49).",
-          explanation: "100 × 2 = 200."
-        },
-        {
-          q: "Multiply 3x²y × (−4xy³):",
-          options: ["−12x³y⁴", "12x²y³", "−7x³y⁴", "−12x²y³"],
-          ans: 0,
-          hint: "Multiply constants (3 × −4) and add powers of same variables.",
-          explanation: "3 × (−4) = −12; x²⁺¹ = x³; y¹⁺³ = y⁴ → −12x³y⁴."
-        }
+        { q: "Solve: (x − 5)/3 = (x − 3)/5", options: ["x = 6", "x = 8", "x = 4", "x = −8"], ans: 1, hint: "Cross-multiply: 5(x − 5) = 3(x − 3).", explanation: "5x − 25 = 3x − 9 → 2x = 16 → x = 8." },
+        { q: "Use Identity III to evaluate: 1.02 × 0.98", options: ["0.996", "0.9996", "1.0004", "0.9896"], ans: 1, hint: "(1 + 0.02)(1 − 0.02) = 1² − (0.02)².", explanation: "1 − 0.0004 = 0.9996." },
+        { q: "Factorise: 4y² − 12y + 9", options: ["(2y + 3)²", "(2y − 3)²", "(4y − 3)²", "(2y − 9)²"], ans: 1, hint: "Matches a² − 2ab + b² with a = 2y and b = 3.", explanation: "(2y − 3)²." },
+        { q: "Factorise: p² − 10p + 21", options: ["(p + 3)(p + 7)", "(p − 3)(p − 7)", "(p − 21)(p + 1)", "(p − 10)(p − 11)"], ans: 1, hint: "Find two numbers whose sum is −10 and product is +21 (−3 and −7).", explanation: "(p − 3)(p − 7)." },
+        { q: "A steamer goes downstream in 4 hrs and upstream in 5 hrs. If stream speed is 2 km/hr, find steamer speed in still water:", options: ["16 km/hr", "18 km/hr", "20 km/hr", "14 km/hr"], ans: 1, hint: "4(x + 2) = 5(x − 2).", explanation: "4x + 8 = 5x − 10 → x = 18 km/hr." }
       ]
     },
     {
-      id: "ch9",
+      id: "ch8_3_8_5",
+      stage: "Stage 4",
+      stageClass: "s4-badge",
       grade: "Class 8",
-      title: "Mensuration: Perimeter, Area & Volume (2D & 3D)",
-      summary: "Area of trapezium, rhombus, circle, and surface area & volume of cube, cuboid, cylinder.",
+      title: "Ch 8.3 & 8.5: Quadrilaterals, Squares/Cubes & Euler's Polyhedron Law",
+      summary: "Polygon interior/exterior angles, quadrilateral diagonal theorems, square & cube roots, Hardy-Ramanujan 1729, and F+V−E=2.",
+      diagramCaption: "Rhombus Diagonal Theorem (Diagonals bisect at 90°) & Euler's Polyhedron Law (F + V − E = 2)",
+      svg: `<svg viewBox="0 0 600 140" style="width:100%;max-height:160px;display:block;margin:auto;">
+        <polygon points="130,16 215,66 130,116 45,66" fill="#eef2ff" stroke="#4338ca" stroke-width="2.2"/>
+        <line x1="130" y1="16" x2="130" y2="116" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,3"/>
+        <line x1="45" y1="66" x2="215" y2="66" stroke="#0d9488" stroke-width="1.8" stroke-dasharray="4,3"/>
+        <rect x="130" y="54" width="12" height="12" fill="none" stroke="#dc2626" stroke-width="1.6"/>
+        <text x="130" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#4338ca">Rhombus: AC ⊥ BD, AO=OC, BO=OD</text>
+        <rect x="275" y="22" width="295" height="92" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+        <text x="422" y="48" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Euler's Polyhedron Formula</text>
+        <text x="422" y="72" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Faces (F) + Vertices (V) − Edges (E) = 2</text>
+        <text x="422" y="96" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">Prism: F=n+2, V=2n, E=3n | Pyramid: F=n+1, V=n+1, E=2n</text>
+      </svg>`,
       theory: [
-        "<strong>Perimeter vs Area:</strong> Perimeter is the boundary length (in cm, m); Area is the surface covered (in cm², m²).",
-        "<strong>Surface Area vs Volume:</strong> Surface Area is the outer area of a 3D solid; Volume is the space/capacity inside a 3D solid (in cm³, m³, Litres).",
-        "<strong>Unit Conversions:</strong> 1 m² = 10,000 cm²; 1 m³ = 1,000 Litres; 1 Litre = 1,000 cm³."
+        "<strong>Polygon Angles:</strong> Interior angle sum = (n − 2) × 180°; Exterior angle sum of any convex polygon is always 360°.",
+        "<strong>Quadrilateral Diagonals:</strong> Parallelogram diagonals bisect each other; Rhombus diagonals bisect at 90°; Rectangle diagonals are equal & bisect; Square diagonals are equal & bisect at 90°.",
+        "<strong>Hardy-Ramanujan Number:</strong> 1,729 is the smallest number expressible as the sum of two cubes in two ways: 12³ + 1³ = 10³ + 9³.",
+        "<strong>Euler's Formula:</strong> For every convex polyhedron, F + V − E = 2."
+      ],
+      dailyLife: [
+        "Car Scissor Jacks: A collapsing rhombus converts horizontal screw turn into smooth vertical lift."
       ],
       formulas: [
-        { name: "Rectangle & Square Area", expr: "Rect = l × b  |  Square = a²" },
-        { name: "Triangle & Circle Area", expr: "Triangle = ½ × b × h  |  Circle = πr²" },
-        { name: "Trapezium & Rhombus Area", expr: "Trap = ½(a + b)h  |  Rhombus = ½ × d₁ × d₂" },
-        { name: "Cuboid TSA & Volume", expr: "TSA = 2(lb + bh + hl)  |  Vol = l × b × h" },
-        { name: "Cube TSA & Volume", expr: "TSA = 6a²  |  Vol = a³" },
-        { name: "Cylinder CSA, TSA & Volume", expr: "CSA = 2πrh | TSA = 2πr(r+h) | Vol = πr²h" }
+        { name: "Regular Polygon Angles", expr: "Exterior = 360° ÷ n   |   Interior = 180° − Exterior" },
+        { name: "Square & Triplet Rules", expr: "Sum of first n odd numbers = n²  |  Triplet: (2m, m²−1, m²+1)" },
+        { name: "Euler's Polyhedron Law", expr: "F + V − E = 2" }
       ],
       examples: [
-        {
-          q: "Example 1: Find the area of a rhombus whose diagonals are 10 cm and 8 cm.",
-          steps: [
-            "Step 1: Formula: Area = ½ × d₁ × d₂.",
-            "Step 2: Area = ½ × 10 × 8 = 5 × 8 = 40 cm²."
-          ]
-        },
-        {
-          q: "Example 2: Find the volume of a cylinder with radius 7 cm and height 10 cm (π = 22/7).",
-          steps: [
-            "Step 1: Volume = πr²h = (22/7) × 7 × 7 × 10.",
-            "Step 2: Cancel 7 → 22 × 7 × 10 = 1,540 cm³."
-          ]
-        }
+        { q: "Example 1: Find the number of sides of a regular polygon whose each exterior angle measures 24°.", steps: ["n = 360° ÷ 24° = 15 sides."] },
+        { q: "Example 2: Find the smallest number by which 256 must be multiplied to obtain a perfect cube.", steps: ["256 = 2⁸ (eight 2s). Multiply by one more 2 to get 2⁹ = 512. Multiplier = 2."] }
       ],
       practice: [
-        {
-          q: "Find the total surface area (TSA) of a cube of side 5 cm:",
-          options: ["125 cm²", "150 cm²", "100 cm²", "25 cm²"],
-          ans: 1,
-          hint: "A cube has 6 square faces, so TSA = 6a².",
-          explanation: "6 × 5² = 6 × 25 = 150 cm²."
-        },
-        {
-          q: "Area of a trapezium with parallel sides 10 cm & 6 cm and height 4 cm is:",
-          options: ["64 cm²", "32 cm²", "20 cm²", "40 cm²"],
-          ans: 1,
-          hint: "Area = ½ × (sum of parallel sides) × height.",
-          explanation: "½ × (10 + 6) × 4 = ½ × 16 × 4 = 32 cm²."
-        },
-        {
-          q: "How many litres of water can a tank of volume 2 m³ hold?",
-          options: ["200 L", "2,000 L", "20 L", "20,000 L"],
-          ans: 1,
-          hint: "1 m³ = 1,000 Litres.",
-          explanation: "2 × 1,000 = 2,000 Litres."
-        }
+        { q: "What is the measure of each interior angle of a regular octagon (n = 8)?", options: ["120°", "135°", "140°", "108°"], ans: 1, hint: "Exterior angle = 360° ÷ 8 = 45°; Interior = 180° − 45°.", explanation: "135°." },
+        { q: "Without adding, find the sum: 1 + 3 + 5 + 7 + 9 + 11 + 13 + 15 + 17", options: ["64", "81", "100", "49"], ans: 1, hint: "Count the odd numbers (n = 9) and square it (9²).", explanation: "9² = 81." },
+        { q: "Find the smallest square number divisible by each of 4, 9, and 10:", options: ["180", "360", "900", "3,600"], ans: 2, hint: "LCM(4, 9, 10) = 180 = 2² × 3² × 5; multiply by 5 to pair the 5.", explanation: "180 × 5 = 900." },
+        { q: "Find the cube root of −2,744:", options: ["−12", "−14", "−16", "14"], ans: 1, hint: "2,744 = 2³ × 7³ = 14³.", explanation: "∛(−2,744) = −14." },
+        { q: "Using Euler's formula, if a polyhedron has V = 6 vertices and E = 12 edges, find Faces (F):", options: ["6", "8", "10", "18"], ans: 1, hint: "F + 6 − 12 = 2.", explanation: "F = 2 + 6 = 8 faces (Octahedron)." }
       ]
     },
     {
-      id: "ch10",
+      id: "ch8_4_8_6",
+      stage: "Stage 4",
+      stageClass: "s4-badge",
       grade: "Class 8",
-      title: "Exponents, Powers & Standard Form",
-      summary: "Laws of exponents, negative exponents, and scientific standard notation.",
+      title: "Ch 8.4 & 8.6: 3D Mensuration, Compound Interest & Proportions",
+      summary: "Trapezium/rhombus area, Cube/Cuboid/Cylinder LSA, TSA & Volume, hollow pipes, Compound Interest, and Direct/Inverse proportion.",
+      diagramCaption: "3D Surface Area Unfolding: Cube TSA = 6a², Cuboid TSA = 2(lb+bh+hl), Cylinder TSA = 2πr(r+h)",
+      svg: `<svg viewBox="0 0 600 140" style="width:100%;max-height:160px;display:block;margin:auto;">
+        <ellipse cx="95" cy="28" rx="34" ry="10" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+        <path d="M61,28 L61,96 A34,10 0 0,0 129,96 L129,28" fill="#e6fffa" stroke="#0f766e" stroke-width="2"/>
+        <text x="95" y="66" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f766e">r, h</text>
+        <text x="95" y="128" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f766e">Cylinder Vol = πr²h</text>
+        <rect x="210" y="20" width="365" height="96" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+        <text x="392" y="46" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">3D Surface Areas & Compound Interest</text>
+        <text x="392" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Cylinder CSA = 2πrh  |  TSA = 2πr(r + h)</text>
+        <text x="392" y="94" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309">Compound Amount A = P(1 + R/100)ⁿ  |  CI = A − P</text>
+      </svg>`,
       theory: [
-        "<strong>Base & Exponent:</strong> In aⁿ, 'a' is the Base and 'n' is the Exponent/Power, meaning 'a' is multiplied by itself 'n' times.",
-        "<strong>Negative Exponent:</strong> a⁻ⁿ = 1 / aⁿ (Reciprocal with positive exponent).",
-        "<strong>Zero Exponent:</strong> Any non-zero number raised to the power 0 is always 1 (a⁰ = 1).",
-        "<strong>Standard Form:</strong> Writing very large or very small numbers as k × 10ⁿ where 1 ≤ k < 10."
+        "<strong>2D Special Areas:</strong> Trapezium = ½(a + b)h; Rhombus = ½ × d₁ × d₂; General Quadrilateral = ½ × d × (h₁ + h₂).",
+        "<strong>Cylinder & Hollow Pipe:</strong> Rolling a rectangle of length 2πr and height h gives Cylinder CSA = 2πrh. Hollow pipe volume = π(R² − r²)h.",
+        "<strong>Compound Interest (CI):</strong> Interest is added to Principal after each compounding period; for half-yearly compounding, use rate R/2 and periods 2n.",
+        "<strong>Direct vs Inverse Proportion:</strong> Direct: x₁/y₁ = x₂/y₂; Inverse: x₁ × y₁ = x₂ × y₂."
+      ],
+      dailyLife: [
+        "Road Rollers & Wells: A road roller levels 2πrh area per turn; digging a cylindrical well spreads πr²h earth onto a platform."
       ],
       formulas: [
-        { name: "Product Law", expr: "aᵐ × aⁿ = aᵐ⁺ⁿ" },
-        { name: "Quotient Law", expr: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ" },
-        { name: "Power of a Power", expr: "(aᵐ)ⁿ = aᵐˣⁿ" },
-        { name: "Zero & Negative Power", expr: "a⁰ = 1  |  a⁻ⁿ = 1 / aⁿ" }
+        { name: "Cube & Cuboid", expr: "Cube TSA = 6a², Vol = a³  |  Cuboid TSA = 2(lb+bh+hl), Vol = lbh" },
+        { name: "Cylinder & Capacity", expr: "CSA = 2πrh, TSA = 2πr(r+h), Vol = πr²h  |  1 m³ = 1,000 Litres" },
+        { name: "Compound Interest", expr: "A = P(1 + R/100)ⁿ   |   CI = A − P" },
+        { name: "Proportions", expr: "Direct: x₁/y₁ = x₂/y₂   |   Inverse: x₁ × y₁ = x₂ × y₂" }
       ],
       examples: [
-        {
-          q: "Example 1: Simplify (2³ × 2⁴) ÷ 2⁵",
-          steps: [
-            "Step 1: Apply Product Law in bracket: 2³⁺⁴ = 2⁷.",
-            "Step 2: Apply Quotient Law: 2⁷ ÷ 2⁵ = 2⁷⁻⁵ = 2² = 4."
-          ]
-        },
-        {
-          q: "Example 2: Express 0.000045 in Standard Form.",
-          steps: [
-            "Step 1: Move decimal 5 places to the right to get 4.5 (between 1 and 10).",
-            "Step 2: Since we moved right, exponent is negative: 4.5 × 10⁻⁵."
-          ]
-        }
+        { q: "Example 1: A well of diameter 7 m (r = 3.5 m) is dug 20 m deep and earth is spread on a 22 m × 14 m platform. Find platform height.", steps: ["Volume of earth = (22/7) × 3.5² × 20 = 770 m³.", "Height = 770 ÷ (22 × 14) = 2.5 m."] },
+        { q: "Example 2: Find difference between CI and SI on ₹15,000 for 2 years at 8% p.a.", steps: ["SI = (15000 × 8 × 2)/100 = ₹2,400.", "A = 15000(1.08)² = ₹17,496 → CI = ₹2,496. Difference = ₹96."] }
       ],
       practice: [
-        {
-          q: "What is the value of (5⁰ + 3⁰) × 2²?",
-          options: ["4", "8", "32", "0"],
-          ans: 1,
-          hint: "Remember a⁰ = 1, so 5⁰ = 1 and 3⁰ = 1.",
-          explanation: "(1 + 1) × 4 = 2 × 4 = 8."
-        },
-        {
-          q: "Evaluate 3⁻²:",
-          options: ["−9", "−6", "1/9", "1/6"],
-          ans: 2,
-          hint: "Use a⁻ⁿ = 1 / aⁿ.",
-          explanation: "3⁻² = 1 / 3² = 1/9."
-        },
-        {
-          q: "Write 7,20,000 in Standard Form:",
-          options: ["72 × 10⁴", "7.2 × 10⁵", "0.72 × 10⁶", "7.2 × 10⁻⁵"],
-          ans: 1,
-          hint: "Place decimal after the first non-zero digit (7.2) and count digits after it.",
-          explanation: "7,20,000 = 7.2 × 10⁵."
-        }
+        { q: "A cylindrical tank has internal radius 1.4 m and height 3 m. Find its capacity in litres (π = 22/7):", options: ["18,480 L", "1,848 L", "9,240 L", "184,800 L"], ans: 0, hint: "Volume = (22/7) × 1.4 × 1.4 × 3 = 18.48 m³; multiply by 1,000.", explanation: "18.48 × 1,000 = 18,480 litres." },
+        { q: "A hollow iron pipe is 21 cm long with outer radius R = 4 cm and inner radius r = 3 cm. Volume of iron? (π = 22/7)", options: ["462 cm³", "154 cm³", "924 cm³", "308 cm³"], ans: 0, hint: "π(R² − r²)h = (22/7) × (16 − 9) × 21.", explanation: "(22/7) × 7 × 21 = 462 cm³." },
+        { q: "Calculate Compound Interest on ₹20,000 for 1½ years at 10% p.a. compounded half-yearly:", options: ["₹3,000", "₹3,152.50", "₹3,100", "₹2,315.25"], ans: 1, hint: "Half-yearly rate = 5%, periods n = 3: A = 20000 × (1.05)³.", explanation: "A = ₹23,152.50 → CI = ₹3,152.50." },
+        { q: "If 36 men can finish a piece of work in 25 days, in how many days will 15 men finish it?", options: ["50 days", "60 days", "45 days", "75 days"], ans: 1, hint: "Inverse proportion: 36 × 25 = 15 × d.", explanation: "900 ÷ 15 = 60 days." },
+        { q: "A shopkeeper marks goods 40% above CP and allows a 20% discount. Net gain percent?", options: ["20%", "12%", "15%", "8%"], ans: 1, hint: "Let CP = 100 → MP = 140 → SP = 140 × 0.80 = 112.", explanation: "112 − 100 = 12% net gain." }
       ]
     }
   ];
 
+  // =========================================================================
+  // 2. MASTER FORMULA BANK (REFERENCE VAULT)
+  // =========================================================================
   const MASTER_FORMULAS = [
-    { cat: "Mensuration 2D", name: "Area of Rectangle", expr: "Length × Breadth (l × b)" },
-    { cat: "Mensuration 2D", name: "Perimeter of Rectangle", expr: "2 × (l + b)" },
-    { cat: "Mensuration 2D", name: "Area of Square", expr: "Side × Side (a²)" },
-    { cat: "Mensuration 2D", name: "Perimeter of Square", expr: "4 × Side (4a)" },
-    { cat: "Mensuration 2D", name: "Area of Triangle", expr: "½ × Base × Height" },
-    { cat: "Mensuration 2D", name: "Area of Circle", expr: "πr²  (π ≈ 22/7 or 3.14)" },
-    { cat: "Mensuration 2D", name: "Circumference of Circle", expr: "2πr" },
-    { cat: "Mensuration 2D", name: "Area of Trapezium", expr: "½ × (a + b) × h" },
-    { cat: "Mensuration 2D", name: "Area of Rhombus", expr: "½ × d₁ × d₂" },
-    { cat: "Mensuration 3D", name: "Volume of Cube", expr: "a³" },
-    { cat: "Mensuration 3D", name: "Total Surface Area of Cube", expr: "6a²" },
-    { cat: "Mensuration 3D", name: "Volume of Cuboid", expr: "l × b × h" },
-    { cat: "Mensuration 3D", name: "Total Surface Area of Cuboid", expr: "2(lb + bh + hl)" },
-    { cat: "Mensuration 3D", name: "Volume of Cylinder", expr: "πr²h" },
-    { cat: "Mensuration 3D", name: "Curved Surface Area of Cylinder", expr: "2πrh" },
-    { cat: "Algebra", name: "Square of Sum", expr: "(a + b)² = a² + 2ab + b²" },
-    { cat: "Algebra", name: "Square of Difference", expr: "(a − b)² = a² − 2ab + b²" },
-    { cat: "Algebra", name: "Difference of Squares", expr: "a² − b² = (a + b)(a − b)" },
-    { cat: "Algebra", name: "Product Identity", expr: "(x + a)(x + b) = x² + (a + b)x + ab" },
-    { cat: "Commercial Math", name: "Profit %", expr: "(Profit / CP) × 100" },
-    { cat: "Commercial Math", name: "Loss %", expr: "(Loss / CP) × 100" },
-    { cat: "Commercial Math", name: "Simple Interest (SI)", expr: "(P × R × T) / 100" },
-    { cat: "Commercial Math", name: "Compound Amount", expr: "P × (1 + R/100)ⁿ" },
-    { cat: "Exponents", name: "Product of Powers", expr: "aᵐ × aⁿ = aᵐ⁺ⁿ" },
-    { cat: "Exponents", name: "Division of Powers", expr: "aᵐ ÷ aⁿ = aᵐ⁻ⁿ" },
-    { cat: "Geometry", name: "Pythagoras Theorem", expr: "Hypotenuse² = Base² + Perpendicular²" }
+    { cat: "Primary & Number System", name: "Division Check Formula", expr: "Dividend = (Divisor × Quotient) + Remainder" },
+    { cat: "Primary & Number System", name: "HCF & LCM Product Identity", expr: "HCF(A, B) × LCM(A, B) = A × B" },
+    { cat: "Primary & Number System", name: "Sum of First n Natural Numbers", expr: "Sum = n(n + 1) / 2" },
+    { cat: "Primary & Number System", name: "Sum of First n Odd Numbers", expr: "1 + 3 + 5 + ... (n terms) = n²" },
+    { cat: "Mensuration 2D", name: "Rectangle Perimeter & Area", expr: "P = 2(l + b)   |   Area = l × b" },
+    { cat: "Mensuration 2D", name: "Square Perimeter & Area", expr: "P = 4a   |   Area = a² = ½ × (diagonal)²" },
+    { cat: "Mensuration 2D", name: "Triangle & Parallelogram Area", expr: "Triangle = ½ × b × h   |   Parallelogram = b × h" },
+    { cat: "Mensuration 2D", name: "Trapezium & Rhombus Area", expr: "Trapezium = ½(a + b)h   |   Rhombus = ½ × d₁ × d₂" },
+    { cat: "Mensuration 2D", name: "Circle Circumference & Area", expr: "C = 2πr = πd   |   Area = πr²" },
+    { cat: "Mensuration 2D", name: "Crossroads & Circular Ring", expr: "Crossroads = lw + bw − w²   |   Ring = π(R² − r²)" },
+    { cat: "Mensuration 3D", name: "Cube LSA, TSA & Volume", expr: "LSA = 4a²  |  TSA = 6a²  |  Volume = a³" },
+    { cat: "Mensuration 3D", name: "Cuboid LSA, TSA & Volume", expr: "LSA = 2h(l+b)  |  TSA = 2(lb+bh+hl)  |  Vol = lbh" },
+    { cat: "Mensuration 3D", name: "Cylinder CSA, TSA & Volume", expr: "CSA = 2πrh  |  TSA = 2πr(r+h)  |  Vol = πr²h" },
+    { cat: "Mensuration 3D", name: "Hollow Pipe Volume & Capacity", expr: "Vol = π(R² − r²)h   |   1 m³ = 1,000 Litres" },
+    { cat: "Algebra & Exponents", name: "Standard Identities I & II", expr: "(a ± b)² = a² ± 2ab + b²" },
+    { cat: "Algebra & Exponents", name: "Difference of Squares (III)", expr: "(a + b)(a − b) = a² − b²" },
+    { cat: "Algebra & Exponents", name: "Binomial Product (IV)", expr: "(x + a)(x + b) = x² + (a + b)x + ab" },
+    { cat: "Algebra & Exponents", name: "Laws of Exponents", expr: "aᵐ·aⁿ = aᵐ⁺ⁿ  |  aᵐ÷aⁿ = aᵐ⁻ⁿ  |  (aᵐ)ⁿ = aᵐⁿ" },
+    { cat: "Algebra & Exponents", name: "Zero & Negative Exponents", expr: "a⁰ = 1 (a ≠ 0)   |   a⁻ⁿ = 1 / aⁿ" },
+    { cat: "Commercial & Motion", name: "Profit % & Loss %", expr: "Profit% = (Profit/CP)×100   |   Loss% = (Loss/CP)×100" },
+    { cat: "Commercial & Motion", name: "Simple & Compound Interest", expr: "SI = (P×R×T)/100   |   A = P(1 + R/100)ⁿ, CI = A − P" },
+    { cat: "Commercial & Motion", name: "Speed, Distance & Time", expr: "Speed = D ÷ T   |   Distance = S × T   |   Time = D ÷ S" },
+    { cat: "Commercial & Motion", name: "Direct & Inverse Proportions", expr: "Direct: x₁/y₁ = x₂/y₂   |   Inverse: x₁y₁ = x₂y₂" },
+    { cat: "Geometry & Polyhedra", name: "Pythagoras & Polygon Angles", expr: "c² = a² + b²   |   Interior Sum = (n − 2) × 180°" },
+    { cat: "Geometry & Polyhedra", name: "Euler's Polyhedron Law", expr: "Faces (F) + Vertices (V) − Edges (E) = 2" }
   ];
 
-  // ==========================================
-  // 2. STATE & NAVIGATION
-  // ==========================================
+  // =========================================================================
+  // 3. STATE & NAVIGATION LOGIC
+  // =========================================================================
   let completedChapters = JSON.parse(localStorage.getItem('mathsetu_completed') || '[]');
+  let activeStageFilter = 'All';
   let activePreloadedTable = 2;
+
+  function showToast(msg) {
+    const el = document.getElementById('toastMsg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => { el.style.display = 'none'; }, 2400);
+  }
 
   function updateProgressHeader() {
     document.getElementById('completedCount').textContent = completedChapters.length;
@@ -1389,40 +1839,56 @@
     btnEl.classList.add('active');
   }
 
-  // ==========================================
-  // 3. CHAPTERS RENDERING & 4-STEP FLOW
-  // ==========================================
-  function renderChaptersGrid(gradeFilter = 'All') {
+  // =========================================================================
+  // 4. CHAPTERS GRID & 4-STEP CHAPTER FLOW
+  // =========================================================================
+  function filterChapters(stage, btn) {
+    activeStageFilter = stage;
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderChaptersGrid();
+  }
+
+  function renderChaptersGrid() {
     const grid = document.getElementById('chaptersGrid');
-    const filtered = gradeFilter === 'All'
-      ? CHAPTERS_DATA
-      : CHAPTERS_DATA.filter(c => c.grade === gradeFilter);
+    const query = (document.getElementById('chapterSearchInput')?.value || '').toLowerCase().trim();
+
+    const filtered = CHAPTERS_DATA.filter(ch => {
+      const matchesStage = activeStageFilter === 'All' || ch.stage === activeStageFilter;
+      const matchesSearch = !query ||
+        ch.title.toLowerCase().includes(query) ||
+        ch.summary.toLowerCase().includes(query) ||
+        ch.grade.toLowerCase().includes(query) ||
+        ch.stage.toLowerCase().includes(query);
+      return matchesStage && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="card" style="grid-column: 1 / -1; text-align:center; color:var(--text-muted);">
+        No chapters matched your filter. Try clearing the search box or clicking "All Stages".
+      </div>`;
+      return;
+    }
 
     grid.innerHTML = filtered.map(ch => {
       const isDone = completedChapters.includes(ch.id);
       return `
         <div class="chapter-card" onclick="openChapterDetail('${ch.id}')">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span class="chapter-badge">${ch.grade}</span>
-              ${isDone ? '<span style="color:var(--success); font-size:0.8rem; font-weight:800;">✅ Completed</span>' : ''}
+            <div class="badge-row">
+              <span class="stage-badge ${ch.stageClass}">${ch.stage} • ${ch.grade}</span>
+              ${isDone ? '<span style="color:var(--success); font-size:0.78rem; font-weight:800;">✅ Completed</span>' : ''}
             </div>
             <h3>${ch.title}</h3>
             <p>${ch.summary}</p>
           </div>
           <div class="chapter-footer">
-            <span>Theory • Formulas • Examples • Quiz</span>
-            <span>Start →</span>
+            <span>Theory • SVG • Formulas • Quiz</span>
+            <span>Open →</span>
           </div>
         </div>
       `;
     }).join('');
-  }
-
-  function filterChapters(grade, btn) {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    renderChaptersGrid(grade);
   }
 
   function openChapterDetail(chId) {
@@ -1435,24 +1901,40 @@
 
     const html = `
       <div class="card">
-        <span class="chapter-badge">${ch.grade}</span>
-        <h2 style="font-size:1.45rem; margin-bottom:6px;">${ch.title}</h2>
+        <span class="stage-badge ${ch.stageClass}">${ch.stage} • ${ch.grade}</span>
+        <h2 style="font-size:1.4rem; margin: 8px 0 6px;">${ch.title}</h2>
         <p style="color:var(--text-muted); font-size:0.92rem;">${ch.summary}</p>
       </div>
 
-      <!-- STEP 1: THEORY & DEFINITIONS -->
+      <!-- STEP 1: THEORY, DEFINITIONS & INLINE SVG DIAGRAM -->
       <div class="card">
-        <span class="step-badge">STEP 1: THEORY & DEFINITIONS</span>
-        <div class="section-title">📖 Core Concepts</div>
+        <span class="step-badge">STEP 1: THEORY, DEFINITIONS & VISUAL DIAGRAM</span>
+        <div class="section-title">📖 Core Concepts & Definitions</div>
         <ul class="theory-list">
           ${ch.theory.map(item => `<li>${item}</li>`).join('')}
         </ul>
+
+        ${ch.svg ? `
+          <div class="svg-container">
+            ${ch.svg}
+            <div class="svg-caption">${ch.diagramCaption || ''}</div>
+          </div>
+        ` : ''}
+
+        ${ch.dailyLife && ch.dailyLife.length ? `
+          <div class="daily-life-box">
+            <h4>🌍 Daily-Life Connections</h4>
+            <ul>
+              ${ch.dailyLife.map(dl => `<li>${dl}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
       </div>
 
       <!-- STEP 2: ALL TOPIC FORMULAS -->
       <div class="card">
-        <span class="step-badge" style="background:var(--secondary);">STEP 2: FORMULAS & RULES</span>
-        <div class="section-title">📐 Important Formulas of this Topic</div>
+        <span class="step-badge" style="background:var(--secondary);">STEP 2: ALL TOPIC FORMULAS & RULES</span>
+        <div class="section-title">📐 Master Formula & Rule Box</div>
         <div class="formula-grid">
           ${ch.formulas.map(f => `
             <div class="formula-box">
@@ -1463,10 +1945,10 @@
         </div>
       </div>
 
-      <!-- STEP 3: SOLVED EXAMPLES -->
+      <!-- STEP 3: STEP-BY-STEP SOLVED EXAMPLES -->
       <div class="card">
         <span class="step-badge" style="background:var(--accent); color:#1e293b;">STEP 3: SOLVED EXAMPLES</span>
-        <div class="section-title">💡 Step-by-Step Examples</div>
+        <div class="section-title">💡 Step-by-Step Walkthroughs</div>
         ${ch.examples.map(ex => `
           <div class="example-box">
             <div class="example-q">${ex.q}</div>
@@ -1477,13 +1959,13 @@
         `).join('')}
       </div>
 
-      <!-- STEP 4: PRACTICE EXERCISE -->
+      <!-- STEP 4: INTERACTIVE PRACTICE EXERCISE -->
       <div class="card">
-        <span class="step-badge" style="background:var(--success);">STEP 4: PRACTICE EXERCISE</span>
-        <div class="section-title">✍️ Test Your Understanding</div>
+        <span class="step-badge" style="background:var(--success);">STEP 4: INTERACTIVE PRACTICE EXERCISE</span>
+        <div class="section-title">✍️ Practice Drills & Word Problems</div>
         <div id="quizContainer">
           ${ch.practice.map((item, idx) => `
-            <div class="quiz-item" id="quiz-item-${idx}">
+            <div class="quiz-item">
               <div class="quiz-q">Q${idx + 1}. ${item.q}</div>
               <div class="options-grid">
                 ${item.options.map((opt, oIdx) => `
@@ -1549,12 +2031,13 @@
       completedChapters.push(chId);
       localStorage.setItem('mathsetu_completed', JSON.stringify(completedChapters));
       updateProgressHeader();
+      showToast('🏆 Chapter marked as Completed!');
     }
   }
 
-  // ==========================================
-  // 4. SMART GENERATORS (Tables, Squares, Cubes)
-  // ==========================================
+  // =========================================================================
+  // 5. SMART GENERATORS (TABLES, SQUARES, CUBES)
+  // =========================================================================
   function formatNum(n) {
     return Number.isInteger(n) ? n.toLocaleString('en-IN') : parseFloat(n.toFixed(6)).toString();
   }
@@ -1584,7 +2067,7 @@
 
   function speakText(text) {
     if (!('speechSynthesis' in window)) {
-      alert('Text-to-Speech is not supported in this browser.');
+      showToast('Read Aloud is not supported in this browser.');
       return;
     }
     window.speechSynthesis.cancel();
@@ -1597,7 +2080,7 @@
   function speakGeneratedTable() {
     const numVal = parseFloat(document.getElementById('genTableNum').value);
     if (isNaN(numVal)) return;
-    let lines = [`Table of ${numVal}.`];
+    let lines = [`Multiplication table of ${numVal}.`];
     for (let i = 1; i <= 10; i++) {
       lines.push(`${numVal} times ${i} is ${parseFloat((numVal * i).toFixed(4))}.`);
     }
@@ -1612,9 +2095,18 @@
     for (let i = 1; i <= limit; i++) {
       lines.push(`${numVal} × ${i} = ${formatNum(numVal * i)}`);
     }
-    navigator.clipboard.writeText(lines.join('\n')).then(() => {
-      alert('Table copied to clipboard!');
-    });
+    const text = lines.join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => showToast('📋 Table copied to clipboard!'));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('📋 Table copied to clipboard!');
+    }
   }
 
   function calculateSquare() {
@@ -1647,9 +2139,9 @@
     `;
   }
 
-  // ==========================================
-  // 5. PRELOADED REFERENCE VAULT (0-20 Tables, 1-30 Squares/Cubes, Formulas)
-  // ==========================================
+  // =========================================================================
+  // 6. PRELOADED REFERENCE VAULT (0–20 TABLES, 1–30 SQUARES/CUBES, FORMULAS)
+  // =========================================================================
   function switchVaultTab(paneId, btn) {
     document.querySelectorAll('.vault-pane').forEach(p => p.style.display = 'none');
     document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
@@ -1658,7 +2150,6 @@
   }
 
   function initPreloadedVault() {
-    // 1. Tables 0 to 20 Chips
     const chipsContainer = document.getElementById('preloadedTableChips');
     let chipsHtml = '';
     for (let n = 0; n <= 20; n++) {
@@ -1667,7 +2158,6 @@
     chipsContainer.innerHTML = chipsHtml;
     renderPreloadedTable(activePreloadedTable);
 
-    // 2. Squares 1 to 30
     let sqHtml = '';
     for (let i = 1; i <= 30; i++) {
       sqHtml += `
@@ -1679,7 +2169,6 @@
     }
     document.getElementById('squaresGrid').innerHTML = sqHtml;
 
-    // 3. Cubes 1 to 30
     let cbHtml = '';
     for (let i = 1; i <= 30; i++) {
       cbHtml += `
@@ -1691,7 +2180,6 @@
     }
     document.getElementById('cubesGrid').innerHTML = cbHtml;
 
-    // 4. Formulas
     renderMasterFormulas();
   }
 
@@ -1725,7 +2213,7 @@
   }
 
   function renderMasterFormulas() {
-    const query = (document.getElementById('formulaSearchInput')?.value || '').toLowerCase();
+    const query = (document.getElementById('formulaSearchInput')?.value || '').toLowerCase().trim();
     const filtered = MASTER_FORMULAS.filter(f =>
       f.name.toLowerCase().includes(query) ||
       f.cat.toLowerCase().includes(query) ||
@@ -1749,9 +2237,9 @@
     </div>`;
   }
 
-  // ==========================================
-  // INITIALIZE APP
-  // ==========================================
+  // =========================================================================
+  // 7. INITIALIZE APP & REGISTER SERVICE WORKER
+  // =========================================================================
   updateProgressHeader();
   renderChaptersGrid();
   generateCustomTable();
@@ -1759,7 +2247,6 @@
   calculateCube();
   initPreloadedVault();
 
-  // Register Service Worker for Offline PWA Support
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
