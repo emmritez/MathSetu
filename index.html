@@ -702,6 +702,17 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
+    footer.app-footer {
+      max-width: 1120px;
+      margin: 28px auto 12px;
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
     @media (max-width: 600px) {
       .nav-btn { font-size: 0.8rem; padding: 10px 6px; }
       .brand h1 { font-size: 1.15rem; }
@@ -840,6 +851,8 @@
     </div>
   </section>
 </main>
+
+<footer class="app-footer" id="mathsetuFooter"></footer>
 
 <div id="toastBanner" class="toast-banner"></div>
 
@@ -2586,7 +2599,15 @@
   // =========================================================================
   // 7. INITIALIZE APP & REGISTER SERVICE WORKER
   // =========================================================================
+  function renderFooter() {
+    const footerEl = document.getElementById('mathsetuFooter');
+    if (footerEl) {
+      footerEl.textContent = '\u00A9 2026 MathSetu. Created with \u2764\uFE0F by Ritesh Srivastava.';
+    }
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
+    renderFooter();
     initFilterBars();
     updateProgressHeader();
     renderChaptersGrid();
